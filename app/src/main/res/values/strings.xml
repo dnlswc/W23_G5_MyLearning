@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Learning</string>
+    <string name="note_name">Notepad</string>
+    <string name="btnTextQuiz">My Quiz</string>
+    <string name="btnTextNote">My Note</string>
+    <string name="btnTextNews">My News</string>
+</resources>
