@@ -4,4 +4,23 @@
     <string name="btnTextQuiz">My Quiz</string>
     <string name="btnTextNote">My Note</string>
     <string name="btnTextNews">My News</string>
+    <string name="txtScore">Score: 0</string>
+    <string name="txtQuestionCount">Question:</string>
+    <string name="txtTimer">00:30</string>
+    <string name="txtOption1">Option 1</string>
+    <string name="txtOption2">Option 2</string>
+    <string name="txtOption3">Option 3</string>
+    <string name="txtOption4">Option 4</string>
+    <string name="txtQuestion">This is a sample question.</string>
+    <string name="txtConfirm">Confirm</string>
+    <string name="txtQuizCatalogue">Quiz Catalogue</string>
+    <string name="txtStartMcq">Start MC Question</string>
+    <string name="txtStartTfq">Start TF Question</string>
+    <string name="txtStartFitbq">Start FITB Question</string>
+    <string name="txtTrue">True</string>
+    <string name="txtFalse">False</string>
+    <string name="txtTypeYourAnswerHere">Type your answer here</string>
+    <string name="txtDifficulty">Difficulty:</string>
+    <string name="txtTopic">Topic:</string>
+    <string name="txtTopicDifficulty">Topic (Difficulty)</string>
 </resources>
