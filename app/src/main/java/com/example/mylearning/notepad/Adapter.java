@@ -1,6 +1,7 @@
 package com.example.mylearning.notepad;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @NonNull
+
     @Override
     public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.layout_noteitem, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -54,6 +55,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             noteTitle = itemView.findViewById(R.id.textViewTitle);
             noteDate = itemView.findViewById(R.id.textViewDate);
             noteTime = itemView.findViewById(R.id.textViewTime);
+
+            itemView.setOnClickListener((View v)-> {
+                    Intent intent = new Intent(v.getContext(), NoteContent.class);
+                    intent.putExtra("ID",notes.get(getAdapterPosition()).getId());
+                    v.getContext().startActivity(intent);
+
+            });
         }
     }
 }

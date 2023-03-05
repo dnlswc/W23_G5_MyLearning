@@ -27,9 +27,13 @@ public class NotePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_page);
 
+        RecyclerViewMainNote = findViewById(R.id.RecyclerViewMainNote);
+
+        getSupportActionBar().setTitle("My Note");
+
         Database db = new Database(this);
         notes = db.getNotes();
-        RecyclerViewMainNote = findViewById(R.id.RecyclerViewMainNote);
+
         RecyclerViewMainNote.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter(this,notes );
         RecyclerViewMainNote.setAdapter(adapter);
@@ -46,9 +50,8 @@ public class NotePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.add)
         {
-
             Intent addNote = new Intent(this, AddNote.class);
-            Toast.makeText(this, "Add a note.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Add a note", Toast.LENGTH_SHORT).show();
             startActivity(addNote);
         }
         return super.onOptionsItemSelected(item);

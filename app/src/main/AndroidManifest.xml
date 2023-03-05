@@ -12,6 +12,14 @@
         android:theme="@style/Theme.MyLearning"
         tools:targetApi="31">
         <activity
+            android:name=".notepad.EditNote"
+            android:exported="false"
+            android:parentActivityName=".notepad.NotePage"/>
+        <activity
+            android:name=".notepad.NoteContent"
+            android:exported="false"
+            android:parentActivityName=".notepad.NotePage"/>
+        <activity
             android:name=".quiz.FitbqActivity"
             android:exported="false" />
         <activity
@@ -26,15 +34,17 @@
         <activity
             android:name=".notepad.AddNote"
             android:exported="false"
-            android:label="@string/note_name" />
+            android:label="@string/note_name"
+            android:parentActivityName=".notepad.NotePage"/>
 
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".notepad.NotePage" />
+<!--        <meta-data-->
+<!--            android:name="android.support.PARENT_ACTIVITY"-->
+<!--            android:value=".notepad.NotePage" />-->
 
         <activity
             android:name=".notepad.NotePage"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
