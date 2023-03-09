@@ -14,9 +14,7 @@
     <string name="txtQuestion">This is a sample question.</string>
     <string name="txtConfirm">Confirm</string>
     <string name="txtQuizCatalogue">Quiz Catalogue</string>
-    <string name="txtStartMcq">Start MC Question</string>
-    <string name="txtStartTfq">Start TF Question</string>
-    <string name="txtStartFitbq">Start FITB Question</string>
+    <string name="txtStartQuiz">Start Quiz</string>
     <string name="txtTrue">True</string>
     <string name="txtFalse">False</string>
     <string name="txtTypeYourAnswerHere">Type your answer here</string>

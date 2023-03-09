@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".quiz.TfqActivity">
+    tools:context=".quiz.QuizActivity">
 
     <TextView
         android:id="@+id/txtViewScore"
@@ -58,25 +58,26 @@
 
     <TextView
         android:id="@+id/txtViewQuestion"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
+        android:freezesText="true"
         android:text="@string/txtQuestion"
         android:textSize="20sp"
-        android:freezesText="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewQuestionCount" />
 
     <RadioGroup
-        android:id="@+id/rdGrpOptions"
+        android:id="@+id/rdGrpTfOptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion">
@@ -100,18 +101,84 @@
             android:textSize="16sp" />
     </RadioGroup>
 
+    <RadioGroup
+        android:id="@+id/rdGrpMcOptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion">
+
+        <RadioButton
+            android:id="@+id/rdBtnOption1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:minHeight="56dp"
+            android:text="@string/txtOption1"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rdBtnOption2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:minHeight="56dp"
+            android:text="@string/txtOption2"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rdBtnOption3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:minHeight="56dp"
+            android:text="@string/txtOption3"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rdBtnOption4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:minHeight="56dp"
+            android:text="@string/txtOption4"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTxtFitbAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:freezesText="true"
+        android:hint="@string/txtTypeYourAnswerHere"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion" />
+
     <TextView
         android:id="@+id/txtViewCorrectAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:freezesText="true"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirmNext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rdGrpOptions" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnConfirmNext"

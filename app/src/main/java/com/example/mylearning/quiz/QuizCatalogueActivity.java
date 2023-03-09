@@ -21,7 +21,7 @@ public class QuizCatalogueActivity extends AppCompatActivity {
 
     private Spinner spinnerTopic;
     private Spinner spinnerDifficulty;
-    private Button btnStartTfq, btnStartMcq, btnStartFitbq;
+    private Button btnStartQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,50 +30,22 @@ public class QuizCatalogueActivity extends AppCompatActivity {
 
         spinnerTopic = findViewById(R.id.spinnerTopic);
         spinnerDifficulty = findViewById(R.id.spinnerDifficulty);
-        btnStartTfq = findViewById(R.id.btnStartTfq);
-        btnStartMcq = findViewById(R.id.btnStartMcq);
-        btnStartFitbq = findViewById(R.id.btnStartFitbq);
+        btnStartQuiz = findViewById(R.id.btnStartQuiz);
 
         loadTopics();
         loadDifficultyLevels();
 
-        btnStartTfq.setOnClickListener((View v) -> {
+        btnStartQuiz.setOnClickListener((View v) -> {
             Topic selectedTopic = (Topic) spinnerTopic.getSelectedItem();
             int topicId = selectedTopic.getId();
             String topicName = selectedTopic.getName();
             String difficulty = spinnerDifficulty.getSelectedItem().toString();
 
-            Intent tfqIntent = new Intent(QuizCatalogueActivity.this, TfqActivity.class);
-            tfqIntent.putExtra(EXTRA_TOPIC_ID, topicId);
-            tfqIntent.putExtra(EXTRA_TOPIC_NAME, topicName);
-            tfqIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
-            startActivity(tfqIntent);
-        });
-
-        btnStartMcq.setOnClickListener((View v) -> {
-            Topic selectedTopic = (Topic) spinnerTopic.getSelectedItem();
-            int topicId = selectedTopic.getId();
-            String topicName = selectedTopic.getName();
-            String difficulty = spinnerDifficulty.getSelectedItem().toString();
-
-            Intent mcqIntent = new Intent(QuizCatalogueActivity.this, McqActivity.class);
-            mcqIntent.putExtra(EXTRA_TOPIC_ID, topicId);
-            mcqIntent.putExtra(EXTRA_TOPIC_NAME, topicName);
-            mcqIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
-            startActivity(mcqIntent);
-        });
-
-        btnStartFitbq.setOnClickListener((View v) -> {
-            Topic selectedTopic = (Topic) spinnerTopic.getSelectedItem();
-            int topicId = selectedTopic.getId();
-            String topicName = selectedTopic.getName();
-            String difficulty = spinnerDifficulty.getSelectedItem().toString();
-
-            Intent fitbqIntent = new Intent(QuizCatalogueActivity.this, FitbqActivity.class);
-            fitbqIntent.putExtra(EXTRA_TOPIC_ID, topicId);
-            fitbqIntent.putExtra(EXTRA_TOPIC_NAME, topicName);
-            fitbqIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
-            startActivity(fitbqIntent);
+            Intent quizIntent = new Intent(QuizCatalogueActivity.this, QuizActivity.class);
+            quizIntent.putExtra(EXTRA_TOPIC_ID, topicId);
+            quizIntent.putExtra(EXTRA_TOPIC_NAME, topicName);
+            quizIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
+            startActivity(quizIntent);
         });
     }
 

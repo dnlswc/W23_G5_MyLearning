@@ -101,14 +101,14 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         Question q1 = new Question(
                 "TF", 1, Question.DIFFICULTY_EASY,
                 "Computer literacy is understanding the role of information in generating and using business intelligence.",
-                "False", "", "", "", "", Topic.SYSTEMS_DESIGN
+                Question.TFQ_FALSE, Question.TFQ_TRUE, Question.TFQ_FALSE, "", "", Topic.SYSTEMS_DESIGN
         );
         addQuestion(q1);
 
         Question q2 = new Question(
                 "TF", 2, Question.DIFFICULTY_MEDIUM,
                 "The arithmetic logic unit (ALU) performs only arithmetic operations.",
-                "False", "", "", "", "", Topic.SYSTEMS_DESIGN
+                Question.TFQ_FALSE, Question.TFQ_TRUE, Question.TFQ_FALSE, "", "", Topic.SYSTEMS_DESIGN
         );
         addQuestion(q2);
 
@@ -227,14 +227,14 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         Question q15 = new Question(
                 "TF", 1, Question.DIFFICULTY_EASY,
                 "Protocol means the architecture of a network.",
-                "False", "", "", "", "", Topic.COMPUTER_NETWORKING
+                Question.TFQ_FALSE, Question.TFQ_TRUE, Question.TFQ_FALSE, "", "", Topic.COMPUTER_NETWORKING
         );
         addQuestion(q15);
 
         Question q16 = new Question(
                 "TF", 1, Question.DIFFICULTY_EASY,
                 "Topology means a set of rules established for users to gain control of the network to exchange information.",
-                "False", "", "", "", "", Topic.COMPUTER_NETWORKING
+                Question.TFQ_FALSE, Question.TFQ_TRUE, Question.TFQ_FALSE, "", "", Topic.COMPUTER_NETWORKING
         );
         addQuestion(q16);
 
@@ -284,7 +284,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         Question q22 = new Question(
                 "TF", 2, Question.DIFFICULTY_HARD,
                 "Only two wire pairs are used to obtain a proper power-sum measurement.",
-                "False", "", "", "", "", Topic.COMPUTER_NETWORKING
+                Question.TFQ_FALSE, Question.TFQ_TRUE, Question.TFQ_FALSE, "", "", Topic.COMPUTER_NETWORKING
         );
         addQuestion(q22);
 

@@ -22,7 +22,7 @@
         android:id="@+id/txtViewSelectTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="150dp"
         android:text="@string/txtTopic"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="150dp"
         app:layout_constraintStart_toEndOf="@+id/txtViewSelectTopic"
         app:layout_constraintTop_toBottomOf="@+id/txtViewQuizCatalogueTitle" />
 
@@ -43,51 +43,31 @@
         android:id="@+id/txtViewSelectDifficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="20dp"
         android:text="@string/txtDifficulty"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewQuizCatalogueTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTopic" />
 
     <Spinner
         android:id="@+id/spinnerDifficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@+id/txtViewSelectDifficulty"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewQuizCatalogueTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTopic" />
 
     <Button
-        android:id="@+id/btnStartTfq"
+        android:id="@+id/btnStartQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/txtStartTfq"
+        android:text="@string/txtStartQuiz"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerDifficulty" />
-
-    <Button
-        android:id="@+id/btnStartMcq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/txtStartMcq"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStartTfq" />
-
-    <Button
-        android:id="@+id/btnStartFitbq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/txtStartFitbq"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStartMcq" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

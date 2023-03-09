@@ -20,16 +20,10 @@
             android:exported="false"
             android:parentActivityName=".notepad.NotePage"/>
         <activity
-            android:name=".quiz.FitbqActivity"
-            android:exported="false" />
-        <activity
-            android:name=".quiz.TfqActivity"
+            android:name=".quiz.QuizActivity"
             android:exported="false" />
         <activity
             android:name=".quiz.QuizCatalogueActivity"
-            android:exported="false" />
-        <activity
-            android:name=".quiz.McqActivity"
             android:exported="false" />
         <activity
             android:name=".notepad.AddNote"
