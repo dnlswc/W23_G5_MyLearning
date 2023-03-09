@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtViewQuestionCount" />
 
     <EditText
-        android:id="@+id/editTxtAnswer"
+        android:id="@+id/editTxtFitbAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -98,7 +98,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtAnswer" />
+        app:layout_constraintTop_toBottomOf="@+id/editTxtFitbAnswer" />
 
     <Button
         android:id="@+id/btnConfirmNext"

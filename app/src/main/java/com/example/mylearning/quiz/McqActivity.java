@@ -36,7 +36,7 @@ public class McqActivity extends AppCompatActivity {
     private TextView txtViewTimer;
     private TextView txtViewTopicDifficulty;
     private TextView txtViewQuestion;
-    private RadioGroup rdGrpOptions;
+    private RadioGroup rdGrpMcOptions;
     private RadioButton rdBtnOption1;
     private RadioButton rdBtnOption2;
     private RadioButton rdBtnOption3;
@@ -72,7 +72,7 @@ public class McqActivity extends AppCompatActivity {
         txtViewTimer = findViewById(R.id.txtViewTimer);
         txtViewTopicDifficulty = findViewById(R.id.txtViewTopicDifficulty);
         txtViewQuestion = findViewById(R.id.txtViewQuestion);
-        rdGrpOptions = findViewById(R.id.rdGrpOptions);
+        rdGrpMcOptions = findViewById(R.id.rdGrpMcOptions);
         rdBtnOption1 = findViewById(R.id.rdBtnOption1);
         rdBtnOption2 = findViewById(R.id.rdBtnOption2);
         rdBtnOption3 = findViewById(R.id.rdBtnOption3);
@@ -149,7 +149,7 @@ public class McqActivity extends AppCompatActivity {
         rdBtnOption2.setTextColor(txtColourDefaultRdBtn);
         rdBtnOption3.setTextColor(txtColourDefaultRdBtn);
         rdBtnOption4.setTextColor(txtColourDefaultRdBtn);
-        rdGrpOptions.clearCheck();
+        rdGrpMcOptions.clearCheck();
         txtViewCorrectAnswer.setText("");
 
         if (questionCounter < questionCountTotal) {
@@ -209,8 +209,8 @@ public class McqActivity extends AppCompatActivity {
 
         timer.cancel();
 
-        RadioButton rdBtnSelected = findViewById(rdGrpOptions.getCheckedRadioButtonId());
-        answerNo = rdGrpOptions.indexOfChild(rdBtnSelected) + 1;
+        RadioButton rdBtnSelected = findViewById(rdGrpMcOptions.getCheckedRadioButtonId());
+        answerNo = rdGrpMcOptions.indexOfChild(rdBtnSelected) + 1;
 
         if (answerNo == Integer.parseInt(currentQuestion.getAnswer())) {
             score++;

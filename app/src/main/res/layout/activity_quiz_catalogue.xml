@@ -61,11 +61,11 @@
         app:layout_constraintTop_toBottomOf="@+id/txtViewQuizCatalogueTitle" />
 
     <Button
-        android:id="@+id/btnStartTfq"
+        android:id="@+id/btnStartQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/txtStartTfq"
+        android:text="@string/txtStartQuiz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerDifficulty" />
@@ -78,7 +78,7 @@
         android:text="@string/txtStartMcq"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStartTfq" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStartQuiz" />
 
     <Button
         android:id="@+id/btnStartFitbq"

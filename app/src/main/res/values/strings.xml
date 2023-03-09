@@ -23,4 +23,5 @@
     <string name="txtDifficulty">Difficulty:</string>
     <string name="txtTopic">Topic:</string>
     <string name="txtTopicDifficulty">Topic (Difficulty)</string>
+    <string name="txtStartQuiz">Start Quiz</string>
 </resources>
