@@ -11,6 +11,9 @@ public class Question implements Parcelable {
     public static final String DIFFICULTY_MEDIUM = "Medium";
     public static final String DIFFICULTY_HARD = "Hard";
 
+    public static final String TFQ_TRUE = "True";
+    public static final String TFQ_FALSE = "False";
+
     private int id;
     private String category;
     private int chapter;

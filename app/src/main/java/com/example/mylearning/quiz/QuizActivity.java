@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-public class TfqActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
 
     private static final long TIMER_IN_MS = 30000;
 
@@ -32,6 +32,7 @@ public class TfqActivity extends AppCompatActivity {
     private static final String KEY_ANSWERED = "keyAnswered";
     private static final String KEY_QUESTION_LIST = "keyQuestionList";
     private static final String KEY_CORRECT_ANSWER = "keyCorrectAnswer";
+    private static final String KEY_TFQ_FITBQ_ANSWER = "keyTfqFitbqAnswer";
 
     private TextView txtViewScore;
     private TextView txtViewQuestionCount;
@@ -55,7 +56,6 @@ public class TfqActivity extends AppCompatActivity {
     private Button btnConfirmNext;
 
     private ArrayList<Question> questionList;
-//    private ArrayList<Question> mcQuestionList;
 
     private int questionCounter;
     private int questionCountTotal;
@@ -68,6 +68,9 @@ public class TfqActivity extends AppCompatActivity {
     private String tfqFitbqAnswer;
 
     private ColorStateList txtColourDefaultRdBtn;
+    private ColorStateList lineColourDefaultEditTxt;
+    private ColorStateList lineColourGreenEditTxt;
+    private ColorStateList lineColourRedEditTxt;
     private ColorStateList txtColourDefaultTimer;
 
     private CountDownTimer timer;
@@ -76,7 +79,7 @@ public class TfqActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tfq);
+        setContentView(R.layout.activity_quiz);
 
         txtViewScore = findViewById(R.id.txtViewScore);
         txtViewQuestionCount = findViewById(R.id.txtViewQuestionCount);
@@ -100,6 +103,9 @@ public class TfqActivity extends AppCompatActivity {
         btnConfirmNext = findViewById(R.id.btnConfirmNext);
 
         txtColourDefaultRdBtn = rdBtnTrue.getTextColors();
+        lineColourDefaultEditTxt = editTxtFitbAnswer.getBackgroundTintList();
+        lineColourGreenEditTxt = ColorStateList.valueOf(getResources().getColor(R.color.green));
+        lineColourRedEditTxt = ColorStateList.valueOf(getResources().getColor(R.color.red));
         txtColourDefaultTimer = txtViewTimer.getTextColors();
 
         Intent quizIntent = getIntent();
@@ -112,7 +118,6 @@ public class TfqActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             QuizDbHelper quizDbHelper = QuizDbHelper.getInstance(this);
             questionList = quizDbHelper.getQuestions(topicId, difficulty);
-//            getMcQuestions();
 
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
@@ -128,8 +133,24 @@ public class TfqActivity extends AppCompatActivity {
             timeLeftInMs = savedInstanceState.getLong(KEY_TIME_LEFT);
             answered = savedInstanceState.getBoolean(KEY_ANSWERED);
             correctAnswer = savedInstanceState.getString(KEY_CORRECT_ANSWER);
+            tfqFitbqAnswer = savedInstanceState.getString(KEY_TFQ_FITBQ_ANSWER);
+
             questionCountTotal = questionList.size();
             currentQuestion = questionList.get(questionCounter - 1);
+
+            if (currentQuestion.getCategory().equalsIgnoreCase("TF")) {
+                showTfOptions();
+                hideMcOptions();
+                hideFitbTxtField();
+            } else if (currentQuestion.getCategory().equalsIgnoreCase("MC")) {
+                hideTfOptions();
+                showMcOptions();
+                hideFitbTxtField();
+            } else {
+                hideTfOptions();
+                hideMcOptions();
+                showFitbTxtField();
+            }
 
             if (!answered) {
                 startTimer();
@@ -150,20 +171,20 @@ public class TfqActivity extends AppCompatActivity {
                     if (rdBtnTrue.isChecked() || rdBtnFalse.isChecked()) {
                         checkAnswer();
                     } else {
-                        Toast.makeText(TfqActivity.this, "Please select an option.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizActivity.this, "Please select an option.", Toast.LENGTH_SHORT).show();
                     }
                 } else if (currentQuestion.getCategory().equalsIgnoreCase("MC")) {
                     if (rdBtnOption1.isChecked() || rdBtnOption2.isChecked() ||
                             rdBtnOption3.isChecked() || rdBtnOption4.isChecked()) {
                         checkAnswer();
                     } else {
-                        Toast.makeText(TfqActivity.this, "Please select an option.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizActivity.this, "Please select an option.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if (!(editTxtFitbAnswer.getText().toString().isEmpty())) {
                         checkAnswer();
                     } else {
-                        Toast.makeText(TfqActivity.this, "Please enter an answer.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuizActivity.this, "Please enter an answer.", Toast.LENGTH_SHORT).show();
                     }
                 }
             } else {
@@ -196,16 +217,6 @@ public class TfqActivity extends AppCompatActivity {
         editTxtFitbAnswer.setVisibility(View.GONE);
     }
 
-//    private void getMcQuestions() {
-//        mcQuestionList = new ArrayList<>();
-//
-//        for (Question question : questionList) {
-//            if (question.getCategory().equalsIgnoreCase("MC")) {
-//                mcQuestionList.add(question);
-//            }
-//        }
-//    }
-
     private void showNextQuestion() {
         rdBtnTrue.setTextColor(txtColourDefaultRdBtn);
         rdBtnFalse.setTextColor(txtColourDefaultRdBtn);
@@ -217,6 +228,7 @@ public class TfqActivity extends AppCompatActivity {
         rdBtnOption4.setTextColor(txtColourDefaultRdBtn);
         rdGrpMcOptions.clearCheck();
 
+        editTxtFitbAnswer.setBackgroundTintList(lineColourDefaultEditTxt);
         editTxtFitbAnswer.setText("");
 
         txtViewCorrectAnswer.setText("");
@@ -343,7 +355,7 @@ public class TfqActivity extends AppCompatActivity {
             case 1:
                 rdBtnOption1.setTextColor(Color.GREEN);
                 if (mcqAnswer != 1) {
-                    correctAnswer = "The correct answer is A.";
+                    correctAnswer = "Correct Answer: A";
                 } else {
                     correctAnswer = "";
                 }
@@ -351,7 +363,7 @@ public class TfqActivity extends AppCompatActivity {
             case 2:
                 rdBtnOption2.setTextColor(Color.GREEN);
                 if (mcqAnswer != 2) {
-                    correctAnswer = "The correct answer is B.";
+                    correctAnswer = "Correct Answer: B";
                 } else {
                     correctAnswer = "";
                 }
@@ -359,7 +371,7 @@ public class TfqActivity extends AppCompatActivity {
             case 3:
                 rdBtnOption3.setTextColor(Color.GREEN);
                 if (mcqAnswer != 3) {
-                    correctAnswer = "The correct answer is C.";
+                    correctAnswer = "Correct Answer: C";
                 } else {
                     correctAnswer = "";
                 }
@@ -367,7 +379,7 @@ public class TfqActivity extends AppCompatActivity {
             case 4:
                 rdBtnOption4.setTextColor(Color.GREEN);
                 if (mcqAnswer != 4) {
-                    correctAnswer = "The correct answer is D.";
+                    correctAnswer = "Correct Answer: D";
                 } else {
                     correctAnswer = "";
                 }
@@ -392,7 +404,7 @@ public class TfqActivity extends AppCompatActivity {
                 case "True":
                     rdBtnTrue.setTextColor(Color.GREEN);
                     if (!(tfqFitbqAnswer.equalsIgnoreCase("True"))) {
-                        correctAnswer = "The correct answer is \"True\".";
+                        correctAnswer = "Correct Answer: True";
                     } else {
                         correctAnswer = "";
                     }
@@ -400,16 +412,18 @@ public class TfqActivity extends AppCompatActivity {
                 case "False":
                     rdBtnFalse.setTextColor(Color.GREEN);
                     if (!(tfqFitbqAnswer.equalsIgnoreCase("False"))) {
-                        correctAnswer = "The correct answer is \"False\".";
+                        correctAnswer = "Correct Answer: False";
                     } else {
                         correctAnswer = "";
                     }
                     break;
             }
         } else {
+            editTxtFitbAnswer.setBackgroundTintList(lineColourRedEditTxt);
             if (!(tfqFitbqAnswer.equalsIgnoreCase(currentQuestion.getAnswer()))) {
-                correctAnswer = "The correct answer is " + currentQuestion.getAnswer();
+                correctAnswer = "Correct Answer: " + currentQuestion.getAnswer();
             } else {
+                editTxtFitbAnswer.setBackgroundTintList(lineColourGreenEditTxt);
                 correctAnswer = "";
             }
         }
@@ -444,5 +458,6 @@ public class TfqActivity extends AppCompatActivity {
         outState.putLong(KEY_TIME_LEFT, timeLeftInMs);
         outState.putBoolean(KEY_ANSWERED, answered);
         outState.putParcelableArrayList(KEY_QUESTION_LIST, questionList);
+        outState.putString(KEY_TFQ_FITBQ_ANSWER, tfqFitbqAnswer);
     }
 }
