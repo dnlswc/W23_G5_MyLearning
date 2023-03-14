@@ -3,53 +3,31 @@ package com.example.mylearning.quiz;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 public class Question implements Parcelable {
+    public static final String TOPIC_C_SHARP = "C#";
+    public static final String TOPIC_COMPUTER_NETWORKING = "Computer Networking";
+    public static final String TOPIC_JAVA = "Java";
+    public static final String TOPIC_OPERATING_SYSTEMS = "Operating Systems";
+    public static final String TOPIC_SQL = "SQL";
+    public static final String TOPIC_SYSTEMS_DESIGN = "Systems Design";
 
     public static final String DIFFICULTY_EASY = "Easy";
     public static final String DIFFICULTY_MEDIUM = "Medium";
     public static final String DIFFICULTY_HARD = "Hard";
 
-    public static final String TFQ_TRUE = "True";
-    public static final String TFQ_FALSE = "False";
-
-    private int id;
     private String category;
-    private int chapter;
     private String difficulty;
+    private String topic;
+    private String chapter;
     private String question;
     private String answer;
     private String option1;
     private String option2;
     private String option3;
     private String option4;
-    private int topicId;
 
     public Question() {
 
-    }
-
-    public Question(String category, int chapter, String difficulty, String question, String answer,
-                    String option1, String option2, String option3, String option4, int topicId) {
-        this.category = category;
-        this.chapter = chapter;
-        this.difficulty = difficulty;
-        this.question = question;
-        this.answer = answer;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.topicId = topicId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCategory() {
@@ -60,20 +38,28 @@ public class Question implements Parcelable {
         this.category = category;
     }
 
-    public int getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(int chapter) {
-        this.chapter = chapter;
-    }
-
     public String getDifficulty() {
         return difficulty;
     }
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(String chapter) {
+        this.chapter = chapter;
     }
 
     public String getQuestion() {
@@ -124,12 +110,11 @@ public class Question implements Parcelable {
         this.option4 = option4;
     }
 
-    public int getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
+    public static String[] getAllTopics() {
+        return new String[] {
+                TOPIC_C_SHARP, TOPIC_COMPUTER_NETWORKING, TOPIC_JAVA,
+                TOPIC_OPERATING_SYSTEMS, TOPIC_SQL, TOPIC_SYSTEMS_DESIGN
+        };
     }
 
     public static String[] getAllDifficultyLevels() {
@@ -139,32 +124,30 @@ public class Question implements Parcelable {
     }
 
     protected Question(Parcel in) {
-        id = in.readInt();
         category = in.readString();
-        chapter = in.readInt();
         difficulty = in.readString();
+        topic = in.readString();
+        chapter = in.readString();
         question = in.readString();
         answer = in.readString();
         option1 = in.readString();
         option2 = in.readString();
         option3 = in.readString();
         option4 = in.readString();
-        topicId = in.readInt();
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(id);
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(category);
-        dest.writeInt(chapter);
         dest.writeString(difficulty);
+        dest.writeString(topic);
+        dest.writeString(chapter);
         dest.writeString(question);
         dest.writeString(answer);
         dest.writeString(option1);
         dest.writeString(option2);
         dest.writeString(option3);
         dest.writeString(option4);
-        dest.writeInt(topicId);
     }
 
     @Override
@@ -183,5 +166,4 @@ public class Question implements Parcelable {
             return new Question[size];
         }
     };
-
 }

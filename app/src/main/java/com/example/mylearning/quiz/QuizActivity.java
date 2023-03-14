@@ -1,6 +1,5 @@
 package com.example.mylearning.quiz;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -109,15 +108,14 @@ public class QuizActivity extends AppCompatActivity {
         txtColourDefaultTimer = txtViewTimer.getTextColors();
 
         Intent quizIntent = getIntent();
-        int topicId = quizIntent.getIntExtra(QuizCatalogueActivity.EXTRA_TOPIC_ID, 0);
-        String topicName = quizIntent.getStringExtra(QuizCatalogueActivity.EXTRA_TOPIC_NAME);
+        String topic = quizIntent.getStringExtra(QuizCatalogueActivity.EXTRA_TOPIC);
         String difficulty = quizIntent.getStringExtra(QuizCatalogueActivity.EXTRA_DIFFICULTY);
 
-        txtViewTopicDifficulty.setText(topicName + " (" + difficulty + ")");
+        txtViewTopicDifficulty.setText(topic + " (" + difficulty + ")");
 
         if (savedInstanceState == null) {
             QuizDbHelper quizDbHelper = QuizDbHelper.getInstance(this);
-            questionList = quizDbHelper.getQuestions(topicId, difficulty);
+            questionList = quizDbHelper.getQuestions(topic, difficulty);
 
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
@@ -400,25 +398,22 @@ public class QuizActivity extends AppCompatActivity {
             rdBtnTrue.setTextColor(Color.RED);
             rdBtnFalse.setTextColor(Color.RED);
 
-            switch (currentQuestion.getAnswer()) {
-                case "True":
-                    rdBtnTrue.setTextColor(Color.GREEN);
-                    if (!(tfqFitbqAnswer.equalsIgnoreCase("True"))) {
-                        correctAnswer = "Correct Answer: True";
-                    } else {
-                        correctAnswer = "";
-                    }
-                    break;
-                case "False":
-                    rdBtnFalse.setTextColor(Color.GREEN);
-                    if (!(tfqFitbqAnswer.equalsIgnoreCase("False"))) {
-                        correctAnswer = "Correct Answer: False";
-                    } else {
-                        correctAnswer = "";
-                    }
-                    break;
+            if (currentQuestion.getAnswer().equalsIgnoreCase("True")) {
+                rdBtnTrue.setTextColor(Color.GREEN);
+                if (!(tfqFitbqAnswer.equalsIgnoreCase("True"))) {
+                    correctAnswer = "Correct Answer: True";
+                } else {
+                    correctAnswer = "";
+                }
+            } else if (currentQuestion.getAnswer().equalsIgnoreCase("False")) {
+                rdBtnFalse.setTextColor(Color.GREEN);
+                if (!(tfqFitbqAnswer.equalsIgnoreCase("False"))) {
+                    correctAnswer = "Correct Answer: False";
+                } else {
+                    correctAnswer = "";
+                }
             }
-        } else {
+        } else if (currentQuestion.getCategory().equalsIgnoreCase("FITB")) {
             editTxtFitbAnswer.setBackgroundTintList(lineColourRedEditTxt);
             if (!(tfqFitbqAnswer.equalsIgnoreCase(currentQuestion.getAnswer()))) {
                 correctAnswer = "Correct Answer: " + currentQuestion.getAnswer();
@@ -451,7 +446,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_SCORE, score);
         outState.putInt(KEY_QUESTION_COUNTER, questionCounter);
