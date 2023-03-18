@@ -44,6 +44,7 @@ public class QuizCatalogueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_catalogue);
+        getSupportActionBar().setTitle("My Quiz");
 
         spinnerTopic = findViewById(R.id.spinnerTopic);
         spinnerDifficulty = findViewById(R.id.spinnerDifficulty);

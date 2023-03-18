@@ -41,6 +41,7 @@ public class AddNoteActivity extends AppCompatActivity {
         editTextTitle = findViewById(R.id.editTextTitle);
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.myNote);
 
         editTextTitle.addTextChangedListener(new TextWatcher() {
             @Override

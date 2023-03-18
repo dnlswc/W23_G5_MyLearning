@@ -87,6 +87,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        getSupportActionBar().setTitle("Quiz Practice");
 
         txtViewScore = findViewById(R.id.txtViewScore);
         txtViewQuestionCount = findViewById(R.id.txtViewQuestionCount);
@@ -108,6 +109,7 @@ public class QuizActivity extends AppCompatActivity {
         txtViewCorrectAnswer = findViewById(R.id.txtViewCorrectAnswer);
         btnConfirmNext = findViewById(R.id.btnConfirmNext);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.myQuiz);
 
         txtColourDefaultRdBtn = rdBtnTrue.getTextColors();
         lineColourDefaultEditTxt = editTxtFitbAnswer.getBackgroundTintList();

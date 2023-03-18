@@ -45,6 +45,7 @@ public class EditNoteActivity extends AppCompatActivity {
         editTextContent = findViewById(R.id.editTextContent);
         editTextTitle = findViewById(R.id.editTextTitle);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.myNote);
 
         ActionBar actionBar = getSupportActionBar();
         //   actionBar.setDisplayHomeAsUpEnabled(true);

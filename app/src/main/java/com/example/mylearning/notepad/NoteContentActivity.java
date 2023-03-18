@@ -37,6 +37,7 @@ public class NoteContentActivity extends AppCompatActivity {
         textViewNoteContent = findViewById(R.id.textViewNoteContent);
         floatingActionButtonDelete = findViewById(R.id.floatingActionButtonDelete);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.myNote);
 
         ActionBar actionBar = getSupportActionBar();
 
