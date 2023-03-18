@@ -12,13 +12,16 @@
         android:theme="@style/Theme.MyLearning"
         tools:targetApi="31">
         <activity
-            android:name=".notepad.EditNote"
-            android:exported="false"
-            android:parentActivityName=".notepad.NotePage"/>
+            android:name=".news.NewsActivity"
+            android:exported="false" />
         <activity
-            android:name=".notepad.NoteContent"
+            android:name=".notepad.EditNoteActivity"
             android:exported="false"
-            android:parentActivityName=".notepad.NotePage"/>
+            android:parentActivityName=".notepad.NotePageActivity" />
+        <activity
+            android:name=".notepad.NoteContentActivity"
+            android:exported="false"
+            android:parentActivityName=".notepad.NotePageActivity" />
         <activity
             android:name=".quiz.QuizActivity"
             android:exported="false" />
@@ -26,19 +29,16 @@
             android:name=".quiz.QuizCatalogueActivity"
             android:exported="false" />
         <activity
-            android:name=".notepad.AddNote"
+            android:name=".notepad.AddNoteActivity"
             android:exported="false"
             android:label="@string/note_name"
-            android:parentActivityName=".notepad.NotePage"/>
-
-<!--        <meta-data-->
-<!--            android:name="android.support.PARENT_ACTIVITY"-->
-<!--            android:value=".notepad.NotePage" />-->
-
+            android:parentActivityName=".notepad.NotePageActivity" /> <!-- <meta-data -->
+        <!-- android:name="android.support.PARENT_ACTIVITY" -->
+        <!-- android:value=".notepad.NotePage" /> -->
         <activity
-            android:name=".notepad.NotePage"
+            android:name=".notepad.NotePageActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

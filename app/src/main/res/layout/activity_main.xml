@@ -14,9 +14,12 @@
             android:id="@+id/btnQuiz"
             android:layout_width="133dp"
             android:layout_height="89dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="40dp"
             android:text="@string/btnTextQuiz"
+            android:textSize="19sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.611"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +29,10 @@
             android:layout_height="89dp"
             android:layout_marginTop="96dp"
             android:text="@string/btnTextNote"
+            android:textSize="19sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.611"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnQuiz" />
 
@@ -36,10 +42,49 @@
             android:layout_height="89dp"
             android:layout_marginTop="96dp"
             android:text="@string/btnTextNews"
+            android:textSize="19sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.611"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnNote" />
 
+        <ImageView
+            android:id="@+id/imageViewQuizIcon"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnQuiz"
+            app:layout_constraintEnd_toStartOf="@+id/btnQuiz"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnQuiz"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/quiz_icon" />
+
+        <ImageView
+            android:id="@+id/imageViewNoteIcon"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNote"
+            app:layout_constraintEnd_toStartOf="@+id/btnNote"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnNote"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/baseline_sticky_note_2_24" />
+
+        <ImageView
+            android:id="@+id/imageViewNewsIcon"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNews"
+            app:layout_constraintEnd_toStartOf="@+id/btnNews"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnNews"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/baseline_newspaper_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

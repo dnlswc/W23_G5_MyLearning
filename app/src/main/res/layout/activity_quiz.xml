@@ -1,194 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".question2.QuizActivity">
+    tools:context=".quiz.QuizActivity">
 
-    <TextView
-        android:id="@+id/txtViewScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/txtScore"
-        android:textSize="16sp"
-        android:freezesText="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtViewQuestionCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/txtQuestionCount"
-        android:textSize="16sp"
-        android:freezesText="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewScore" />
-
-    <TextView
-        android:id="@+id/txtViewTopicDifficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:freezesText="true"
-        android:text="@string/txtTopicDifficulty"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
-
-    <TextView
-        android:id="@+id/txtViewTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="16dp"
-        android:freezesText="true"
-        android:text="@string/txtTimer"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewTopicDifficulty" />
-
-    <TextView
-        android:id="@+id/txtViewQuestion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:freezesText="true"
-        android:text="@string/txtQuestion"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewQuestionCount" />
-
-    <RadioGroup
-        android:id="@+id/rdGrpTfOptions"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion">
-
-        <RadioButton
-            android:id="@+id/rdBtnTrue"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/editTxtFitbAnswer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
             android:freezesText="true"
-            android:minHeight="56dp"
-            android:text="@string/txtTrue"
-            android:textSize="16sp" />
+            android:hint="@string/txtTypeYourAnswerHere"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion" />
 
-        <RadioButton
-            android:id="@+id/rdBtnFalse"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtViewCorrectAnswer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
             android:freezesText="true"
-            android:minHeight="56dp"
-            android:text="@string/txtFalse"
-            android:textSize="16sp" />
-    </RadioGroup>
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnConfirmNext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/rdGrpMcOptions"
-        android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/rdGrpMcOptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion">
+
+            <RadioButton
+                android:id="@+id/rdBtnOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:minHeight="56dp"
+                android:text="@string/txtOption1"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rdBtnOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:minHeight="56dp"
+                android:text="@string/txtOption2"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rdBtnOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:minHeight="56dp"
+                android:text="@string/txtOption3"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rdBtnOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:minHeight="56dp"
+                android:text="@string/txtOption4"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/txtViewTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:freezesText="true"
+            android:text="@string/txtTimer"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewTopicDifficulty" />
+
+        <TextView
+            android:id="@+id/txtViewTopicDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:freezesText="true"
+            android:text="@string/txtTopicDifficulty"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.06" />
+
+        <TextView
+            android:id="@+id/txtViewScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:freezesText="true"
+            android:text="@string/txtScore"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.07" />
+
+        <Button
+            android:id="@+id/btnConfirmNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="88dp"
+            android:freezesText="true"
+            android:text="@string/txtConfirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rdGrpTfOptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion">
+
+            <RadioButton
+                android:id="@+id/rdBtnTrue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:minHeight="56dp"
+                android:text="@string/txtTrue"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/rdBtnFalse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:minHeight="56dp"
+                android:text="@string/txtFalse"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/txtViewQuestionCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:freezesText="true"
+            android:text="@string/txtQuestionCount"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewScore" />
+
+        <TextView
+            android:id="@+id/txtViewQuestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:freezesText="true"
+            android:text="@string/txtQuestion"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewQuestionCount" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion">
+        android:id="@+id/bottom_navigator"
+        app:itemBackground="@color/purple_500"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/bottom_navigation_menu"
+        android:layout_alignParentBottom="true"/>
 
-        <RadioButton
-            android:id="@+id/rdBtnOption1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:minHeight="56dp"
-            android:text="@string/txtOption1"
-            android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/rdBtnOption2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:minHeight="56dp"
-            android:text="@string/txtOption2"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/rdBtnOption3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:minHeight="56dp"
-            android:text="@string/txtOption3"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/rdBtnOption4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:minHeight="56dp"
-            android:text="@string/txtOption4"
-            android:textSize="16sp" />
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/editTxtFitbAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:freezesText="true"
-        android:hint="@string/txtTypeYourAnswerHere"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewQuestion" />
-
-    <TextView
-        android:id="@+id/txtViewCorrectAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
-        android:freezesText="true"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnConfirmNext"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnConfirmNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="@string/txtConfirm"
-        android:freezesText="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

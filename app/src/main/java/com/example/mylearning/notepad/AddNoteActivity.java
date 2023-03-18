@@ -13,16 +13,21 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.news.NewsActivity;
+import com.example.mylearning.quiz.QuizCatalogueActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 
-public class AddNote extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity {
 
     EditText editTextTitle, editTextContent;
     Calendar calendar;
     String today;
     String time;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,8 @@ public class AddNote extends AppCompatActivity {
 
         editTextContent = findViewById(R.id.editTextContent);
         editTextTitle = findViewById(R.id.editTextTitle);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigator);
 
         editTextTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -53,6 +60,37 @@ public class AddNote extends AppCompatActivity {
 
             }
         });
+
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+
+            switch (item.getItemId())
+            {
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myQuiz:
+                    startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myNote:
+                    startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+
+                case R.id.myNews:
+                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+            }
+
+            return false;
+
+        });
+
 /*
         calendar = Calendar.getInstance();
         today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
@@ -90,8 +128,10 @@ public class AddNote extends AppCompatActivity {
         } else if (item.getItemId() == R.id.save) {
             if (editTextTitle.getText().toString().isEmpty() == false) {
                 calendar = Calendar.getInstance();
-                today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
-                        + "/" + calendar.get(Calendar.DAY_OF_MONTH);
+               /* today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
+                        + "/" + calendar.get(Calendar.DAY_OF_MONTH);*/
+                today = pad(calendar.get(Calendar.YEAR) )+ "/" + pad((calendar.get(Calendar.MONTH) + 1))
+                        + "/" + pad(calendar.get(Calendar.DAY_OF_MONTH));
                 time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE));
 
                 Note note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
@@ -108,7 +148,7 @@ public class AddNote extends AppCompatActivity {
     }
 
     private void directToNotePage() {
-        Intent intent = new Intent(this, NotePage.class);
+        Intent intent = new Intent(this, NotePageActivity.class);
         startActivity(intent);
     }
 

@@ -57,7 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             noteTime = itemView.findViewById(R.id.textViewTime);
 
             itemView.setOnClickListener((View v)-> {
-                    Intent intent = new Intent(v.getContext(), NoteContent.class);
+                    Intent intent = new Intent(v.getContext(), NoteContentActivity.class);
                     intent.putExtra("ID",notes.get(getAdapterPosition()).getId());
                     v.getContext().startActivity(intent);
 

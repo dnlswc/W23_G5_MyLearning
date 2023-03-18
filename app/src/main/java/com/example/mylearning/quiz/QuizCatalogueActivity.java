@@ -1,16 +1,22 @@
 package com.example.mylearning.quiz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.news.NewsActivity;
+import com.example.mylearning.notepad.NotePageActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -32,6 +38,7 @@ public class QuizCatalogueActivity extends AppCompatActivity {
     private List<Question> questions;
 
     private QuizDbHelper quizDbHelper;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class QuizCatalogueActivity extends AppCompatActivity {
         spinnerTopic = findViewById(R.id.spinnerTopic);
         spinnerDifficulty = findViewById(R.id.spinnerDifficulty);
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
+        bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.myQuiz);
 
         loadTopics();
         loadDifficultyLevels();
@@ -53,6 +62,36 @@ public class QuizCatalogueActivity extends AppCompatActivity {
             quizDbHelper.addQuestion(question);
         }
 
+
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+
+            switch (item.getItemId())
+            {
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myQuiz:
+                    return true;
+
+                case R.id.myNote:
+                    startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+
+                case R.id.myNews:
+                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+            }
+
+            return false;
+
+        });
+
+
         btnStartQuiz.setOnClickListener((View v) -> {
             String topic = spinnerTopic.getSelectedItem().toString();
             String difficulty = spinnerDifficulty.getSelectedItem().toString();
@@ -62,6 +101,9 @@ public class QuizCatalogueActivity extends AppCompatActivity {
             quizIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
             startActivity(quizIntent);
         });
+
+
+
     }
 
     private void loadTopics() {

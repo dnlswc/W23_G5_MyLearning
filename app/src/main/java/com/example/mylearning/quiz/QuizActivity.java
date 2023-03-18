@@ -1,5 +1,6 @@
 package com.example.mylearning.quiz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +17,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.news.NewsActivity;
+import com.example.mylearning.notepad.NotePageActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,6 +80,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private CountDownTimer timer;
     private long timeLeftInMs;
+    BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +103,11 @@ public class QuizActivity extends AppCompatActivity {
         rdBtnOption2 = findViewById(R.id.rdBtnOption2);
         rdBtnOption3 = findViewById(R.id.rdBtnOption3);
         rdBtnOption4 = findViewById(R.id.rdBtnOption4);
-
         editTxtFitbAnswer = findViewById(R.id.editTxtFitbAnswer);
 
         txtViewCorrectAnswer = findViewById(R.id.txtViewCorrectAnswer);
         btnConfirmNext = findViewById(R.id.btnConfirmNext);
+        bottomNavigationView = findViewById(R.id.bottom_navigator);
 
         txtColourDefaultRdBtn = rdBtnTrue.getTextColors();
         lineColourDefaultEditTxt = editTxtFitbAnswer.getBackgroundTintList();
@@ -188,6 +196,36 @@ public class QuizActivity extends AppCompatActivity {
             } else {
                 showNextQuestion();
             }
+        });
+
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+
+            switch (item.getItemId())
+            {
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myQuiz:
+                    startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myNote:
+                    startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+
+                case R.id.myNews:
+                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+            }
+
+            return false;
+
         });
     }
 

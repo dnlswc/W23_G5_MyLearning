@@ -84,7 +84,8 @@ public class Database extends SQLiteOpenHelper {
         //String query = "SELECT * FROM " + TABLE;
         // String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
       //  String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC, " + ID + " DESC";
-        String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " ASC, " + TIME + " DESC, " + ID + " ASC";
+        //String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " ASC, " + TIME + " DESC, " + ID + " ASC";
+        String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC, " + ID + " DESC";
 
         Cursor cursor = db.rawQuery(query, null);
         //  if (cursor!=null) {

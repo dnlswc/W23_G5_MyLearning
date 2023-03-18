@@ -14,13 +14,15 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
-import com.example.mylearning.notepad.Note;
-import com.example.mylearning.notepad.NotePage;
+import com.example.mylearning.news.NewsActivity;
+import com.example.mylearning.quiz.QuizCatalogueActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 
-public class EditNote extends AppCompatActivity {
+public class EditNoteActivity extends AppCompatActivity {
 
     EditText editTextTitle, editTextContent;
     Calendar calendar;
@@ -28,7 +30,7 @@ public class EditNote extends AppCompatActivity {
     String time;
     Database database;
     Note note;
-
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class EditNote extends AppCompatActivity {
 
         editTextContent = findViewById(R.id.editTextContent);
         editTextTitle = findViewById(R.id.editTextTitle);
+        bottomNavigationView = findViewById(R.id.bottom_navigator);
 
         ActionBar actionBar = getSupportActionBar();
         //   actionBar.setDisplayHomeAsUpEnabled(true);
@@ -86,6 +89,37 @@ public class EditNote extends AppCompatActivity {
 
         Toast.makeText(this, "Date and Time: " + today + " and " + time, Toast.LENGTH_SHORT).show();
 */
+
+
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+
+            switch (item.getItemId())
+            {
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myQuiz:
+                    startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myNote:
+                    startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+
+                case R.id.myNews:
+                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+            }
+
+            return false;
+
+        });
 
     }
 
@@ -143,7 +177,7 @@ public class EditNote extends AppCompatActivity {
             }
 
 
-            Intent intent = new Intent(getApplicationContext(), NotePage.class);
+            Intent intent = new Intent(getApplicationContext(), NotePageActivity.class);
             /*intent.putExtra("ID", note.getId());
             intent.putExtra("DATE", note.getDate());
             intent.putExtra("TIME", note.getTime());*/
