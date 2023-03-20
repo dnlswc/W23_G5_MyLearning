@@ -1,5 +1,7 @@
 package com.example.mylearning.notepad;
 
+import static android.text.TextUtils.substring;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -37,6 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String title = notes.get(position).getTitle();
         String date = notes.get(position).getDate();
         String time = notes.get(position).getTime();
+        time = time.substring(0,5);
         holder.noteTitle.setText(title);
         holder.noteDate.setText(date);
         holder.noteTime.setText(time);

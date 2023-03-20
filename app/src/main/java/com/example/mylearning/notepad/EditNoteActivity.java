@@ -153,10 +153,11 @@ public class EditNoteActivity extends AppCompatActivity {
                 note.setContent(editTextContent.getText().toString());
 
                 calendar = Calendar.getInstance();
-                today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
-                        + "/" + calendar.get(Calendar.DAY_OF_MONTH);
+                today = pad(calendar.get(Calendar.YEAR) )+ "/" + pad((calendar.get(Calendar.MONTH) + 1))
+                        + "/" + pad(calendar.get(Calendar.DAY_OF_MONTH));
 
-                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE));
+                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE))+
+                        ":" + pad(calendar.get(Calendar.SECOND));;
 
                 note.setDate(today);
                 note.setTime(time);

@@ -133,7 +133,8 @@ public class AddNoteActivity extends AppCompatActivity {
                         + "/" + calendar.get(Calendar.DAY_OF_MONTH);*/
                 today = pad(calendar.get(Calendar.YEAR) )+ "/" + pad((calendar.get(Calendar.MONTH) + 1))
                         + "/" + pad(calendar.get(Calendar.DAY_OF_MONTH));
-                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE));
+                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE))+
+                        ":" + pad(calendar.get(Calendar.SECOND));
 
                 Note note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
                 Database db = new Database(this);
