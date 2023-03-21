@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import com.example.mylearning.news.NewsActivity;
 import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EditNoteActivity extends AppCompatActivity {
@@ -31,16 +33,27 @@ public class EditNoteActivity extends AppCompatActivity {
     Database database;
     Note note;
     BottomNavigationView bottomNavigationView;
+    ArrayList<Note> noteListToReceive= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_note);
 
+        database = new Database(this);
+
+        /*
         Intent intent = getIntent();
         Long id = intent.getLongExtra("ID", -1);
         database = new Database(this);
         note = database.getNote(id);
+*/
+
+        noteListToReceive = getIntent().getParcelableArrayListExtra("NOTE_LIST");
+        note = noteListToReceive.get(0);
+        Log.d("Edit111", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
+                + note.getDate() + ", " + note.getTime());
+
 
         editTextContent = findViewById(R.id.editTextContent);
         editTextTitle = findViewById(R.id.editTextTitle);
@@ -48,15 +61,7 @@ public class EditNoteActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.myNote);
 
         ActionBar actionBar = getSupportActionBar();
-        //   actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(note.getTitle());
-        //  actionBar.setDisplayHomeAsUpEnabled(true);
-
-        /*
-        getSupportActionBar().setTitle(note.getTitle());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-*/
-
 
         editTextTitle.setText(note.getTitle());
         editTextContent.setText(note.getContent());
@@ -81,40 +86,28 @@ public class EditNoteActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        calendar = Calendar.getInstance();
-        today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
-                + "/" + calendar.get(Calendar.DAY_OF_MONTH);
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) -> {
 
-        time = pad(calendar.get(Calendar.HOUR)) + ":" + pad(calendar.get(Calendar.MINUTE));
-
-        Toast.makeText(this, "Date and Time: " + today + " and " + time, Toast.LENGTH_SHORT).show();
-*/
-
-
-        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
-
-            switch (item.getItemId())
-            {
+            switch (item.getItemId()) {
                 case R.id.home:
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
                 case R.id.myQuiz:
                     startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
                 case R.id.myNote:
                     startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
 
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
             }
 
@@ -147,32 +140,58 @@ public class EditNoteActivity extends AppCompatActivity {
             Toast.makeText(this, "Cancel the note.", Toast.LENGTH_SHORT).show();
             onBackPressed();
         } else if (item.getItemId() == R.id.save) {
-            // new line
             if (editTextTitle.getText().toString().isEmpty() == false) {
                 note.setTitle(editTextTitle.getText().toString());
                 note.setContent(editTextContent.getText().toString());
 
+                /*
+                long note_id = note.getId();
+                Note note1 = new Note();
+                note1.setId(note_id);
+                note1.setTitle(editTextTitle.getText().toString());
+                note1.setContent(editTextContent.getText().toString());
+*/
+
                 calendar = Calendar.getInstance();
-                today = pad(calendar.get(Calendar.YEAR) )+ "/" + pad((calendar.get(Calendar.MONTH) + 1))
+                today = calendar.get(Calendar.YEAR) + "/" + pad((calendar.get(Calendar.MONTH) + 1))
                         + "/" + pad(calendar.get(Calendar.DAY_OF_MONTH));
 
-                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE))+
-                        ":" + pad(calendar.get(Calendar.SECOND));;
+                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE)) +
+                        ":" + pad(calendar.get(Calendar.SECOND));
+
 
                 note.setDate(today);
                 note.setTime(time);
 
+/*
+                note1.setDate(today);
+                note1.setTime(time);
+*/
+
+                Log.d("Edit222", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
+                + note.getDate() + ", " + note.getTime());
+
                 int numberOfRowAffected = database.editNote(note);
-                //  int id = database.editNote(note);
-                //  if (id==note.getId()){
+              /* int numberOfRowAffected = database.editNote(note.getId(), note.getTitle(), note.getContent(),note.getDate()
+               , note.getTime());*/
+
+
+
+
+                /*
+                if (note!=null) {
+                    database.editNote(note);
+                }*/
+                Log.d("999","Passed_numberOfRowAffected");
+
+
                 if (numberOfRowAffected == 1) {
                     Toast.makeText(this, "Note was updated successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Unsuccessful update", Toast.LENGTH_SHORT).show();
                 }
 
-                //  Toast.makeText(this, "Updated the note.", Toast.LENGTH_SHORT).show();
-                // goToMain();
+
             } else {
                 Toast.makeText(this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
@@ -180,24 +199,11 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
             Intent intent = new Intent(getApplicationContext(), NotePageActivity.class);
-            /*intent.putExtra("ID", note.getId());
-            intent.putExtra("DATE", note.getDate());
-            intent.putExtra("TIME", note.getTime());*/
+
             startActivity(intent);
 
-/*
-            Toast.makeText(this, "Save the note.", Toast.LENGTH_SHORT).show();
-            //  onBackPressed();
-            goToMain();*/
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /*
-    private void goToMain() {
-        Intent intent = new Intent(this, NotePage.class);
-        startActivity(intent);
-    }
-*/
 
 }

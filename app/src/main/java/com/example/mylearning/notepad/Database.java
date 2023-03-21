@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
 
-    // Table inforamtion
+    // Table information
     private static final int VERSION = 2;
     // Can't use database / database1 / database2 >>> will crash
     private static final String NAME = "database3";
@@ -67,13 +67,13 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE, new String[]{ID, TITLE, CONTENT, DATE, TIME},
                 ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
+
+        Note note = new Note();
+
+        if (cursor.moveToFirst() == true) {
+            note = new Note(cursor.getLong(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getString(3), cursor.getString(4));
         }
-
-        Note note = new Note(cursor.getLong(0), cursor.getString(1),
-                cursor.getString(2), cursor.getString(3), cursor.getString(4));
-
         return note;
     }
 
@@ -81,16 +81,10 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Note> allNotes = new ArrayList<>();
 
-        //String query = "SELECT * FROM " + TABLE;
-        // String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
-      //  String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC, " + ID + " DESC";
-        //String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " ASC, " + TIME + " DESC, " + ID + " ASC";
-       // String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC, " + ID + " DESC";
         String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
 
         Cursor cursor = db.rawQuery(query, null);
-        //  if (cursor!=null) {
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst() == true) {
             do {
                 Note note = new Note();
                 note.setId(cursor.getLong(0));
@@ -99,7 +93,7 @@ public class Database extends SQLiteOpenHelper {
                 note.setDate(cursor.getString(3));
                 note.setTime(cursor.getString(4));
                 allNotes.add(note);
-            } while (cursor.moveToNext());
+            } while (cursor.moveToNext() == true);
         }
         return allNotes;
     }
@@ -120,7 +114,24 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put(DATE, note.getDate());
         contentValues.put(TIME, note.getTime());
         return db.update(TABLE, contentValues, ID + "=?", new String[]{String.valueOf(note.getId())});
+
     }
+
+
+    /*
+    public int editNote(long id, String title, String content, String date, String time) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TITLE, title);
+        contentValues.put(CONTENT, content);
+        contentValues.put(DATE, date);
+        contentValues.put(TIME, time);
+        return db.update(TABLE, contentValues, ID + "=?", new String[]{String.valueOf(id)});
+
+    }*/
+
+
+
 
 
 }

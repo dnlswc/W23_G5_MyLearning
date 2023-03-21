@@ -28,6 +28,8 @@ public class AddNoteActivity extends AppCompatActivity {
     String today;
     String time;
     BottomNavigationView bottomNavigationView;
+    Database db;
+    Note note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,29 +64,28 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) -> {
 
-            switch (item.getItemId())
-            {
+            switch (item.getItemId()) {
                 case R.id.home:
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
                 case R.id.myQuiz:
                     startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
                 case R.id.myNote:
                     startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
 
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
             }
 
@@ -92,19 +93,6 @@ public class AddNoteActivity extends AppCompatActivity {
 
         });
 
-/*
-        calendar = Calendar.getInstance();
-        today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
-                + "/" + calendar.get(Calendar.DAY_OF_MONTH);
-
-        // time = pad(calendar.get(Calendar.HOUR)) + ":" + pad(calendar.get(Calendar.MINUTE));
-        //time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE)) + calendar.get(Calendar.AM_PM);
-        time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE));
-*/
-
-        // Toast.makeText(this, "Date and Time: " + today + " and " + time, Toast.LENGTH_SHORT).show();
-
-        //  Log.d("Calender", "Date and Time: " + today + "and " + time );
     }
 
     private String pad(int i) {
@@ -129,23 +117,21 @@ public class AddNoteActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.save) {
             if (editTextTitle.getText().toString().isEmpty() == false) {
                 calendar = Calendar.getInstance();
-               /* today = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1)
-                        + "/" + calendar.get(Calendar.DAY_OF_MONTH);*/
-                today = pad(calendar.get(Calendar.YEAR) )+ "/" + pad((calendar.get(Calendar.MONTH) + 1))
+                today = calendar.get(Calendar.YEAR) + "/" + pad((calendar.get(Calendar.MONTH) + 1))
                         + "/" + pad(calendar.get(Calendar.DAY_OF_MONTH));
-                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE))+
+                time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE)) +
                         ":" + pad(calendar.get(Calendar.SECOND));
 
-                Note note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
-                Database db = new Database(this);
-                db.addNote(note);
+                note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
+                db = new Database(this);
+                long idFromDb = db.addNote(note);
+                note.setId(idFromDb);
                 Toast.makeText(this, "Saved the note", Toast.LENGTH_SHORT).show();
                 directToNotePage();
             } else {
                 Toast.makeText(this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -14,14 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mylearning.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     LayoutInflater inflater;
     List<Note> notes;
+    ArrayList<Note> noteListToBePassed = new ArrayList<>();
 
-    Adapter(Context context, List<Note>notes){
+    Adapter(Context context, List<Note> notes) {
         this.inflater = LayoutInflater.from(context);
         this.notes = notes;
     }
@@ -39,7 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String title = notes.get(position).getTitle();
         String date = notes.get(position).getDate();
         String time = notes.get(position).getTime();
-        time = time.substring(0,5);
+        time = time.substring(0, 5);
         holder.noteTitle.setText(title);
         holder.noteDate.setText(date);
         holder.noteTime.setText(time);
@@ -50,8 +52,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return notes.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView noteTitle,  noteDate, noteTime;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView noteTitle, noteDate, noteTime;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,10 +61,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             noteDate = itemView.findViewById(R.id.textViewDate);
             noteTime = itemView.findViewById(R.id.textViewTime);
 
-            itemView.setOnClickListener((View v)-> {
-                    Intent intent = new Intent(v.getContext(), NoteContentActivity.class);
-                    intent.putExtra("ID",notes.get(getAdapterPosition()).getId());
-                    v.getContext().startActivity(intent);
+            itemView.setOnClickListener((View v) -> {
+                Intent intent = new Intent(v.getContext(), NoteContentActivity.class);
+                //intent.putExtra("ID", notes.get(getAdapterPosition()).getId());
+                Note noteObjectToBePassed = new Note(notes.get(getAdapterPosition()).getId(), notes.get(getAdapterPosition()).getTitle(),
+                        notes.get(getAdapterPosition()).getContent(), notes.get(getAdapterPosition()).getDate(),
+                        notes.get(getAdapterPosition()).getTime());
+
+                noteListToBePassed.add(noteObjectToBePassed);
+
+                intent.putParcelableArrayListExtra("NOTE_LIST",noteListToBePassed);
+                v.getContext().startActivity(intent);
 
             });
         }

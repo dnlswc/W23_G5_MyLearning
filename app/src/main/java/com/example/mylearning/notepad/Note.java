@@ -1,6 +1,11 @@
 package com.example.mylearning.notepad;
 
-public class Note {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Note implements Parcelable {
 
     private long id;
     private String title;
@@ -8,7 +13,7 @@ public class Note {
     private String date;
     private String time;
 
-    Note(){
+    Note() {
 
     }
 
@@ -26,6 +31,26 @@ public class Note {
         this.date = date;
         this.time = time;
     }
+
+    protected Note(Parcel in) {
+        id = in.readLong();
+        title = in.readString();
+        content = in.readString();
+        date = in.readString();
+        time = in.readString();
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -67,4 +92,17 @@ public class Note {
         this.time = time;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(title);
+        dest.writeString(content);
+        dest.writeString(date);
+        dest.writeString(time);
+    }
 }

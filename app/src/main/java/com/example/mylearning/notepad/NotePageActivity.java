@@ -27,6 +27,7 @@ public class NotePageActivity extends AppCompatActivity {
     List<Note> notes;
 
     BottomNavigationView bottomNavigationView;
+    Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +40,38 @@ public class NotePageActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("My Note");
 
-        Database db = new Database(this);
+        db = new Database(this);
         notes = db.getNotes();
 
 
-
         RecyclerViewMainNote.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Adapter(this,notes );
+        adapter = new Adapter(this, notes);
         RecyclerViewMainNote.setAdapter(adapter);
 
-        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) -> {
 
-               switch (item.getItemId())
-               {
-                   case R.id.home:
-                       startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                       overridePendingTransition(0,0);
-                       return true;
+            switch (item.getItemId()) {
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
 
-                   case R.id.myQuiz:
-                       startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
-                       overridePendingTransition(0,0);
-                       return true;
+                case R.id.myQuiz:
+                    startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
 
-                   case R.id.myNote:
-                       return true;
+                case R.id.myNote:
+                    return true;
 
 
-                   case R.id.myNews:
-                       startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                       overridePendingTransition(0,0);
-                       return true;
-               }
+                case R.id.myNews:
+                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+            }
 
-                return false;
+            return false;
 
         });
     }
@@ -86,15 +85,13 @@ public class NotePageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()==R.id.add)
-        {
+        if (item.getItemId() == R.id.add) {
             Intent addNote = new Intent(this, AddNoteActivity.class);
             Toast.makeText(this, "Add a note", Toast.LENGTH_SHORT).show();
             startActivity(addNote);
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

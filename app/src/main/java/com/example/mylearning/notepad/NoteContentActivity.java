@@ -21,13 +21,16 @@ import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class NoteContentActivity extends AppCompatActivity {
     TextView textViewNoteContent;
     FloatingActionButton floatingActionButtonDelete;
     Database database;
     Note note;
     BottomNavigationView bottomNavigationView;
-
+    ArrayList<Note> noteListToReceive= new ArrayList<>();
+    ArrayList<Note> noteListToBePassed = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +44,19 @@ public class NoteContentActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
+        database = new Database(this);
 
+        noteListToReceive = getIntent().getParcelableArrayListExtra("NOTE_LIST");
+        note = noteListToReceive.get(0);
+
+
+        /*
         Intent intent = getIntent();
         Long id = intent.getLongExtra("ID", 0);
 
         database = new Database(this);
         note = database.getNote(id);
+*/
 
         actionBar.setTitle(note.getTitle());
         textViewNoteContent.setText(note.getContent());
@@ -59,29 +69,28 @@ public class NoteContentActivity extends AppCompatActivity {
         });
 
 
-        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
+        bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) -> {
 
-            switch (item.getItemId())
-            {
+            switch (item.getItemId()) {
                 case R.id.home:
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
                 case R.id.myQuiz:
                     startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
                 case R.id.myNote:
                     startActivity(new Intent(getApplicationContext(), NotePageActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
 
 
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     return true;
             }
 
@@ -103,12 +112,15 @@ public class NoteContentActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // menu object in edit_menu.xml
         if (item.getItemId() == R.id.edit) {
             Toast.makeText(this, "Edit the note", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, EditNoteActivity.class);
-            intent.putExtra("ID",note.getId());
+            //intent.putExtra("ID", note.getId());
+
+            noteListToBePassed.add(note);
+
+            intent.putParcelableArrayListExtra("NOTE_LIST",noteListToBePassed);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
