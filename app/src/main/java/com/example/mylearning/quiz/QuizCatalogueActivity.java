@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
@@ -28,11 +29,14 @@ import java.util.List;
 public class QuizCatalogueActivity extends AppCompatActivity {
     static final String TAG = "QuizData";
 
+    public static final String EXTRA_TYPE = "extraType";
     public static final String EXTRA_TOPIC = "extraTopic";
     public static final String EXTRA_DIFFICULTY = "extraDifficulty";
 
+    private Spinner spinnerType;
     private Spinner spinnerTopic;
     private Spinner spinnerDifficulty;
+    private TextView txtViewHighScore;
     private Button btnStartQuiz;
 
     private List<Question> questions;
@@ -44,14 +48,19 @@ public class QuizCatalogueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_catalogue);
+
         getSupportActionBar().setTitle("My Quiz");
 
+        spinnerType = findViewById(R.id.spinnerType);
         spinnerTopic = findViewById(R.id.spinnerTopic);
         spinnerDifficulty = findViewById(R.id.spinnerDifficulty);
+        txtViewHighScore = findViewById(R.id.txtViewHighScore);
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
+
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.myQuiz);
 
+        loadTypes();
         loadTopics();
         loadDifficultyLevels();
 
@@ -63,6 +72,25 @@ public class QuizCatalogueActivity extends AppCompatActivity {
             quizDbHelper.addQuestion(question);
         }
 
+        btnStartQuiz.setOnClickListener((View v) -> {
+            String type = spinnerType.getSelectedItem().toString();
+            String topic = spinnerTopic.getSelectedItem().toString();
+            String difficulty = spinnerDifficulty.getSelectedItem().toString();
+
+            if (type.equalsIgnoreCase("True or False")) {
+                type = "TF";
+            } else if (type.equalsIgnoreCase("Multiple Choice")) {
+                type = "MC";
+            } else if (type.equalsIgnoreCase("Fill in the Blank")) {
+                type = "FITB";
+            }
+
+            Intent quizIntent = new Intent(QuizCatalogueActivity.this, QuizActivity.class);
+            quizIntent.putExtra(EXTRA_TYPE, type);
+            quizIntent.putExtra(EXTRA_TOPIC, topic);
+            quizIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
+            startActivity(quizIntent);
+        });
 
         bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
 
@@ -89,26 +117,35 @@ public class QuizCatalogueActivity extends AppCompatActivity {
             }
 
             return false;
-
         });
-
-
-        btnStartQuiz.setOnClickListener((View v) -> {
-            String topic = spinnerTopic.getSelectedItem().toString();
-            String difficulty = spinnerDifficulty.getSelectedItem().toString();
-
-            Intent quizIntent = new Intent(QuizCatalogueActivity.this, QuizActivity.class);
-            quizIntent.putExtra(EXTRA_TOPIC, topic);
-            quizIntent.putExtra(EXTRA_DIFFICULTY, difficulty);
-            startActivity(quizIntent);
-        });
-
-
-
     }
 
+    private void loadTypes() {
+        String[] types = new String[Question.getAllTypes().length + 1];
+        for (int i = 0; i <= Question.getAllTypes().length; i++) {
+            if (i == 0) {
+                types[i] = "All";
+            } else {
+                types[i] = Question.getAllTypes()[i - 1];
+            }
+        }
+
+        ArrayAdapter<String> adapterType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerType.setAdapter(adapterType);
+    }
+
+    // load distinct topics from the database
     private void loadTopics() {
-        String[] topics = Question.getAllTopics();
+        QuizDbHelper quizDbHelper = new QuizDbHelper(this);
+        String[] topics = new String[quizDbHelper.getTopics().size() + 1];
+        for (int i = 0; i <= quizDbHelper.getTopics().size(); i++) {
+            if (i == 0) {
+                topics[i] = "All";
+            } else {
+                topics[i] = quizDbHelper.getTopics().get(i - 1);
+            }
+        }
 
         ArrayAdapter<String> adapterTopic = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, topics);
         adapterTopic.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -116,7 +153,14 @@ public class QuizCatalogueActivity extends AppCompatActivity {
     }
 
     private void loadDifficultyLevels() {
-        String[] difficultyLevels = Question.getAllDifficultyLevels();
+        String[] difficultyLevels = new String[Question.getAllDifficultyLevels().length + 1];
+        for (int i = 0; i <= Question.getAllDifficultyLevels().length; i++) {
+            if (i == 0) {
+                difficultyLevels[i] = "All";
+            } else {
+                difficultyLevels[i] = Question.getAllDifficultyLevels()[i - 1];
+            }
+        }
 
         ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
         adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -147,11 +191,11 @@ public class QuizCatalogueActivity extends AppCompatActivity {
                 }
 
                 Question question = new Question();
-                question.setCategory(tokens[0]);
+                question.setType(tokens[0]);
                 question.setDifficulty(tokens[1]);
                 question.setTopic(tokens[2]);
                 question.setChapter(tokens[3]);
-                question.setQuestion(tokens[4]);
+                question.setQuestion(tokens[4].replace("***", "\n"));
                 question.setAnswer(tokens[5]);
                 if (tokens[6].length() > 0) {
                     question.setOption1(tokens[6]);

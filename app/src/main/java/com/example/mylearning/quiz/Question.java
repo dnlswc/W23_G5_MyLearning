@@ -4,18 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Question implements Parcelable {
-    public static final String TOPIC_C_SHARP = "C#";
-    public static final String TOPIC_COMPUTER_NETWORKING = "Computer Networking";
-    public static final String TOPIC_JAVA = "Java";
-    public static final String TOPIC_OPERATING_SYSTEMS = "Operating Systems";
-    public static final String TOPIC_SQL = "SQL";
-    public static final String TOPIC_SYSTEMS_DESIGN = "Systems Design";
+    public static final String TYPE_TFQ = "True or False";
+    public static final String TYPE_MCQ = "Multiple Choice";
+    public static final String TYPE_FITBQ = "Fill in the Blank";
 
     public static final String DIFFICULTY_EASY = "Easy";
     public static final String DIFFICULTY_MEDIUM = "Medium";
     public static final String DIFFICULTY_HARD = "Hard";
 
-    private String category;
+    private String type;
     private String difficulty;
     private String topic;
     private String chapter;
@@ -26,16 +23,14 @@ public class Question implements Parcelable {
     private String option3;
     private String option4;
 
-    public Question() {
+    public Question() {}
 
+    public String getType() {
+        return type;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDifficulty() {
@@ -110,10 +105,9 @@ public class Question implements Parcelable {
         this.option4 = option4;
     }
 
-    public static String[] getAllTopics() {
+    public static String[] getAllTypes() {
         return new String[] {
-                TOPIC_C_SHARP, TOPIC_COMPUTER_NETWORKING, TOPIC_JAVA,
-                TOPIC_OPERATING_SYSTEMS, TOPIC_SQL, TOPIC_SYSTEMS_DESIGN
+                TYPE_TFQ, TYPE_MCQ, TYPE_FITBQ
         };
     }
 
@@ -124,7 +118,7 @@ public class Question implements Parcelable {
     }
 
     protected Question(Parcel in) {
-        category = in.readString();
+        type = in.readString();
         difficulty = in.readString();
         topic = in.readString();
         chapter = in.readString();
@@ -138,7 +132,7 @@ public class Question implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(category);
+        dest.writeString(type);
         dest.writeString(difficulty);
         dest.writeString(topic);
         dest.writeString(chapter);

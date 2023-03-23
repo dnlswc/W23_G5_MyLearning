@@ -21,4 +21,6 @@
     <string name="txtDifficulty">Difficulty:</string>
     <string name="txtTopic">Topic:</string>
     <string name="txtTopicDifficulty">Topic (Difficulty)</string>
+    <string name="txtCategory">Type:</string>
+    <string name="txtHighScore">High Score: 0</string>
 </resources>
