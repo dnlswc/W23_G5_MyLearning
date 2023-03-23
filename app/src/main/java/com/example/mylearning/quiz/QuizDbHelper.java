@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "quiz_questions";
     private static final String COLUMN_ID = "id";
-    private static final String COLUMN_CATEGORY = "category";
+    private static final String COLUMN_TYPE = "type";
     private static final String COLUMN_DIFFICULTY = "difficulty";
     private static final String COLUMN_TOPIC = "topic";
     private static final String COLUMN_CHAPTER = "chapter";
@@ -45,7 +46,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_QUESTIONS_TABLE =
             "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_CATEGORY + " TEXT, "
+                + COLUMN_TYPE + " TEXT, "
                 + COLUMN_DIFFICULTY + " TEXT, "
                 + COLUMN_TOPIC + " TEXT, "
                 + COLUMN_CHAPTER + " TEXT, "
@@ -69,7 +70,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_CATEGORY, question.getCategory());
+        cv.put(COLUMN_TYPE, question.getType());
         cv.put(COLUMN_DIFFICULTY, question.getDifficulty());
         cv.put(COLUMN_TOPIC, question.getTopic());
         cv.put(COLUMN_CHAPTER, question.getChapter());
@@ -84,27 +85,99 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Question> getQuestions(String topic, String difficulty) {
+    public ArrayList<String> getTopics() {
+        db = this.getReadableDatabase();
+        ArrayList<String> topicList = new ArrayList<>();
+        String[] columns = {COLUMN_TOPIC};
+        Cursor cursor = null;
+
+        cursor = db.query(true, TABLE_NAME, columns, null, null, null, null, COLUMN_TOPIC, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                topicList.add(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOPIC)));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return topicList;
+    }
+
+    public ArrayList<Question> getQuestions(String type, String topic, String difficulty) {
         db = this.getReadableDatabase();
         ArrayList<Question> questionList = new ArrayList<>();
+        String selection = "";
+        String[] selectionArgs = null;
+        Cursor cursor = null;
 
-        String selection = COLUMN_TOPIC + " = ? "
-                + " AND " + COLUMN_DIFFICULTY + " = ? ";
-        String[] selectionArgs = new String[] {topic, difficulty};
-        Cursor cursor = db.query(
-                TABLE_NAME,
-                null,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
+        if (type.equalsIgnoreCase("All")
+                && topic.equalsIgnoreCase("All")
+                && difficulty.equalsIgnoreCase("All")) {
+            cursor = db.query(TABLE_NAME, null,
+                    null, null,
+                    null, null,
+                    null);
+        } else {
+            if (!(type.equalsIgnoreCase("All"))
+                    && !(topic.equalsIgnoreCase("All"))
+                    && !(difficulty.equalsIgnoreCase("All"))) {
+                selection = COLUMN_TYPE + " = ? "
+                        + " AND " + COLUMN_TOPIC + " = ? "
+                        + " AND " + COLUMN_DIFFICULTY + " = ? ";
+                selectionArgs = new String[] {type, topic, difficulty};
+
+            } else if (type.equalsIgnoreCase("All")
+                    && !(topic.equalsIgnoreCase("All"))
+                    && !(difficulty.equalsIgnoreCase("All"))) {
+                selection = COLUMN_TOPIC + " = ? "
+                        + " AND " + COLUMN_DIFFICULTY + " = ? ";
+                selectionArgs = new String[] {topic, difficulty};
+
+            } else if (!(type.equalsIgnoreCase("All"))
+                    && topic.equalsIgnoreCase("All")
+                    && !(difficulty.equalsIgnoreCase("All"))) {
+                selection = COLUMN_TYPE + " = ? "
+                        + " AND " + COLUMN_DIFFICULTY + " = ? ";
+                selectionArgs = new String[] {type, difficulty};
+
+            } else if (!(type.equalsIgnoreCase("All"))
+                    && !(topic.equalsIgnoreCase("All"))
+                    && difficulty.equalsIgnoreCase("All")) {
+                selection = COLUMN_TYPE + " = ? "
+                        + " AND " + COLUMN_TOPIC + " = ? ";
+                selectionArgs = new String[] {type, topic};
+
+            } else if (type.equalsIgnoreCase("All")
+                    && topic.equalsIgnoreCase("All")
+                    && !(difficulty.equalsIgnoreCase("All"))) {
+                selection = COLUMN_DIFFICULTY + " = ? ";
+                selectionArgs = new String[] {difficulty};
+
+            } else if (type.equalsIgnoreCase("All")
+                    && !(topic.equalsIgnoreCase("All"))
+                    && difficulty.equalsIgnoreCase("All")) {
+                selection = COLUMN_TOPIC + " = ? ";
+                selectionArgs = new String[] {topic};
+
+            } else if (!(type.equalsIgnoreCase("All"))
+                    && topic.equalsIgnoreCase("All")
+                    && difficulty.equalsIgnoreCase("All")) {
+                selection = COLUMN_TYPE + " = ? ";
+                selectionArgs = new String[] {type};
+
+            }
+
+            cursor = db.query(TABLE_NAME, null,
+                    selection, selectionArgs,
+                    null, null,
+                    null);
+        }
 
         if (cursor.moveToFirst()) {
             do {
                 Question question = new Question();
-                question.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY)));
+                question.setType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TYPE)));
                 question.setDifficulty(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DIFFICULTY)));
                 question.setTopic(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOPIC)));
                 question.setChapter(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CHAPTER)));
@@ -119,6 +192,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
+
         return questionList;
     }
 

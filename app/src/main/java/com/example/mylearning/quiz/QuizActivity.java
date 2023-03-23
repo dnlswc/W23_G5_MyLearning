@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +29,15 @@ import java.util.Collections;
 import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity {
-
     private static final long TIMER_IN_MS = 30000;
+
+    // score(s) for correct answers in different difficulties
+    private static final int EASY_SCORE = 1;
+    private static final int MEDIUM_SCORE = 2;
+    private static final int HARD_SCORE = 3;
+
+    // maximum number of questions per quiz
+    private static final int MAX_NUM_OF_QUESTIONS = 10;
 
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNTER = "keyQuestionCounter";
@@ -118,16 +126,15 @@ public class QuizActivity extends AppCompatActivity {
         txtColourDefaultTimer = txtViewTimer.getTextColors();
 
         Intent quizIntent = getIntent();
+        String type = quizIntent.getStringExtra(QuizCatalogueActivity.EXTRA_TYPE);
         String topic = quizIntent.getStringExtra(QuizCatalogueActivity.EXTRA_TOPIC);
         String difficulty = quizIntent.getStringExtra(QuizCatalogueActivity.EXTRA_DIFFICULTY);
 
-        txtViewTopicDifficulty.setText(topic + " (" + difficulty + ")");
-
         if (savedInstanceState == null) {
             QuizDbHelper quizDbHelper = QuizDbHelper.getInstance(this);
-            questionList = quizDbHelper.getQuestions(topic, difficulty);
+            questionList = quizDbHelper.getQuestions(type, topic, difficulty);
 
-            questionCountTotal = questionList.size();
+            setQuestionLimit();
             Collections.shuffle(questionList);
 
             showNextQuestion();
@@ -143,14 +150,14 @@ public class QuizActivity extends AppCompatActivity {
             correctAnswer = savedInstanceState.getString(KEY_CORRECT_ANSWER);
             tfqFitbqAnswer = savedInstanceState.getString(KEY_TFQ_FITBQ_ANSWER);
 
-            questionCountTotal = questionList.size();
+            setQuestionLimit();
             currentQuestion = questionList.get(questionCounter - 1);
 
-            if (currentQuestion.getCategory().equalsIgnoreCase("TF")) {
+            if (currentQuestion.getType().equalsIgnoreCase("TF")) {
                 showTfOptions();
                 hideMcOptions();
                 hideFitbTxtField();
-            } else if (currentQuestion.getCategory().equalsIgnoreCase("MC")) {
+            } else if (currentQuestion.getType().equalsIgnoreCase("MC")) {
                 hideTfOptions();
                 showMcOptions();
                 hideFitbTxtField();
@@ -164,8 +171,8 @@ public class QuizActivity extends AppCompatActivity {
                 startTimer();
             } else {
                 updateTimerText();
-                if (currentQuestion.getCategory().equalsIgnoreCase("TF")
-                        || currentQuestion.getCategory().equalsIgnoreCase("FITB")) {
+                if (currentQuestion.getType().equalsIgnoreCase("TF")
+                        || currentQuestion.getType().equalsIgnoreCase("FITB")) {
                     showCorrectTfqFitbqAnswer(tfqFitbqAnswer);
                 } else {
                     showCorrectMcqAnswer(mcqAnswer);
@@ -175,13 +182,13 @@ public class QuizActivity extends AppCompatActivity {
 
         btnConfirmNext.setOnClickListener((View v) -> {
             if (!answered) {
-                if (currentQuestion.getCategory().equalsIgnoreCase("TF")) {
+                if (currentQuestion.getType().equalsIgnoreCase("TF")) {
                     if (rdBtnTrue.isChecked() || rdBtnFalse.isChecked()) {
                         checkAnswer();
                     } else {
                         Toast.makeText(QuizActivity.this, "Please select an option.", Toast.LENGTH_SHORT).show();
                     }
-                } else if (currentQuestion.getCategory().equalsIgnoreCase("MC")) {
+                } else if (currentQuestion.getType().equalsIgnoreCase("MC")) {
                     if (rdBtnOption1.isChecked() || rdBtnOption2.isChecked() ||
                             rdBtnOption3.isChecked() || rdBtnOption4.isChecked()) {
                         checkAnswer();
@@ -255,6 +262,14 @@ public class QuizActivity extends AppCompatActivity {
         editTxtFitbAnswer.setVisibility(View.GONE);
     }
 
+    private int setQuestionLimit() {
+        if (questionList.size() <= MAX_NUM_OF_QUESTIONS) {
+            return questionCountTotal = questionList.size();
+        }
+
+        return questionCountTotal = MAX_NUM_OF_QUESTIONS;
+    }
+
     private void showNextQuestion() {
         rdBtnTrue.setTextColor(txtColourDefaultRdBtn);
         rdBtnFalse.setTextColor(txtColourDefaultRdBtn);
@@ -274,15 +289,16 @@ public class QuizActivity extends AppCompatActivity {
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
 
+            txtViewTopicDifficulty.setText(currentQuestion.getTopic() + " (" + currentQuestion.getDifficulty() + ")");
             txtViewQuestion.setText(currentQuestion.getQuestion());
 
-            if (currentQuestion.getCategory().equalsIgnoreCase("TF")) {
+            if (currentQuestion.getType().equalsIgnoreCase("TF")) {
                 showTfOptions();
                 hideMcOptions();
                 hideFitbTxtField();
                 rdBtnTrue.setText("True");
                 rdBtnFalse.setText("False");
-            } else if (currentQuestion.getCategory().equalsIgnoreCase("MC")) {
+            } else if (currentQuestion.getType().equalsIgnoreCase("MC")) {
                 hideTfOptions();
                 showMcOptions();
                 hideFitbTxtField();
@@ -308,55 +324,23 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    private void startTimer() {
-        timer = new CountDownTimer(timeLeftInMs, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMs = millisUntilFinished;
-                updateTimerText();
-            }
-
-            @Override
-            public void onFinish() {
-                timeLeftInMs = 0;
-                updateTimerText();
-                checkAnswer();
-            }
-        }.start();
-    }
-
-    private void updateTimerText() {
-        int minutes = (int) (timeLeftInMs / 1000) / 60;
-        int seconds = (int) (timeLeftInMs / 1000) % 60;
-
-        String timerFormat = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-        txtViewTimer.setText(timerFormat);
-
-        if (timeLeftInMs < 10000) {
-            txtViewTimer.setTextColor(Color.RED);
-        } else {
-            txtViewTimer.setTextColor(txtColourDefaultTimer);
-        }
-    }
-
     private void checkAnswer() {
         answered = true;
         timer.cancel();
 
-        if (currentQuestion.getCategory().equalsIgnoreCase("MC")) {
+        if (currentQuestion.getType().equalsIgnoreCase("MC")) {
             RadioButton rdBtnSelected = findViewById(rdGrpMcOptions.getCheckedRadioButtonId());
             mcqAnswer = rdGrpMcOptions.indexOfChild(rdBtnSelected) + 1;
 
             if (mcqAnswer == Integer.parseInt(currentQuestion.getAnswer())) {
-                score++;
-                txtViewScore.setText("Score: " + score);
+                calculateScore();
             }
 
             showCorrectMcqAnswer(mcqAnswer);
             return;
         }
 
-        if (currentQuestion.getCategory().equalsIgnoreCase("TF")) {
+        if (currentQuestion.getType().equalsIgnoreCase("TF")) {
             RadioButton rdBtnSelected = findViewById(rdGrpTfOptions.getCheckedRadioButtonId());
 
             if (rdGrpTfOptions.indexOfChild(rdBtnSelected) == 0) {
@@ -368,19 +352,29 @@ public class QuizActivity extends AppCompatActivity {
             }
 
             if (tfqFitbqAnswer.equalsIgnoreCase(currentQuestion.getAnswer())) {
-                score++;
-                txtViewScore.setText("Score: " + score);
+                calculateScore();
             }
-        } else if (currentQuestion.getCategory().equalsIgnoreCase("FITB")) {
+        } else if (currentQuestion.getType().equalsIgnoreCase("FITB")) {
             tfqFitbqAnswer = editTxtFitbAnswer.getText().toString();
 
             if (tfqFitbqAnswer.equalsIgnoreCase(currentQuestion.getAnswer())) {
-                score++;
-                txtViewScore.setText("Score: " + score);
+                calculateScore();
             }
         }
 
         showCorrectTfqFitbqAnswer(tfqFitbqAnswer);
+    }
+
+    private void calculateScore() {
+        if (currentQuestion.getDifficulty().equalsIgnoreCase("Easy")) {
+            score += EASY_SCORE;
+        } else if (currentQuestion.getDifficulty().equalsIgnoreCase("Medium")) {
+            score += MEDIUM_SCORE;
+        } else {
+            score += HARD_SCORE;
+        }
+
+        txtViewScore.setText("Score: " + score);
     }
 
     private void showCorrectMcqAnswer(int mcqAnswer) {
@@ -434,7 +428,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showCorrectTfqFitbqAnswer(String tfqFitbqAnswer) {
-        if (currentQuestion.getCategory().equalsIgnoreCase("TF")) {
+        if (currentQuestion.getType().equalsIgnoreCase("TF")) {
             rdBtnTrue.setTextColor(Color.RED);
             rdBtnFalse.setTextColor(Color.RED);
 
@@ -453,7 +447,7 @@ public class QuizActivity extends AppCompatActivity {
                     correctAnswer = "";
                 }
             }
-        } else if (currentQuestion.getCategory().equalsIgnoreCase("FITB")) {
+        } else if (currentQuestion.getType().equalsIgnoreCase("FITB")) {
             editTxtFitbAnswer.setBackgroundTintList(lineColourRedEditTxt);
             if (!(tfqFitbqAnswer.equalsIgnoreCase(currentQuestion.getAnswer()))) {
                 correctAnswer = "Correct Answer: " + currentQuestion.getAnswer();
@@ -469,6 +463,37 @@ public class QuizActivity extends AppCompatActivity {
             btnConfirmNext.setText("Next");
         } else {
             btnConfirmNext.setText("Finish");
+        }
+    }
+
+    private void startTimer() {
+        timer = new CountDownTimer(timeLeftInMs, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMs = millisUntilFinished;
+                updateTimerText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMs = 0;
+                updateTimerText();
+                checkAnswer();
+            }
+        }.start();
+    }
+
+    private void updateTimerText() {
+        int minutes = (int) (timeLeftInMs / 1000) / 60;
+        int seconds = (int) (timeLeftInMs / 1000) % 60;
+
+        String timerFormat = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        txtViewTimer.setText(timerFormat);
+
+        if (timeLeftInMs < 10000) {
+            txtViewTimer.setTextColor(Color.RED);
+        } else {
+            txtViewTimer.setTextColor(txtColourDefaultTimer);
         }
     }
 
