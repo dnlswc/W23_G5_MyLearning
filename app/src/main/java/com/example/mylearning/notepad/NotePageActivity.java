@@ -2,6 +2,7 @@ package com.example.mylearning.notepad;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import com.example.mylearning.news.NewsActivity;
 import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NotePageActivity extends AppCompatActivity {
@@ -28,6 +30,8 @@ public class NotePageActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Database db;
+    SearchView searchViewNote;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class NotePageActivity extends AppCompatActivity {
         RecyclerViewMainNote = findViewById(R.id.RecyclerViewMainNote);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.myNote);
+        searchViewNote = findViewById(R.id.searchViewNote);
 
         getSupportActionBar().setTitle("My Note");
 
@@ -74,7 +79,47 @@ public class NotePageActivity extends AppCompatActivity {
             return false;
 
         });
+
+        searchViewNote.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                filter(newText);
+                return true;
+            }
+        });
+
+
+
+
+
+
     }
+
+    private void filter(String newText)
+    {
+        List<Note> filteredList = new ArrayList<>();
+        for (Note item: notes)
+        {
+           // if (item.getTitle().toLowerCase().contains(newText.toLowerCase()))
+            if (item.getTitle().toLowerCase().contains(newText.toLowerCase()) ||
+                    item.getContent().toLowerCase().contains(newText.toLowerCase()) ||
+                    item.getDate().toLowerCase().contains(newText.toLowerCase()) ||
+                    item.getTime().toLowerCase().contains(newText.toLowerCase())
+            )
+            {
+                filteredList.add(item);
+            }
+        }
+        adapter.filterList(filteredList);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

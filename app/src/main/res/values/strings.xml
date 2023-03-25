@@ -23,4 +23,5 @@
     <string name="txtTopicDifficulty">Topic (Difficulty)</string>
     <string name="txtCategory">Type:</string>
     <string name="txtHighScore">High Score: 0</string>
+    <string name="txtQueryHint">Search by title, content, date or time</string>
 </resources>

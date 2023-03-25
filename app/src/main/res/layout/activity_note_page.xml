@@ -6,17 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".notepad.NotePageActivity">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewNote"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/material_dynamic_neutral_variant95"
+        app:queryHint="@string/txtQueryHint" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewMainNote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/searchViewNote"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/searchViewNote" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

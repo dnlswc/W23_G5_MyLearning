@@ -76,4 +76,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             });
         }
     }
+
+    public void filterList(List<Note> filteredList)
+    {
+        notes = filteredList;
+        notifyDataSetChanged();
+    }
 }
