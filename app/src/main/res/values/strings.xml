@@ -24,4 +24,11 @@
     <string name="txtCategory">Type:</string>
     <string name="txtHighScore">High Score: 0</string>
     <string name="txtQueryHint">Search by title, content, date or time</string>
+    <string name="textViewTxtSortBy">Sort by:</string>
+    <string name="buttonTxtConfirm">Confirm</string>
+    <string name="buttonTextCancel">Cancel</string>
+    <string name="radioButtonTxtAtoZ">Title: A - Z</string>
+    <string name="radioButtonTxtZtoA">Title: Z - A</string>
+    <string name="radioButtonTxtModifiedTimeNewestToOldest">Modified time: Newest - Oldest</string>
+    <string name="radioButtonTxtModifiedTimeoOldestToNewes">Modified time: Oldest - Newest</string>
 </resources>
