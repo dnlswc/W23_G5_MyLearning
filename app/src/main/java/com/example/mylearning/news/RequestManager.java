@@ -61,10 +61,12 @@ public class RequestManager {
                 @Override
                 public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(context, "Error in loading news articles", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Error in fetching news articles:\nReached daily API request limit", Toast.LENGTH_LONG).show();
                     }
 
-                    listener.onFetchData(response.body().getArticles(), response.message());
+                    if (response.body() != null) {
+                        listener.onFetchData(response.body().getArticles(), response.message());
+                    }
                 }
 
                 @Override
