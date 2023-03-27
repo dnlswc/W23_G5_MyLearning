@@ -8,7 +8,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -116,6 +115,7 @@ public class QuizActivity extends AppCompatActivity {
 
         txtViewCorrectAnswer = findViewById(R.id.txtViewCorrectAnswer);
         btnConfirmNext = findViewById(R.id.btnConfirmNext);
+
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.myQuiz);
 
@@ -226,7 +226,6 @@ public class QuizActivity extends AppCompatActivity {
                     overridePendingTransition(0,0);
                     return true;
 
-
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                     overridePendingTransition(0,0);
@@ -234,7 +233,6 @@ public class QuizActivity extends AppCompatActivity {
             }
 
             return false;
-
         });
     }
 

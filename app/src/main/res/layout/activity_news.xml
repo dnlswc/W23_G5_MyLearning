@@ -1,9 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".news.NewsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <HorizontalScrollView
+            android:id="@+id/scrollViewNewsSources"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtAll"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnArsTechnica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtArsTechnica"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnEngadget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtEngadget"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnTechCrunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtTechCrunch"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnTechRadar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtTechRadar"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnTheNextWeb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtTheNextWeb"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnTheVerge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtTheVerge"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnVox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtVox"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnWired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="@string/txtWired"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <SearchView
+            android:id="@+id/searchViewQuery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/txtSearchNews"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewNewsSources" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNews"
+            android:layout_width="match_parent"
+            android:layout_height="435dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewQuery" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigator"
+        app:itemBackground="@color/purple_500"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/bottom_navigation_menu"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
