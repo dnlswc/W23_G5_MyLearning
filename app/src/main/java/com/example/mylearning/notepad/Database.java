@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
@@ -24,6 +25,29 @@ public class Database extends SQLiteOpenHelper {
     private static final String CONTENT = "Content";
     private static final String DATE = "Date";
     private static final String TIME = "Time";
+
+    /*
+    private ArrayList<String> sortingChoice = new ArrayList<>(Arrays.asList(
+            "\" ORDER BY \" + DATE + \" DESC, \" + TIME + \" DESC\"",
+            "\" ORDER BY \" + DATE + \" ASC, \" + TIME + \" ASC\"",
+            "\" ORDER BY \" + TITLE + \" ASC\"",
+            "\" ORDER BY \" + TITLE + \" DESC\""
+            ));*/
+
+    /*
+    private ArrayList<String> sortingChoice = new ArrayList<>(Arrays.asList(
+            " ORDER BY  + DATE +  DESC,  + TIME +  DESC\"",
+            " ORDER BY  + DATE +  ASC,  + TIME +  ASC\"",
+            " ORDER BY  + TITLE +  ASC\"",
+            " ORDER BY  + TITLE +  DESC\""
+    ));
+*/
+    private ArrayList<String> sortingChoice = new ArrayList<>(Arrays.asList(
+            " ORDER BY DATE DESC, TIME DESC",
+            " ORDER BY DATE ASC, TIME ASC",
+            " ORDER BY TITLE ASC",
+            " ORDER BY TITLE DESC"
+    ));
 
     Database(Context context) {
         super(context, NAME, null, VERSION);
@@ -81,7 +105,11 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Note> allNotes = new ArrayList<>();
 
-        String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
+        String sortingOption = sortingChoice.get(NotePageActivity.sortingIndex);
+
+        //String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
+        String query = "SELECT * FROM " + TABLE + sortingOption;
+        Log.d("SQLQUERY: ",query);
 
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst() == true) {
