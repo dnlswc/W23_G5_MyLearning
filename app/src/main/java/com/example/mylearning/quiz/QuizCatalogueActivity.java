@@ -109,7 +109,6 @@ public class QuizCatalogueActivity extends AppCompatActivity {
                     overridePendingTransition(0,0);
                     return true;
 
-
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                     overridePendingTransition(0,0);

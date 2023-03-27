@@ -23,4 +23,17 @@
     <string name="txtTopicDifficulty">Topic (Difficulty)</string>
     <string name="txtCategory">Type:</string>
     <string name="txtHighScore">High Score: 0</string>
+    <string name="news_api_key">92388440e04e493ba423e20051f76681</string>
+    <string name="txtNewsImage">News Image</string>
+    <string name="txtSearchNews">Search for news in all sources...</string>
+    <string name="txtAll">All</string>
+    <string name="txtArsTechnica">Ars Technica</string>
+    <string name="txtEngadget">Engadget</string>
+    <string name="txtHackerNews">Hacker News</string>
+    <string name="txtTechCrunch">TechCrunch</string>
+    <string name="txtTechRadar">TechRadar</string>
+    <string name="txtTheNextWeb">The Next Web</string>
+    <string name="txtTheVerge">The Verge</string>
+    <string name="txtVox">Vox</string>
+    <string name="txtWired">Wired</string>
 </resources>
