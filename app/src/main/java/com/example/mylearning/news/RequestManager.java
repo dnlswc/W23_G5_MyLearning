@@ -1,7 +1,7 @@
 package com.example.mylearning.news;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.util.MutableBoolean;
 
 import com.example.mylearning.R;
 
@@ -15,6 +15,7 @@ import retrofit2.http.Query;
 
 public class RequestManager {
     Context context;
+    String[] apiKeys;
     Retrofit retrofit = new Retrofit
             .Builder()
             .baseUrl("https://newsapi.org/v2/")
@@ -26,57 +27,69 @@ public class RequestManager {
     }
 
     public void getArticles(OnFetchDataListener listener, String query) {
+        apiKeys = context.getResources().getStringArray(R.array.news_api_key);
+        final MutableBoolean responseIsSuccessful = new MutableBoolean(false);
+        int i = 0;
+
         CallNewsApi callNewsApi = retrofit.create(CallNewsApi.class);
-        Call<NewsApiResponse> call = callNewsApi.callArticles("us", "technology", query, context.getString(R.string.news_api_key));
 
-        try {
-            call.enqueue(new Callback<NewsApiResponse>() {
-                @Override
-                public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(context, "Error in fetching news articles:\nReached daily API request limit", Toast.LENGTH_LONG).show();
+        do {
+            Call<NewsApiResponse> call = callNewsApi.callArticles("us", "technology", query, apiKeys[i]);
+
+            try {
+                call.enqueue(new Callback<NewsApiResponse>() {
+                    @Override
+                    public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
+                        if (response.isSuccessful()) {
+                            responseIsSuccessful.value = true;
+                            listener.onFetchData(response.body().getArticles(), response.message());
+                        }
                     }
 
-                    if (response.body() != null) {
-                        listener.onFetchData(response.body().getArticles(), response.message());
+                    @Override
+                    public void onFailure(Call<NewsApiResponse> call, Throwable t) {
+                        listener.onError("Request failed");
                     }
-                }
+                });
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
-                @Override
-                public void onFailure(Call<NewsApiResponse> call, Throwable t) {
-                    listener.onError("Request failed");
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+            i++;
+        } while (!responseIsSuccessful.value && i < apiKeys.length);
     }
 
     public void getArticlesBySource(OnFetchDataListener listener, String source) {
+        apiKeys = context.getResources().getStringArray(R.array.news_api_key);
+        final MutableBoolean responseIsSuccessful = new MutableBoolean(false);
+        int i = 0;
+
         CallNewsApi callNewsApi = retrofit.create(CallNewsApi.class);
-        Call<NewsApiResponse> call = callNewsApi.callArticlesBySource(source, context.getString(R.string.news_api_key));
 
-        try {
-            call.enqueue(new Callback<NewsApiResponse>() {
-                @Override
-                public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
-                    if (!response.isSuccessful()) {
-                        Toast.makeText(context, "Error in fetching news articles:\nReached daily API request limit", Toast.LENGTH_LONG).show();
+        do {
+            Call<NewsApiResponse> call = callNewsApi.callArticlesBySource(source, apiKeys[i]);
+
+            try {
+                call.enqueue(new Callback<NewsApiResponse>() {
+                    @Override
+                    public void onResponse(Call<NewsApiResponse> call, Response<NewsApiResponse> response) {
+                        if (response.isSuccessful()) {
+                            responseIsSuccessful.value = true;
+                            listener.onFetchData(response.body().getArticles(), response.message());
+                        }
                     }
 
-                    if (response.body() != null) {
-                        listener.onFetchData(response.body().getArticles(), response.message());
+                    @Override
+                    public void onFailure(Call<NewsApiResponse> call, Throwable t) {
+                        listener.onError("Request failed");
                     }
-                }
+                });
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
-                @Override
-                public void onFailure(Call<NewsApiResponse> call, Throwable t) {
-                    listener.onError("Request failed");
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+            i++;
+        } while (!responseIsSuccessful.value && i < apiKeys.length);
     }
 
     public interface CallNewsApi {

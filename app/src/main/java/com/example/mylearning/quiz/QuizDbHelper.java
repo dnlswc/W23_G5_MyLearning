@@ -16,7 +16,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TYPE = "type";
     private static final String COLUMN_DIFFICULTY = "difficulty";
     private static final String COLUMN_TOPIC = "topic";
-    private static final String COLUMN_CHAPTER = "chapter";
     private static final String COLUMN_QUESTION = "question";
     private static final String COLUMN_ANSWER = "answer";
     private static final String COLUMN_OPTION1 = "option1";
@@ -48,7 +47,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 + COLUMN_TYPE + " TEXT, "
                 + COLUMN_DIFFICULTY + " TEXT, "
                 + COLUMN_TOPIC + " TEXT, "
-                + COLUMN_CHAPTER + " TEXT, "
                 + COLUMN_QUESTION + " TEXT, "
                 + COLUMN_ANSWER + " TEXT, "
                 + COLUMN_OPTION1 + " TEXT, "
@@ -72,7 +70,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_TYPE, question.getType());
         cv.put(COLUMN_DIFFICULTY, question.getDifficulty());
         cv.put(COLUMN_TOPIC, question.getTopic());
-        cv.put(COLUMN_CHAPTER, question.getChapter());
         cv.put(COLUMN_QUESTION, question.getQuestion());
         cv.put(COLUMN_ANSWER, question.getAnswer());
         cv.put(COLUMN_OPTION1, question.getOption1());
@@ -179,7 +176,6 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 question.setType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TYPE)));
                 question.setDifficulty(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DIFFICULTY)));
                 question.setTopic(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOPIC)));
-                question.setChapter(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CHAPTER)));
                 question.setQuestion(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_QUESTION)));
                 question.setAnswer(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ANSWER)));
                 question.setOption1(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_OPTION1)));

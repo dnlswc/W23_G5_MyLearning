@@ -32,8 +32,8 @@ public class QuizActivity extends AppCompatActivity {
 
     // score(s) for correct answers in different difficulties
     private static final int EASY_SCORE = 1;
-    private static final int MEDIUM_SCORE = 2;
-    private static final int HARD_SCORE = 3;
+    private static final int MODERATE_SCORE = 2;
+    private static final int CHALLENGING_SCORE = 3;
 
     // maximum number of questions per quiz
     private static final int MAX_NUM_OF_QUESTIONS = 10;
@@ -366,10 +366,10 @@ public class QuizActivity extends AppCompatActivity {
     private void calculateScore() {
         if (currentQuestion.getDifficulty().equalsIgnoreCase("Easy")) {
             score += EASY_SCORE;
-        } else if (currentQuestion.getDifficulty().equalsIgnoreCase("Medium")) {
-            score += MEDIUM_SCORE;
+        } else if (currentQuestion.getDifficulty().equalsIgnoreCase("Moderate")) {
+            score += MODERATE_SCORE;
         } else {
-            score += HARD_SCORE;
+            score += CHALLENGING_SCORE;
         }
 
         txtViewScore.setText("Score: " + score);

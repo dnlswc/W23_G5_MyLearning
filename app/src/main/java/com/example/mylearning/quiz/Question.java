@@ -9,13 +9,12 @@ public class Question implements Parcelable {
     public static final String TYPE_FITBQ = "Fill in the Blank";
 
     public static final String DIFFICULTY_EASY = "Easy";
-    public static final String DIFFICULTY_MEDIUM = "Medium";
-    public static final String DIFFICULTY_HARD = "Hard";
+    public static final String DIFFICULTY_MODERATE = "Moderate";
+    public static final String DIFFICULTY_CHALLENGING = "Challenging";
 
     private String type;
     private String difficulty;
     private String topic;
-    private String chapter;
     private String question;
     private String answer;
     private String option1;
@@ -47,14 +46,6 @@ public class Question implements Parcelable {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public String getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(String chapter) {
-        this.chapter = chapter;
     }
 
     public String getQuestion() {
@@ -113,7 +104,7 @@ public class Question implements Parcelable {
 
     public static String[] getAllDifficultyLevels() {
         return new String[] {
-          DIFFICULTY_EASY, DIFFICULTY_MEDIUM, DIFFICULTY_HARD
+          DIFFICULTY_EASY, DIFFICULTY_MODERATE, DIFFICULTY_CHALLENGING
         };
     }
 
@@ -121,7 +112,6 @@ public class Question implements Parcelable {
         type = in.readString();
         difficulty = in.readString();
         topic = in.readString();
-        chapter = in.readString();
         question = in.readString();
         answer = in.readString();
         option1 = in.readString();
@@ -135,7 +125,6 @@ public class Question implements Parcelable {
         dest.writeString(type);
         dest.writeString(difficulty);
         dest.writeString(topic);
-        dest.writeString(chapter);
         dest.writeString(question);
         dest.writeString(answer);
         dest.writeString(option1);

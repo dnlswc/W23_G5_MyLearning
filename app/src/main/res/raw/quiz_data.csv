@@ -1,26 +1,59 @@
-﻿Category,Difficulty,Topic,Chapter,Question,Answer,Option1,Option2,Option3,Option4
-TF,Easy,Systems Design,1,Computer literacy is understanding the role of information in generating and using business intelligence.,FALSE,TRUE,FALSE,,
-TF,Medium,Systems Design,2,The arithmetic logic unit (ALU) performs only arithmetic operations.,FALSE,TRUE,FALSE,,
-MC,Hard,Systems Design,3,Which of the following is not among the 5Vs of big data?,1,Variance,Value,Variety,Veracity
-MC,Easy,C#,1,The fully qualified call to the method that allows the user to input a single character is:,2,Console.System.Read(),System.Console.Read(),Console.System.Write(),System.Console.Write()
-FITB,Easy,C#,1,Which escape sequence can be used to indicate that the cursor should advance to the next line?,\n,,,,
-MC,Easy,C#,2,"One of the primary differences between float, double, and decimal is:",4,Float is used to represent more significant digits.,Double is normally used with large monetary values.,Decimal is not used to display negative values.,Double does not require suffixing a numeric literal with a value such as m or f.
-FITB,Medium,C#,2,"What is stored in ans as a result of the arithmetic expression, given the following declarations?***int ans = 10, v1 = 5, v2 = 7, v3 = 18;***ans += v1 + 10 (v2 / 5) + v3 / v2;",27,,,,
-MC,Hard,C#,2,"Given the following method definition, what would be a valid call? The variable someIntValue is defined as an int.***static int GetData(out int aValue, ref int bValue)",2,"someIntValue = GetData(aValue, bValue);","someIntValue = GetData(out aValue, ref bValue);","someIntValue = GetData(out, ref);","someIntValue = GetData(int out aValue, int ref bValue);"
-MC,Easy,Java,1,All Java applications must have a method named _____.,2,method(),main(),java(),hello()
-FITB,Easy,Java,2,"Which Java statement produces w on one line and xyz on the next line?***_____(""w\nxyz"");",System.out.println,,,,
-FITB,Medium,Java,3,"A public static method named computeSum() is located in ClassA. To call the method from within ClassB, use the statement _____.",ClassA.computeSum();,,,,
-MC,Hard,Java,3,The non-static data components of a class often are referred to as the _____ of that class.,2,access types,instance variables,methods,objects
-MC,Medium,Java,3,The concept of allowing a class’s private data to be changed only by a class’s own methods is known as _____.,3,structured logic,object orientation,information hiding,data masking
-FITB,Medium,Java,3,"If a class is named Student, the class constructor name is _____.",Student(),,,,
-TF,Easy,Computer Networking,1,Protocol means the architecture of a network.,FALSE,TRUE,FALSE,,
-TF,Easy,Computer Networking,1,Topology means a set of rules established for users to gain control of the network to exchange information.,FALSE,TRUE,FALSE,,
-FITB,Medium,Computer Networking,1,HTTP functions are on the _____ Layer of the OSI model.,Application,,,,
-MC,Medium,Computer Networking,1,Which information is not included in an Ethernet frame?,1,Frame size,Source MAC address,Padding,Frame check sequence
-FITB,Hard,Computer Networking,1,"On Windows 10, what command can help you find the Ethernet (MAC) address?",ipconfig /all,,,,
-FITB,Medium,Computer Networking,2,What is the data rate for Fast Ethernet? _____Mbps,100,,,,
-MC,Easy,Computer Networking,2,A data problem is reported to the network administrator. The problem is found to be with the UTP network connection. What steps could the network administrator have taken to isolate the problem?,2,Visually inspect all UTP terminations,Use the PING command to verify network connectivity,Use pairs 4–5 and 7–8 to repair the connection,Contact the installer of the UTP cable to obtain a certification report
-TF,Hard,Computer Networking,2,Only two wire pairs are used to obtain a proper power-sum measurement.,FALSE,TRUE,FALSE,,
-MC,Hard,Computer Networking,3,Which of the following is not the advantage of optical communication links?,3,Extremely wide bandwidth,Elimination of crosstalk,Elimination of attenuation,Security
-MC,Medium,Computer Networking,3,Which type of fiber is preferred for use in modern computer networks?,3,Multi-mode,Polarized mode,Single-mode,All of these answers are correct
-MC,Easy,Computer Networking,3,What is the material surrounding the core of an optical waveguide called?,4,Aperture,Mode field,Step-index,Cladding
+﻿Type,Difficulty,Topic,Question,Answer,Option1,Option2,Option3,Option4
+TF,Easy,Systems Design,Computer literacy is understanding the role of information in generating and using business intelligence.,FALSE,TRUE,FALSE,,
+TF,Moderate,Systems Design,The arithmetic logic unit (ALU) performs only arithmetic operations.,FALSE,TRUE,FALSE,,
+MC,Challenging,Systems Design,Which of the following is not among the 5Vs of big data?,1,Variance,Value,Variety,Veracity
+MC,Easy,C#,The fully qualified call to the method that allows the user to input a single character is:,2,Console.System.Read(),System.Console.Read(),Console.System.Write(),System.Console.Write()
+FITB,Easy,C#,Which escape sequence can be used to indicate that the cursor should advance to the next line?,\n,,,,
+MC,Easy,C#,"One of the primary differences between float, double, and decimal is:",4,Float is used to represent more significant digits.,Double is normally used with large monetary values.,Decimal is not used to display negative values.,Double does not require suffixing a numeric literal with a value such as m or f.
+FITB,Moderate,C#,"What is stored in ans as a result of the arithmetic expression, given the following declarations?***int ans = 10, v1 = 5, v2 = 7, v3 = 18;***ans += v1 + 10 (v2 / 5) + v3 / v2;",27,,,,
+MC,Challenging,C#,"Given the following method definition, what would be a valid call? The variable someIntValue is defined as an int.***static int GetData(out int aValue, ref int bValue)",2,"someIntValue = GetData(aValue, bValue);","someIntValue = GetData(out aValue, ref bValue);","someIntValue = GetData(out, ref);","someIntValue = GetData(int out aValue, int ref bValue);"
+MC,Easy,Java,All Java applications must have a method named _____.,2,method(),main(),java(),hello()
+FITB,Easy,Java,"Which Java statement produces w on one line and xyz on the next line?***_____(""w\nxyz"");",System.out.println,,,,
+FITB,Moderate,Java,"A public static method named computeSum() is located in ClassA. To call the method from within ClassB, use the statement _____.",ClassA.computeSum();,,,,
+MC,Challenging,Java,The non-static data components of a class often are referred to as the _____ of that class.,2,access types,instance variables,methods,objects
+MC,Moderate,Java,The concept of allowing a class’s private data to be changed only by a class’s own methods is known as _____.,3,structured logic,object orientation,information hiding,data masking
+FITB,Moderate,Java,"If a class is named Student, the class constructor name is _____.",Student(),,,,
+TF,Easy,Computer Networking,Protocol means the architecture of a network.,FALSE,TRUE,FALSE,,
+TF,Easy,Computer Networking,Topology means a set of rules established for users to gain control of the network to exchange information.,FALSE,TRUE,FALSE,,
+FITB,Moderate,Computer Networking,HTTP functions are on the _____ Layer of the OSI model.,Application,,,,
+MC,Moderate,Computer Networking,Which information is not included in an Ethernet frame?,1,Frame size,Source MAC address,Padding,Frame check sequence
+FITB,Challenging,Computer Networking,"On Windows 10, what command can help you find the Ethernet (MAC) address?",ipconfig /all,,,,
+FITB,Moderate,Computer Networking,What is the data rate for Fast Ethernet? _____Mbps,100,,,,
+MC,Easy,Computer Networking,A data problem is reported to the network administrator. The problem is found to be with the UTP network connection. What steps could the network administrator have taken to isolate the problem?,2,Visually inspect all UTP terminations,Use the PING command to verify network connectivity,Use pairs 4–5 and 7–8 to repair the connection,Contact the installer of the UTP cable to obtain a certification report
+TF,Challenging,Computer Networking,Only two wire pairs are used to obtain a proper power-sum measurement.,FALSE,TRUE,FALSE,,
+MC,Challenging,Computer Networking,Which of the following is not the advantage of optical communication links?,3,Extremely wide bandwidth,Elimination of crosstalk,Elimination of attenuation,Security
+MC,Moderate,Computer Networking,Which type of fiber is preferred for use in modern computer networks?,3,Multi-mode,Polarized mode,Single-mode,All of these answers are correct
+MC,Easy,Computer Networking,What is the material surrounding the core of an optical waveguide called?,4,Aperture,Mode field,Step-index,Cladding
+TF,Easy,Systems Design,"When repetitive transaction-processing operations are automated, human involvement is increasingly required.",FALSE,TRUE,FALSE,,
+TF,Easy,Systems Design,"Every character, number, or symbol on the keyboard is represented as a hexadecimal number in computer memory.",FALSE,TRUE,FALSE,,
+TF,Easy,Systems Design,Data communication systems decrease inventory costs.,TRUE,TRUE,FALSE,,
+TF,Moderate,Systems Design,A database is a critical component of information systems because any type of analysis that is done is based on data available in the database.,TRUE,TRUE,FALSE,,
+TF,Moderate,Systems Design,"In contrast to pharming, phishing involves hijacking an official Web site address by hacking a Domain Name System server.",FALSE,TRUE,FALSE,,
+TF,Moderate,Systems Design,The Web changed the Internet by introducing a graphical interface to the largely text-based Internet.,TRUE,TRUE,FALSE,,
+TF,Challenging,Systems Design,"Ryan, an employee of ABC Corp., makes and sells customized paper notebooks. He uses the company’s intranet to advertise the notebooks and sell them to the employees of the company. This is an example of consumer-to-consumer e-commerce.",TRUE,TRUE,FALSE,,
+TF,Challenging,Systems Design,The similarity between agile methodology and extreme programming (XP) is both give equal emphasis to team coding.,FALSE,TRUE,FALSE,,
+TF,Challenging,Systems Design,"Each computer or network has an Ethernet address, which is assigned by the ICANN.",FALSE,TRUE,FALSE,,
+TF,Challenging,Systems Design,"William knows how to use word processors, spreadsheets, and presentation software. He also has a basic knowledge of hardware, software, and the Internet. Given this information, it can be concluded that William has computer literacy.",TRUE,TRUE,FALSE,,
+MC,Easy,Systems Design,The process of capturing and recording network traffic is referred to as _____.,1,sniffing,phishing,bombing,pharming
+MC,Easy,Systems Design,Which are not allowed in domain names?,4,Numerals,Hyphens,Combinations of letters,Spaces
+MC,Easy,Systems Design,One way to improve the security of a Wi-Fi network is to ___________.,1,enable WPA2 encryption,maintain the router's default password,filter MAC addresses on your computer,increase the range of the wireless signal
+MC,Easy,Systems Design,_____ is a computer crime that involves destroying or disrupting computer services.,4,Keystroke logging,Dumpster diving,Bombing,Sabotage
+MC,Moderate,Systems Design,Which statement is true of transaction-processing systems?,1,They focus on data collection and processing.,They focus on integrating hardware and software technologies.,"They focus on integrating data, processes, and human elements.",They focus on maximizing human involvement.
+MC,Moderate,Systems Design,Companies exclusively using business-to-consumer (B2C) applications:,1,sell directly to consumers,rely on physical storefronts for customer interactions,approach customers through third-party agents,focus on using personalized physical stores to serve consumers
+MC,Moderate,Systems Design,"During the _____ phase of the systems development life cycle (SDLC), a team assesses how a system is working and takes steps to keep the system up and running.",3,planning,implementation,maintenance,design
+MC,Moderate,Systems Design,"Which is a generic top-level domain (TLD) name used for backbone, regional, and commercial networks?",3,.org,.int,.net,.mil
+MC,Challenging,Systems Design,"Unlike data in databases, data in data warehouses is:",4,function oriented,raw transaction data,collected from a single source,used for analytical purposes
+MC,Challenging,Systems Design,"The word computer consists of 64 bits, which is equivalent to _____ bytes.",2,6,8,16,32
+MC,Challenging,Systems Design,"David makes two copies of an antivirus software package he just bought and sells one of the copies to Eric. In this scenario, David’s actions are considered _____.",3,"ethical, but illegal","unethical, but legal",illegal and unethical,legal and ethical
+FITB,Easy,Systems Design,"In the context of IT jobs in the information systems field, a _____ is typically responsible for providing network and cybersecurity.",network administrator,,,,
+FITB,Easy,Systems Design,The _____ denotes the type of organization or country the address of a document or site on the Internet specifies.,top-level domain,,,,
+FITB,Easy,Systems Design,All client computers that try to access an access point are required to include an _____ in all their packets.,SSID,,,,
+FITB,Easy,Systems Design,The _____ denotes the type of organization or country the address of a document or site on the Internet specifies.,top-level domain,,,,
+FITB,Moderate,Systems Design,"In a relational database, every record must be uniquely identified by a _____ key.",primary,,,,
+FITB,Moderate,Systems Design,_____ is where two programmers participate in one development effort at one workstation.,Pair programming,,,,
+FITB,Moderate,Systems Design,"One shortcoming of _____ is a narrow focus, which might limit future development.",rapid application development,,,,
+FITB,Moderate,Systems Design,Cookies provide information about a user’s _____ and computer equipment.,location,,,,
+FITB,Challenging,Systems Design,"When disaster strikes, an organization should contact the _____ to resume normal operations as soon as possible.",insurance company,,,,
+FITB,Challenging,Systems Design,"XYZtore Inc., an online retail store, sells all of its products through its Web site, xyztore.com, and through an application on cell phones. XYZtore Inc. is an example of a _____.",pure-play company,,,,
+FITB,Challenging,Systems Design,"Paul, a data analyst, is working on a project from home and needs to download some data from his office network. _____ servers will best serve his purpose.",Remote access,,,,
+FITB,Challenging,Systems Design,"Sam is a gamer, and every time he plays at a gaming center, he pays five dollars using a card that he recharges electronically every week. It is evident that Sam uses _____ as the mode of payment.",e-cash,,,,

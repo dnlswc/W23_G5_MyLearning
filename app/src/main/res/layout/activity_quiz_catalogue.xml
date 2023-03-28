@@ -95,25 +95,15 @@
             app:layout_constraintStart_toEndOf="@+id/txtViewSelectDifficulty"
             app:layout_constraintTop_toBottomOf="@+id/spinnerTopic" />
 
-        <TextView
-            android:id="@+id/txtViewHighScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txtHighScore"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerDifficulty" />
-
         <Button
             android:id="@+id/btnStartQuiz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="24dp"
             android:text="@string/txtStartQuiz"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewHighScore" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerDifficulty" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

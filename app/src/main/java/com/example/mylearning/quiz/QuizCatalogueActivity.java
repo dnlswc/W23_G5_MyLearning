@@ -36,7 +36,6 @@ public class QuizCatalogueActivity extends AppCompatActivity {
     private Spinner spinnerType;
     private Spinner spinnerTopic;
     private Spinner spinnerDifficulty;
-    private TextView txtViewHighScore;
     private Button btnStartQuiz;
 
     private List<Question> questions;
@@ -54,7 +53,6 @@ public class QuizCatalogueActivity extends AppCompatActivity {
         spinnerType = findViewById(R.id.spinnerType);
         spinnerTopic = findViewById(R.id.spinnerTopic);
         spinnerDifficulty = findViewById(R.id.spinnerDifficulty);
-        txtViewHighScore = findViewById(R.id.txtViewHighScore);
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
 
         bottomNavigationView = findViewById(R.id.bottom_navigator);
@@ -193,26 +191,25 @@ public class QuizCatalogueActivity extends AppCompatActivity {
                 question.setType(tokens[0]);
                 question.setDifficulty(tokens[1]);
                 question.setTopic(tokens[2]);
-                question.setChapter(tokens[3]);
-                question.setQuestion(tokens[4].replace("***", "\n"));
-                question.setAnswer(tokens[5]);
-                if (tokens[6].length() > 0) {
-                    question.setOption1(tokens[6]);
+                question.setQuestion(tokens[3].replace("***", "\n"));
+                question.setAnswer(tokens[4]);
+                if (tokens[5].length() > 0) {
+                    question.setOption1(tokens[5]);
                 } else {
                     question.setOption1("");
                 }
-                if (tokens[7].length() > 0) {
-                    question.setOption2(tokens[7]);
+                if (tokens[6].length() > 0) {
+                    question.setOption2(tokens[6]);
                 } else {
                     question.setOption2("");
                 }
-                if (tokens[8].length() > 0) {
-                    question.setOption3(tokens[8]);
+                if (tokens[7].length() > 0) {
+                    question.setOption3(tokens[7]);
                 } else {
                     question.setOption3("");
                 }
-                if (tokens[9].length() > 0) {
-                    question.setOption4(tokens[9]);
+                if (tokens[8].length() > 0) {
+                    question.setOption4(tokens[8]);
                 } else {
                     question.setOption4("");
                 }

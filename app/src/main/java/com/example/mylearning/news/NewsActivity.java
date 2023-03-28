@@ -127,6 +127,7 @@ public class NewsActivity extends AppCompatActivity implements ArticleOnClickLis
         public void onFetchData(List<Article> articleList, String message) {
             if (articleList.isEmpty()) {
                 Toast.makeText(NewsActivity.this, "No news articles available", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             } else {
                 showArticles(articleList);
                 dialog.dismiss();

@@ -22,8 +22,11 @@
     <string name="txtTopic">Topic:</string>
     <string name="txtTopicDifficulty">Topic (Difficulty)</string>
     <string name="txtCategory">Type:</string>
-    <string name="txtHighScore">High Score: 0</string>
-    <string name="news_api_key">92388440e04e493ba423e20051f76681</string>
+    <string-array name="news_api_key">
+        <item>a14bed07842f4eb6b798ce3643a31077</item>
+        <item>a412090be15d4a6590616da1c618926a</item>
+        <item>92388440e04e493ba423e20051f76681</item>
+    </string-array>
     <string name="txtNewsImage">News Image</string>
     <string name="txtSearchNews">Search for news in all sources...</string>
     <string name="txtAll">All</string>
