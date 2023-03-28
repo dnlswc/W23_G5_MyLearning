@@ -38,6 +38,7 @@ public class NewsActivity extends AppCompatActivity implements ArticleOnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        getSupportActionBar().setTitle("My News");
 
         btnAll = findViewById(R.id.btnAll);
         btnArsTechnica = findViewById(R.id.btnArsTechnica);

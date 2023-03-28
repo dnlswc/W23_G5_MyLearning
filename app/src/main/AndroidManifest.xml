@@ -15,10 +15,12 @@
         tools:targetApi="31">
         <activity
             android:name=".news.NewsArticleActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".news.NewsActivity"/>
         <activity
             android:name=".news.NewsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".notepad.EditNoteActivity"
             android:exported="false"
@@ -29,10 +31,12 @@
             android:parentActivityName=".notepad.NotePageActivity" />
         <activity
             android:name=".quiz.QuizActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".quiz.QuizCatalogueActivity"/>
         <activity
             android:name=".quiz.QuizCatalogueActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".notepad.AddNoteActivity"
             android:exported="false"

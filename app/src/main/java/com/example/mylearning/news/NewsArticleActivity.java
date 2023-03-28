@@ -30,6 +30,7 @@ public class NewsArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_article);
+        getSupportActionBar().setTitle("News content");
 
         txtViewArticleTitle = findViewById(R.id.txtViewArticleTitle);
         txtViewArticleAuthor = findViewById(R.id.txtViewArticleAuthor);
