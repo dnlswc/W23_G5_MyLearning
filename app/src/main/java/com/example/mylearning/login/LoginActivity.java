@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class LoginActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
@@ -35,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     ImageView imageViewGoogle;
 
     BottomNavigationView bottomNavigationView;
+
+    GifImageView gifViewGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.myAccount);
         imageViewGoogle = findViewById(R.id.imageViewGoogle);
+        gifViewGoogle = findViewById(R.id.gifViewGoogle);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
@@ -74,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
             buttonSignIn.setText("Sign-out");
             imageViewGoogle.setImageResource(R.drawable.account_photo_2);
+            gifViewGoogle.setImageResource(R.drawable.account_photo_19);
 
            // Toast.makeText(this, ""+googleSignInAccount.getAccount(), Toast.LENGTH_SHORT).show();
 
