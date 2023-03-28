@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.login.LoginActivity;
 import com.example.mylearning.news.NewsActivity;
 import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -85,6 +87,11 @@ public class AddNoteActivity extends AppCompatActivity {
 
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+
+                case R.id.myAccount:
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
             }

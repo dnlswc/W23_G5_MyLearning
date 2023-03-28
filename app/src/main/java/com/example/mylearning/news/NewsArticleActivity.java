@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.login.LoginActivity;
 import com.example.mylearning.notepad.NotePageActivity;
 import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,7 +31,7 @@ public class NewsArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_article);
-        getSupportActionBar().setTitle("News content");
+        getSupportActionBar().setTitle("News Content");
 
         txtViewArticleTitle = findViewById(R.id.txtViewArticleTitle);
         txtViewArticleAuthor = findViewById(R.id.txtViewArticleAuthor);
@@ -77,8 +78,11 @@ public class NewsArticleActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.myNews:
-                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myAccount:
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    overridePendingTransition(0, 0);
                     return true;
             }
 

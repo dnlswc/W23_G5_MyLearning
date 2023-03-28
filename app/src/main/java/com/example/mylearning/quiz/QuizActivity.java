@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.login.LoginActivity;
 import com.example.mylearning.news.NewsActivity;
 import com.example.mylearning.notepad.NotePageActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -229,6 +230,11 @@ public class QuizActivity extends AppCompatActivity {
                 case R.id.myNews:
                     startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                     overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myAccount:
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    overridePendingTransition(0, 0);
                     return true;
             }
 

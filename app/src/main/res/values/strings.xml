@@ -47,4 +47,7 @@
     <string name="radioButtonTxtZtoA">Title: Z - A</string>
     <string name="radioButtonTxtModifiedTimeNewestToOldest">Modified time: Newest - Oldest</string>
     <string name="radioButtonTxtModifiedTimeoOldestToNewes">Modified time: Oldest - Newest</string>
+    <string name="textViewTextSignIn">Google Sign-in</string>
+    <string name="buttonTxtSignIn">Sign-in</string>
+    <string name="txtSignOut">Sign-out</string>
 </resources>

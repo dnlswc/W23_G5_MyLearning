@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
+import com.example.mylearning.login.LoginActivity;
 import com.example.mylearning.notepad.NotePageActivity;
+import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -106,6 +108,8 @@ public class NewsActivity extends AppCompatActivity implements ArticleOnClickLis
                     return true;
 
                 case R.id.myQuiz:
+                    startActivity(new Intent(getApplicationContext(), QuizCatalogueActivity.class));
+                    overridePendingTransition(0,0);
                     return true;
 
                 case R.id.myNote:
@@ -114,8 +118,11 @@ public class NewsActivity extends AppCompatActivity implements ArticleOnClickLis
                     return true;
 
                 case R.id.myNews:
-                    startActivity(new Intent(getApplicationContext(), NewsActivity.class));
-                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.myAccount:
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    overridePendingTransition(0, 0);
                     return true;
             }
 
