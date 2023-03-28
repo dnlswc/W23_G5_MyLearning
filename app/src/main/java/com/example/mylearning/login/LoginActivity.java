@@ -73,13 +73,13 @@ public class LoginActivity extends AppCompatActivity {
             textViewName.setText("User name: " + firstName);
 
             textViewEmail.setText("Email: " + email);
-            textViewSignIn.setText("Welcome");
+            textViewSignIn.setText("Welcome Back");
             textViewNumberOfQuiz.setText("Number of notes created: xxx");
             textViewScore.setText("Score obtained: xxx");
 
             buttonSignIn.setText("Sign-out");
             imageViewGoogle.setImageResource(R.drawable.account_photo_2);
-            gifViewGoogle.setImageResource(R.drawable.account_photo_19);
+            gifViewGoogle.setImageResource(0);
 
            // Toast.makeText(this, ""+googleSignInAccount.getAccount(), Toast.LENGTH_SHORT).show();
 
