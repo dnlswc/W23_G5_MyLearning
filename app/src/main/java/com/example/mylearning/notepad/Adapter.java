@@ -64,9 +64,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             itemView.setOnClickListener((View v) -> {
                 Intent intent = new Intent(v.getContext(), NoteContentActivity.class);
                 //intent.putExtra("ID", notes.get(getAdapterPosition()).getId());
+                /*
                 Note noteObjectToBePassed = new Note(notes.get(getAdapterPosition()).getId(), notes.get(getAdapterPosition()).getTitle(),
                         notes.get(getAdapterPosition()).getContent(), notes.get(getAdapterPosition()).getDate(),
                         notes.get(getAdapterPosition()).getTime());
+*/
+                Note noteObjectToBePassed = new Note(notes.get(getAdapterPosition()).getId(), notes.get(getAdapterPosition()).getTitle(),
+                        notes.get(getAdapterPosition()).getContent(), notes.get(getAdapterPosition()).getDate(),
+                        notes.get(getAdapterPosition()).getTime(),  notes.get(getAdapterPosition()).getAuthorEmail());
 
                 noteListToBePassed.add(noteObjectToBePassed);
 

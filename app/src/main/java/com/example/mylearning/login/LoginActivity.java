@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import com.example.mylearning.MainActivity;
 import com.example.mylearning.R;
 import com.example.mylearning.news.NewsActivity;
+import com.example.mylearning.notepad.Database;
+import com.example.mylearning.notepad.Note;
 import com.example.mylearning.notepad.NotePageActivity;
 import com.example.mylearning.quiz.QuizCatalogueActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,32 +30,67 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+
 import pl.droidsonroids.gif.GifImageView;
 
 public class LoginActivity extends AppCompatActivity {
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
 
-    TextView textViewSignIn, textViewName, textViewNumberOfQuiz, textViewEmail, textViewScore;
+    TextView textViewSignIn, textViewName, textViewNumberOfNoteCreated, textViewEmail, textViewRemark;
     Button buttonSignIn, buttonSignOut;
     ImageView imageViewGoogle;
 
     BottomNavigationView bottomNavigationView;
 
     GifImageView gifViewGoogle;
+   // public static String  displayNameInBar = "Guess";
+    public static String  displayNameInBar = "Empty";
+
+    public static String stringInTextViewEmail="Empty";
+    public static int numberOfNoteToBePassed = 0;
+    List<Note> notes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String tempAuthorEmail = sharedPreferences.getString("AUTHOR_EMAIL", "Nothing");
+            String tempAuthorName = sharedPreferences.getString("FIRST_NAME", "Nothing");
+            int tempNumberOfNote = sharedPreferences.getInt("NUMBER_OF_NOTE", -1);
+
+            if (!(tempAuthorEmail.equals("Nothing")))
+            {
+                stringInTextViewEmail = tempAuthorEmail;
+            }
+            if (!(tempAuthorName.equals("Nothing")))
+            {
+                displayNameInBar = tempAuthorName;
+            }
+            if (tempNumberOfNote!=-1)
+            {
+                numberOfNoteToBePassed = tempNumberOfNote;
+            }
+
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
         getSupportActionBar().setTitle("My Account");
 
         textViewSignIn = findViewById(R.id.textViewSignIn);
         textViewName = findViewById(R.id.textViewName);
-        textViewNumberOfQuiz = findViewById(R.id.textViewNumberOfQuiz);
+        textViewNumberOfNoteCreated = findViewById(R.id.textViewNumberOfNoteCreated);
         textViewEmail = findViewById(R.id.textViewEmail);
-        textViewScore = findViewById(R.id.textViewScore);
+        textViewRemark = findViewById(R.id.textViewRemark);
         buttonSignIn = findViewById(R.id.buttonSignIn);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.myAccount);
@@ -65,31 +104,51 @@ public class LoginActivity extends AppCompatActivity {
 
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (googleSignInAccount != null) {
-         //   String displayName = googleSignInAccount.getDisplayName();
+            //   String displayName = googleSignInAccount.getDisplayName();
             String firstName = googleSignInAccount.getGivenName();
 
             String email = googleSignInAccount.getEmail();
+            NotePageActivity.author_email = email;
+            stringInTextViewEmail = email;
+
+            Database db = new Database(this);
+            notes = db.getNotes();
+            numberOfNoteToBePassed = notes.size();
+
             //  textViewName.setText("User: " + displayName);
             textViewName.setText("User name: " + firstName);
+            displayNameInBar = firstName;
 
             textViewEmail.setText("Email: " + email);
             textViewSignIn.setText("Welcome Back");
-            textViewNumberOfQuiz.setText("Number of notes created: xxx");
-            textViewScore.setText("Score obtained: xxx");
+            // textViewNumberOfQuiz.setText("Number of notes created: xxx");
+            //textViewNumberOfNoteCreated.setText("Number of notes created: " + NotePageActivity.numberOfNoteForEachAuthor);
+            textViewNumberOfNoteCreated.setText("Number of notes created: " + numberOfNoteToBePassed);
+
+           // textViewRemark.setText("Score obtained: xxx");
+          //  textViewRemark.setText("You can read and write your own set of notes!");
+            textViewRemark.setText("Let's read and write your own set of notes!");
 
             buttonSignIn.setText("Sign-out");
             imageViewGoogle.setImageResource(R.drawable.account_photo_2);
             gifViewGoogle.setImageResource(0);
 
-           // Toast.makeText(this, ""+googleSignInAccount.getAccount(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, ""+googleSignInAccount.getAccount(), Toast.LENGTH_SHORT).show();
 
-          //  imageViewGoogle.setImageDrawable
+            //  imageViewGoogle.setImageDrawable
             //textViewSignIn.setTextSize(20);
             /*
             buttonSignOut.setVisibility(View.VISIBLE);
             buttonSignIn.setVisibility(View.INVISIBLE);*/
 
             //Toast.makeText(this, buttonSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            displayNameInBar = "Guess";
+            Database db = new Database(this);
+            notes = db.getNotes();
+            numberOfNoteToBePassed = notes.size();
         }
 
         /*
@@ -100,6 +159,14 @@ public class LoginActivity extends AppCompatActivity {
 
         //buttonSignIn.setVisibility(View.INVISIBLE);
 
+
+/*
+       Database db = new Database(this);
+        notes = db.getNotes();
+        numberOfNoteToBePassed = notes.size();
+*/
+
+
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +174,9 @@ public class LoginActivity extends AppCompatActivity {
                     signIn();
                 }
                 else if ((buttonSignIn.getText().toString()).equals("Sign-out")) {
+                    NotePageActivity.author_email = "Guess3175@gmail.com";
+                    stringInTextViewEmail =  "Guess3175@gmail.com";
+                    displayNameInBar = "Guess";
                     signOut();
                 }
             }
@@ -184,6 +254,21 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed to login Google", Toast.LENGTH_SHORT).show();
             }
         }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("AUTHOR_EMAIL", stringInTextViewEmail);
+        editor.putString("FIRST_NAME", displayNameInBar);
+        editor.putInt("NUMBER_OF_NOTE", numberOfNoteToBePassed);
+
+        editor.commit();
 
     }
 

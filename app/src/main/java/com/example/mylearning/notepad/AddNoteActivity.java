@@ -129,7 +129,8 @@ public class AddNoteActivity extends AppCompatActivity {
                 time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE)) +
                         ":" + pad(calendar.get(Calendar.SECOND));
 
-                note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
+                //note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
+                note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time, NotePageActivity.author_email);
                 db = new Database(this);
                 long idFromDb = db.addNote(note);
                 note.setId(idFromDb);

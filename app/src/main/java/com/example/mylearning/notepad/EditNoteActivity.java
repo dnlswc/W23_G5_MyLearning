@@ -52,8 +52,12 @@ public class EditNoteActivity extends AppCompatActivity {
 
         noteListToReceive = getIntent().getParcelableArrayListExtra("NOTE_LIST");
         note = noteListToReceive.get(0);
+    /*
         Log.d("Edit111", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
-                + note.getDate() + ", " + note.getTime());
+                + note.getDate() + ", " + note.getTime() );*/
+
+        Log.d("Edit111", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
+                + note.getDate() + ", " + note.getTime() + ", " + note.getAuthorEmail());
 
 
         editTextContent = findViewById(R.id.editTextContent);
@@ -168,14 +172,20 @@ public class EditNoteActivity extends AppCompatActivity {
 
                 note.setDate(today);
                 note.setTime(time);
-
+                note.setAuthorEmail(NotePageActivity.author_email);
 /*
                 note1.setDate(today);
                 note1.setTime(time);
 */
 
+                 /*
                 Log.d("Edit222", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
                 + note.getDate() + ", " + note.getTime());
+*/
+
+                Log.d("Edit222", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
+                        + note.getDate() + ", " + note.getTime() + ", " + note.getAuthorEmail());
+
 
                 int numberOfRowAffected = database.editNote(note);
               /* int numberOfRowAffected = database.editNote(note.getId(), note.getTitle(), note.getContent(),note.getDate()

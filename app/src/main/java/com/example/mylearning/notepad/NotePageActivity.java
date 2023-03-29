@@ -40,6 +40,11 @@ public class NotePageActivity extends AppCompatActivity {
     Database db;
     SearchView searchViewNote;
     static int sortingIndex = 0;
+    public static String author_email = "Guess3175@gmail.com";
+    //public static String author_email;
+    public static String authorName = "Guess";
+
+    public static int numberOfNoteForEachAuthor = 0;
 
     AlertDialog.Builder dialogBuilder;
     AlertDialog dialog;
@@ -54,13 +59,35 @@ public class NotePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_page);
 
-
         try {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             int temSortingIndex = sharedPreferences.getInt("SORT_INDEX_PREFERENCE", -99);
+            String tempAuthorEmail = sharedPreferences.getString("AUTHOR_EMAIL", "Nothing");
+            String tempFistName = sharedPreferences.getString("FIRST_NAME", "Nothing");
 
             if (temSortingIndex != -99) {
                 sortingIndex = temSortingIndex;
+            }
+
+            if (!(tempAuthorEmail.equals("Nothing")) &&!(tempAuthorEmail.equals("Guess3175@gmail.com")))
+            {
+                author_email = tempAuthorEmail;
+            }
+            else
+            {
+                author_email = "Guess3175@gmail.com";
+            }
+
+
+           // if (!(tempFistName.equals("Nothing")) &&!(tempFistName.equals("Guess")))
+                if (!(tempFistName.equals("Nothing")) &&!(tempFistName.equals("Guess")))
+
+                {
+                authorName = tempFistName;
+            }
+            else
+            {
+                authorName = "Guess";
             }
 
         } catch (Exception exception) {
@@ -88,10 +115,14 @@ public class NotePageActivity extends AppCompatActivity {
         searchViewNote = findViewById(R.id.searchViewNote);
         floatingActionButtonSort = findViewById(R.id.floatingActionButtonSort);
 
-        getSupportActionBar().setTitle("My Note");
+      //  getSupportActionBar().setTitle("My Note");
+       // getSupportActionBar().setTitle("My Note: " + LoginActivity.displayNameInBar);
+        getSupportActionBar().setTitle("My Note: " + authorName);
+
 
         db = new Database(this);
         notes = db.getNotes();
+        numberOfNoteForEachAuthor = notes.size();
 
 
         RecyclerViewMainNote.setLayoutManager(new LinearLayoutManager(this));
@@ -157,6 +188,7 @@ public class NotePageActivity extends AppCompatActivity {
         List<Note> filteredList = new ArrayList<>();
         for (Note item : notes) {
             // if (item.getTitle().toLowerCase().contains(newText.toLowerCase()))
+            // Need not Author email since no administrator role
             if (item.getTitle().toLowerCase().contains(newText.toLowerCase()) ||
                     item.getContent().toLowerCase().contains(newText.toLowerCase()) ||
                     item.getDate().toLowerCase().contains(newText.toLowerCase()) ||
@@ -270,6 +302,8 @@ public class NotePageActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putInt("SORT_INDEX_PREFERENCE", sortingIndex);
+        //editor.putString("AUTHOR_EMAIL", author_email);
+
         editor.commit();
 
     }
