@@ -26,7 +26,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,16 +42,15 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
 
     TextView textViewSignIn, textViewName, textViewNumberOfNoteCreated, textViewEmail, textViewRemark;
-    Button buttonSignIn, buttonSignOut;
+    Button buttonSignIn;
     ImageView imageViewGoogle;
 
     BottomNavigationView bottomNavigationView;
 
     GifImageView gifViewGoogle;
-   // public static String  displayNameInBar = "Guess";
-    public static String  displayNameInBar = "Empty";
+    public static String displayNameInBar = "Empty";
 
-    public static String stringInTextViewEmail="Empty";
+    public static String stringInTextViewEmail = "Empty";
     public static int numberOfNoteToBePassed = 0;
     List<Note> notes;
 
@@ -66,16 +67,13 @@ public class LoginActivity extends AppCompatActivity {
             String tempAuthorName = sharedPreferences.getString("FIRST_NAME", "Nothing");
             int tempNumberOfNote = sharedPreferences.getInt("NUMBER_OF_NOTE", -1);
 
-            if (!(tempAuthorEmail.equals("Nothing")))
-            {
+            if (!(tempAuthorEmail.equals("Nothing"))) {
                 stringInTextViewEmail = tempAuthorEmail;
             }
-            if (!(tempAuthorName.equals("Nothing")))
-            {
+            if (!(tempAuthorName.equals("Nothing"))) {
                 displayNameInBar = tempAuthorName;
             }
-            if (tempNumberOfNote!=-1)
-            {
+            if (tempNumberOfNote != -1) {
                 numberOfNoteToBePassed = tempNumberOfNote;
             }
 
@@ -98,14 +96,19 @@ public class LoginActivity extends AppCompatActivity {
         imageViewGoogle = findViewById(R.id.imageViewGoogle);
         gifViewGoogle = findViewById(R.id.gifViewGoogle);
 
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        // Old approach
+        // googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+        // Client id registered in Google: Web client 3
+        String serverClientId = "265614027956-62h3t0lhqkpr4n13oc99v863nf0ild7e.apps.googleusercontent.com";
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+                requestIdToken(serverClientId).requestEmail().build();
+
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        //Toast.makeText(this, "Button Text: " + buttonSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
 
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (googleSignInAccount != null) {
-            //   String displayName = googleSignInAccount.getDisplayName();
             String firstName = googleSignInAccount.getGivenName();
 
             String email = googleSignInAccount.getEmail();
@@ -116,74 +119,37 @@ public class LoginActivity extends AppCompatActivity {
             notes = db.getNotes();
             numberOfNoteToBePassed = notes.size();
 
-            //  textViewName.setText("User: " + displayName);
             textViewName.setText("User name: " + firstName);
             displayNameInBar = firstName;
 
             textViewEmail.setText("Email: " + email);
             textViewSignIn.setText("Welcome Back");
-            // textViewNumberOfQuiz.setText("Number of notes created: xxx");
-            //textViewNumberOfNoteCreated.setText("Number of notes created: " + NotePageActivity.numberOfNoteForEachAuthor);
-            textViewNumberOfNoteCreated.setText("Number of notes created: " + numberOfNoteToBePassed);
 
-           // textViewRemark.setText("Score obtained: xxx");
-          //  textViewRemark.setText("You can read and write your own set of notes!");
+            textViewNumberOfNoteCreated.setText("Number of notes stored: " + numberOfNoteToBePassed);
+
             textViewRemark.setText("Let's read and write your own set of notes!");
 
             buttonSignIn.setText("Sign-out");
             imageViewGoogle.setImageResource(R.drawable.account_photo_2);
             gifViewGoogle.setImageResource(0);
-
-            // Toast.makeText(this, ""+googleSignInAccount.getAccount(), Toast.LENGTH_SHORT).show();
-
-            //  imageViewGoogle.setImageDrawable
-            //textViewSignIn.setTextSize(20);
-            /*
-            buttonSignOut.setVisibility(View.VISIBLE);
-            buttonSignIn.setVisibility(View.INVISIBLE);*/
-
-            //Toast.makeText(this, buttonSignIn.getText().toString(), Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             displayNameInBar = "Guest";
             Database db = new Database(this);
             notes = db.getNotes();
             numberOfNoteToBePassed = notes.size();
         }
 
-        /*
-        if(googleSignInAccount!=null){
-            directToLoginPage();
-        }
-        */
 
-        //buttonSignIn.setVisibility(View.INVISIBLE);
-
-
-/*
-       Database db = new Database(this);
-        notes = db.getNotes();
-        numberOfNoteToBePassed = notes.size();
-*/
-
-
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ((buttonSignIn.getText().toString()).equals("Sign-in")) {
-                    signIn();
-                }
-                else if ((buttonSignIn.getText().toString()).equals("Sign-out")) {
-                    NotePageActivity.author_email = "Guest3175@gmail.com";
-                    stringInTextViewEmail =  "Guest3175@gmail.com";
-                    displayNameInBar = "Guest";
-                    signOut();
-                }
+        buttonSignIn.setOnClickListener((View v) -> {
+            if ((buttonSignIn.getText().toString()).equals("Sign-in")) {
+                signIn();
+            } else if ((buttonSignIn.getText().toString()).equals("Sign-out")) {
+                NotePageActivity.author_email = "Guest3175@gmail.com";
+                stringInTextViewEmail = "Guest3175@gmail.com";
+                displayNameInBar = "Guest";
+                signOut();
             }
-
         });
-
 
 
         bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) -> {
@@ -252,8 +218,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Successful to login Google", Toast.LENGTH_SHORT).show();
                 directToLoginPage();
             } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), "Failed to login Google" + " :"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("GOOGLEFAILURE",e.getMessage());
+                Toast.makeText(getApplicationContext(), "Failed to login Google" + " :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("GOOGLEFAILURE", e.getMessage());
             }
         }
 

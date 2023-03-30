@@ -50,15 +50,6 @@ public class Note implements Parcelable {
         this.authorEmail = authorEmail;
     }
 
-    /*
-    protected Note(Parcel in) {
-        id = in.readLong();
-        title = in.readString();
-        content = in.readString();
-        date = in.readString();
-        time = in.readString();
-    }
-*/
 
     protected Note(Parcel in) {
         id = in.readLong();
@@ -136,15 +127,6 @@ public class Note implements Parcelable {
         return 0;
     }
 
-    /*
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeLong(id);
-        dest.writeString(title);
-        dest.writeString(content);
-        dest.writeString(date);
-        dest.writeString(time);
-    }*/
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {

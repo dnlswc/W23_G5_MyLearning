@@ -34,7 +34,7 @@ public class EditNoteActivity extends AppCompatActivity {
     Database database;
     Note note;
     BottomNavigationView bottomNavigationView;
-    ArrayList<Note> noteListToReceive= new ArrayList<>();
+    ArrayList<Note> noteListToReceive = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +43,10 @@ public class EditNoteActivity extends AppCompatActivity {
 
         database = new Database(this);
 
-        /*
-        Intent intent = getIntent();
-        Long id = intent.getLongExtra("ID", -1);
-        database = new Database(this);
-        note = database.getNote(id);
-*/
 
         noteListToReceive = getIntent().getParcelableArrayListExtra("NOTE_LIST");
         note = noteListToReceive.get(0);
-    /*
-        Log.d("Edit111", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
-                + note.getDate() + ", " + note.getTime() );*/
+
 
         Log.d("Edit111", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
                 + note.getDate() + ", " + note.getTime() + ", " + note.getAuthorEmail());
@@ -154,14 +146,6 @@ public class EditNoteActivity extends AppCompatActivity {
                 note.setTitle(editTextTitle.getText().toString());
                 note.setContent(editTextContent.getText().toString());
 
-                /*
-                long note_id = note.getId();
-                Note note1 = new Note();
-                note1.setId(note_id);
-                note1.setTitle(editTextTitle.getText().toString());
-                note1.setContent(editTextContent.getText().toString());
-*/
-
                 calendar = Calendar.getInstance();
                 today = calendar.get(Calendar.YEAR) + "/" + pad((calendar.get(Calendar.MONTH) + 1))
                         + "/" + pad(calendar.get(Calendar.DAY_OF_MONTH));
@@ -173,32 +157,15 @@ public class EditNoteActivity extends AppCompatActivity {
                 note.setDate(today);
                 note.setTime(time);
                 note.setAuthorEmail(NotePageActivity.author_email);
-/*
-                note1.setDate(today);
-                note1.setTime(time);
-*/
 
-                 /*
-                Log.d("Edit222", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
-                + note.getDate() + ", " + note.getTime());
-*/
 
                 Log.d("Edit222", note.getId() + ", " + note.getTitle() + ", " + note.getContent() + ", "
                         + note.getDate() + ", " + note.getTime() + ", " + note.getAuthorEmail());
 
 
                 int numberOfRowAffected = database.editNote(note);
-              /* int numberOfRowAffected = database.editNote(note.getId(), note.getTitle(), note.getContent(),note.getDate()
-               , note.getTime());*/
 
-
-
-
-                /*
-                if (note!=null) {
-                    database.editNote(note);
-                }*/
-                Log.d("999","Passed_numberOfRowAffected");
+                Log.d("999", "Passed_numberOfRowAffected");
 
 
                 if (numberOfRowAffected == 1) {
@@ -213,11 +180,9 @@ public class EditNoteActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
 
-
             Intent intent = new Intent(getApplicationContext(), NotePageActivity.class);
 
             startActivity(intent);
-
         }
         return super.onOptionsItemSelected(item);
     }

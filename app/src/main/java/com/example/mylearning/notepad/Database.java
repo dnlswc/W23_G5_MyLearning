@@ -15,9 +15,8 @@ public class Database extends SQLiteOpenHelper {
 
     // Table information
     private static final int VERSION = 2;
-    // Can't use database / database1 / database2 / database3 >>> will crash
-    private static final String NAME = "database4";
-    private static final String TABLE = "note4";
+    private static final String NAME = "database";
+    private static final String TABLE = "note";
 
     // Table's column information
     private static final String ID = "Id";
@@ -27,23 +26,6 @@ public class Database extends SQLiteOpenHelper {
     private static final String TIME = "Time";
     private static final String AUTHOR_EMAIL = "Email";
 
-
-    /*
-    private ArrayList<String> sortingChoice = new ArrayList<>(Arrays.asList(
-            "\" ORDER BY \" + DATE + \" DESC, \" + TIME + \" DESC\"",
-            "\" ORDER BY \" + DATE + \" ASC, \" + TIME + \" ASC\"",
-            "\" ORDER BY \" + TITLE + \" ASC\"",
-            "\" ORDER BY \" + TITLE + \" DESC\""
-            ));*/
-
-    /*
-    private ArrayList<String> sortingChoice = new ArrayList<>(Arrays.asList(
-            " ORDER BY  + DATE +  DESC,  + TIME +  DESC\"",
-            " ORDER BY  + DATE +  ASC,  + TIME +  ASC\"",
-            " ORDER BY  + TITLE +  ASC\"",
-            " ORDER BY  + TITLE +  DESC\""
-    ));
-*/
     private ArrayList<String> sortingChoice = new ArrayList<>(Arrays.asList(
             " ORDER BY DATE DESC, TIME DESC",
             " ORDER BY DATE ASC, TIME ASC",
@@ -65,14 +47,6 @@ public class Database extends SQLiteOpenHelper {
                 TIME + " TEXT," +
                 AUTHOR_EMAIL + " TEXT" + ")";
         db.execSQL(query);
-       /*
-        String query = "CREATE TABLE " + TABLE + "(" +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                TITLE + " TEXT, " +
-                CONTENT + " TEXT," +
-                DATE + " TEXT," +
-                TIME + " TEXT" + ")";
-        db.execSQL(query);*/
     }
 
     @Override
@@ -94,31 +68,20 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put(AUTHOR_EMAIL, note.getAuthorEmail());
 
         long id = db.insert(TABLE, null, contentValues);
-        //  Toast.makeText(this, "Inserted" + "ID: " + id, Toast.LENGTH_SHORT).show();
         Log.d("Inserted", "ID: " + id);
         return id;
     }
 
     public Note getNote(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
-       /*
-        Cursor cursor = db.query(TABLE, new String[]{ID, TITLE, CONTENT, DATE, TIME},
-                ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
-*/
 
         Cursor cursor = db.query(TABLE, new String[]{ID, TITLE, CONTENT, DATE, TIME, AUTHOR_EMAIL},
                 ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
         Note note = new Note();
 
-        /*
         if (cursor.moveToFirst() == true) {
             note = new Note(cursor.getLong(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getString(3), cursor.getString(4));
-        }*/
-
-        if (cursor.moveToFirst() == true) {
-            note = new Note(cursor.getLong(0), cursor.getString(1),
-                    cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5));
+                    cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
         }
         return note;
     }
@@ -129,25 +92,17 @@ public class Database extends SQLiteOpenHelper {
 
         String sortingOption = sortingChoice.get(NotePageActivity.sortingIndex);
 
-        //String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
-        //String query = "SELECT * FROM " + TABLE + sortingOption;
-
-       String tempAuthorEmail= NotePageActivity.author_email;
-       if (tempAuthorEmail.equals("Empty")==true)
-       {
-           tempAuthorEmail = "Guest3175@gmail.com";
-       }
-
-       /*
-        String query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL +" = '" + NotePageActivity.author_email
-                + "' "+ sortingOption;
-*/
-
-        String query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL +" = '" + tempAuthorEmail
-                + "' "+ sortingOption;
+        String tempAuthorEmail = NotePageActivity.author_email;
+        if (tempAuthorEmail.equals("Empty") == true) {
+            tempAuthorEmail = "Guest3175@gmail.com";
+        }
 
 
-        Log.d("SQLQUERY: ",query);
+        String query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL + " = '" + tempAuthorEmail
+                + "' " + sortingOption;
+
+
+        Log.d("SQLQUERY: ", query);
 
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst() == true) {
@@ -186,22 +141,5 @@ public class Database extends SQLiteOpenHelper {
         return db.update(TABLE, contentValues, ID + "=?", new String[]{String.valueOf(note.getId())});
 
     }
-
-
-    /*
-    public int editNote(long id, String title, String content, String date, String time) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(TITLE, title);
-        contentValues.put(CONTENT, content);
-        contentValues.put(DATE, date);
-        contentValues.put(TIME, time);
-        return db.update(TABLE, contentValues, ID + "=?", new String[]{String.valueOf(id)});
-
-    }*/
-
-
-
-
 
 }

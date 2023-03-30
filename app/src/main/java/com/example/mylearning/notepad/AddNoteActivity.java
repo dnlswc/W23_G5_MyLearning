@@ -34,7 +34,7 @@ public class AddNoteActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Database db;
     Note note;
-    public static int addCounterForGuest=0;
+    public static int addCounterForGuest = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +49,12 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
             if (temAddCounterForGuest != -99) {
-                /*if (temAddCounterForGuest != -99 && (NotePageActivity.author_email.equals("Guest3175@gmail.com")==true ||
-                        NotePageActivity.author_email.equals("Empty")==true)) {*/
-
-                    addCounterForGuest = temAddCounterForGuest;
+                addCounterForGuest = temAddCounterForGuest;
             }
 
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-
-
-
 
         getSupportActionBar().setTitle("Add a new note");
 
@@ -152,20 +146,16 @@ public class AddNoteActivity extends AppCompatActivity {
                 time = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE)) +
                         ":" + pad(calendar.get(Calendar.SECOND));
 
-                //note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time);
                 note = new Note(editTextTitle.getText().toString(), editTextContent.getText().toString(), today, time, NotePageActivity.author_email);
                 db = new Database(this);
                 long idFromDb = db.addNote(note);
                 note.setId(idFromDb);
                 Toast.makeText(this, "Saved the note", Toast.LENGTH_SHORT).show();
 
-                //if (NotePageActivity.author_email.equals("Guest3175@gmail.com")==true )
-                    if (NotePageActivity.author_email.equals("Guest3175@gmail.com")==true ||
-                            NotePageActivity.author_email.equals("Empty")==true)
-                    {
+                if (NotePageActivity.author_email.equals("Guest3175@gmail.com") == true ||
+                        NotePageActivity.author_email.equals("Empty") == true) {
                     addCounterForGuest++;
                 }
-
 
                 directToNotePage();
             } else {

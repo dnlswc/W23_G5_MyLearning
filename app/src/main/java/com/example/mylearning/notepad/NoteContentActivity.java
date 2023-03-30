@@ -30,7 +30,7 @@ public class NoteContentActivity extends AppCompatActivity {
     Database database;
     Note note;
     BottomNavigationView bottomNavigationView;
-    ArrayList<Note> noteListToReceive= new ArrayList<>();
+    ArrayList<Note> noteListToReceive = new ArrayList<>();
     ArrayList<Note> noteListToBePassed = new ArrayList<>();
 
     @Override
@@ -50,14 +50,6 @@ public class NoteContentActivity extends AppCompatActivity {
         noteListToReceive = getIntent().getParcelableArrayListExtra("NOTE_LIST");
         note = noteListToReceive.get(0);
 
-
-        /*
-        Intent intent = getIntent();
-        Long id = intent.getLongExtra("ID", 0);
-
-        database = new Database(this);
-        note = database.getNote(id);
-*/
 
         actionBar.setTitle(note.getTitle());
         textViewNoteContent.setText(note.getContent());
@@ -122,11 +114,10 @@ public class NoteContentActivity extends AppCompatActivity {
             Toast.makeText(this, "Edit the note", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, EditNoteActivity.class);
-            //intent.putExtra("ID", note.getId());
 
             noteListToBePassed.add(note);
 
-            intent.putParcelableArrayListExtra("NOTE_LIST",noteListToBePassed);
+            intent.putParcelableArrayListExtra("NOTE_LIST", noteListToBePassed);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
