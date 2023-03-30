@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -145,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
-            displayNameInBar = "Guess";
+            displayNameInBar = "Guest";
             Database db = new Database(this);
             notes = db.getNotes();
             numberOfNoteToBePassed = notes.size();
@@ -174,9 +175,9 @@ public class LoginActivity extends AppCompatActivity {
                     signIn();
                 }
                 else if ((buttonSignIn.getText().toString()).equals("Sign-out")) {
-                    NotePageActivity.author_email = "Guess3175@gmail.com";
-                    stringInTextViewEmail =  "Guess3175@gmail.com";
-                    displayNameInBar = "Guess";
+                    NotePageActivity.author_email = "Guest3175@gmail.com";
+                    stringInTextViewEmail =  "Guest3175@gmail.com";
+                    displayNameInBar = "Guest";
                     signOut();
                 }
             }
@@ -251,7 +252,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Successful to login Google", Toast.LENGTH_SHORT).show();
                 directToLoginPage();
             } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), "Failed to login Google", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed to login Google" + " :"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("GOOGLEFAILURE",e.getMessage());
             }
         }
 

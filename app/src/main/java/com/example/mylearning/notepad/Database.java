@@ -131,8 +131,21 @@ public class Database extends SQLiteOpenHelper {
 
         //String query = "SELECT * FROM " + TABLE + " ORDER BY " + DATE + " DESC, " + TIME + " DESC";
         //String query = "SELECT * FROM " + TABLE + sortingOption;
+
+       String tempAuthorEmail= NotePageActivity.author_email;
+       if (tempAuthorEmail.equals("Empty")==true)
+       {
+           tempAuthorEmail = "Guest3175@gmail.com";
+       }
+
+       /*
         String query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL +" = '" + NotePageActivity.author_email
                 + "' "+ sortingOption;
+*/
+
+        String query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL +" = '" + tempAuthorEmail
+                + "' "+ sortingOption;
+
 
         Log.d("SQLQUERY: ",query);
 

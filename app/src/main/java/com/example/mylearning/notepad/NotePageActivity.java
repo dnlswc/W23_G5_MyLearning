@@ -1,5 +1,6 @@
 package com.example.mylearning.notepad;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,9 +41,10 @@ public class NotePageActivity extends AppCompatActivity {
     Database db;
     SearchView searchViewNote;
     static int sortingIndex = 0;
-    public static String author_email = "Guess3175@gmail.com";
+    public static String author_email = "Guest3175@gmail.com";
     //public static String author_email;
-    public static String authorName = "Guess";
+    public static String authorName = "Guest";
+    static int addCounterGot = 0;
 
     public static int numberOfNoteForEachAuthor = 0;
 
@@ -53,6 +55,7 @@ public class NotePageActivity extends AppCompatActivity {
     Button buttonConfirm;
     Button buttonCancel;
     RadioGroup radioGroupSortOption;
+    List<Note> demonNotes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,31 +67,39 @@ public class NotePageActivity extends AppCompatActivity {
             int temSortingIndex = sharedPreferences.getInt("SORT_INDEX_PREFERENCE", -99);
             String tempAuthorEmail = sharedPreferences.getString("AUTHOR_EMAIL", "Nothing");
             String tempFistName = sharedPreferences.getString("FIRST_NAME", "Nothing");
+            int temAddCounterForGuest = sharedPreferences.getInt("ADD_COUNTER", -99);
 
             if (temSortingIndex != -99) {
                 sortingIndex = temSortingIndex;
             }
 
-            if (!(tempAuthorEmail.equals("Nothing")) &&!(tempAuthorEmail.equals("Guess3175@gmail.com")))
+
+            if (!(tempAuthorEmail.equals("Nothing")) &&!(tempAuthorEmail.equals("Guest3175@gmail.com")))
             {
                 author_email = tempAuthorEmail;
             }
             else
             {
-                author_email = "Guess3175@gmail.com";
+                author_email = "Guest3175@gmail.com";
             }
 
 
            // if (!(tempFistName.equals("Nothing")) &&!(tempFistName.equals("Guess")))
-                if (!(tempFistName.equals("Nothing")) &&!(tempFistName.equals("Guess")))
+                if (!(tempFistName.equals("Nothing")) &&!(tempFistName.equals("Guest")))
 
                 {
                 authorName = tempFistName;
             }
             else
             {
-                authorName = "Guess";
+                authorName = "Guest";
             }
+
+
+            if (temAddCounterForGuest != -99) {
+                addCounterGot = temAddCounterForGuest;
+            }
+
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -124,7 +135,75 @@ public class NotePageActivity extends AppCompatActivity {
         notes = db.getNotes();
         numberOfNoteForEachAuthor = notes.size();
 
+        /*
+        Toast.makeText(this, "number: "+numberOfNoteForEachAuthor+
+                ", email: " + author_email + ", add: " + addCounterGot , Toast.LENGTH_SHORT).show();
+*/
+      /*  if (addCounterGot==0 &&
+                (author_email.equals("Guest3175@gmail.com")==true ||author_email.equals("Empty")==true ))*/
 
+        if (numberOfNoteForEachAuthor==0  && addCounterGot==0 &&
+                (author_email.equals("Guest3175@gmail.com")==true ||author_email.equals("Empty")==true ))
+
+           /* if (numberOfNoteForEachAuthor==0  && addCounterGot==0 &&
+                    (author_email.equals("Empty")==true ))*/
+        {
+           // Toast.makeText(this, "Inside if...", Toast.LENGTH_SHORT).show();
+            //db = new Database(this);
+
+            Note note1 = new Note("First Demo Note","We are group 5",
+                    "2023/03/27", "10:26:30","Guest3175@gmail.com");
+            long idFromDb1 = db.addNote(note1);
+          //  Toast.makeText(this, "idFromDb1: "+idFromDb1, Toast.LENGTH_SHORT).show();
+            note1.setId(idFromDb1);
+           // demonNotes.add(note1);
+
+          //  Toast.makeText(this, "Note1"+note1.getTitle(), Toast.LENGTH_SHORT).show();
+
+
+            Note note2 = new Note("2nd Demo Note","MyLearning App",
+                    "2023/03/27", "15:45:45","Guest3175@gmail.com");
+
+            long idFromDb2 = db.addNote(note2);
+            note2.setId(idFromDb2);
+
+            Note note3 = new Note("Third Demo Note","My Note",
+                    "2023/03/28", "09:20:33","Guest3175@gmail.com");
+            long idFromDb3 = db.addNote(note3);
+            note3.setId(idFromDb3);
+
+
+            Note note4 = new Note("Demo notes created when DB is empty","When DD is empty, some dummy " +
+                    "notes are created",
+                    "2023/03/29", "14:10:22","Guest3175@gmail.com");
+            long idFromDb4 = db.addNote(note4);
+            note4.setId(idFromDb4);
+
+            Note note5 = new Note("These notes are demo notes","Dummy notes are created when it is" +
+                    "the first time user accesses to MyNote",
+                    "2023/03/29", "18:15:22","Guest3175@gmail.com");
+            long idFromDb5 = db.addNote(note5);
+            note5.setId(idFromDb5);
+
+
+            notes.add(note5);
+            notes.add(note4);
+            notes.add(note1);
+            notes.add(note2);
+            notes.add(note3);
+
+          //  db = new Database(this);
+            notes = db.getNotes();
+           // startActivity(new Intent(this, NotePageActivity.class));
+          // notes = db.getNotes();
+           // demonNotes = db.getNotes();
+           // numberOfNoteForEachAuthor = demonNotes.size();
+            addCounterGot++;
+        }
+
+       // db = new Database(this);
+       // notes = db.getNotes();
+      //  Toast.makeText(this, "author_email: "+author_email, Toast.LENGTH_SHORT).show();
         RecyclerViewMainNote.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter(this, notes);
         RecyclerViewMainNote.setAdapter(adapter);

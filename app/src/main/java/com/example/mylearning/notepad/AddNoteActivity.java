@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,11 +34,32 @@ public class AddNoteActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Database db;
     Note note;
+    public static int addCounterForGuest=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+
+
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+            int temAddCounterForGuest = sharedPreferences.getInt("ADD_COUNTER", -99);
+
+
+            if (temAddCounterForGuest != -99) {
+                /*if (temAddCounterForGuest != -99 && (NotePageActivity.author_email.equals("Guest3175@gmail.com")==true ||
+                        NotePageActivity.author_email.equals("Empty")==true)) {*/
+
+                    addCounterForGuest = temAddCounterForGuest;
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
 
 
         getSupportActionBar().setTitle("Add a new note");
@@ -135,6 +158,15 @@ public class AddNoteActivity extends AppCompatActivity {
                 long idFromDb = db.addNote(note);
                 note.setId(idFromDb);
                 Toast.makeText(this, "Saved the note", Toast.LENGTH_SHORT).show();
+
+                //if (NotePageActivity.author_email.equals("Guest3175@gmail.com")==true )
+                    if (NotePageActivity.author_email.equals("Guest3175@gmail.com")==true ||
+                            NotePageActivity.author_email.equals("Empty")==true)
+                    {
+                    addCounterForGuest++;
+                }
+
+
                 directToNotePage();
             } else {
                 Toast.makeText(this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
@@ -152,5 +184,20 @@ public class AddNoteActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("ADD_COUNTER", addCounterForGuest);
+
+        editor.commit();
+
+    }
+
 
 }
