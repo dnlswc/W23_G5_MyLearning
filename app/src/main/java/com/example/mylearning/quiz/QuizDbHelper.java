@@ -96,6 +96,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
+        db.close();
 
         return topicList;
     }
@@ -187,13 +188,8 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
+        db.close();
 
         return questionList;
-    }
-
-    public void resetTable() {
-        db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 }

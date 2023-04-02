@@ -3,7 +3,9 @@ package com.example.mylearning.quiz;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -40,8 +42,11 @@ public class QuizCatalogueActivity extends AppCompatActivity {
     private Button btnStartQuiz;
 
     private List<Question> questions;
-
     private QuizDbHelper quizDbHelper;
+
+    private SharedPreferences sharedPrefQuiz;
+    private SharedPreferences.Editor editor;
+
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -59,17 +64,27 @@ public class QuizCatalogueActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.myQuiz);
 
+        // use shared preferences to determine if it is the first run of the quiz feature
+        sharedPrefQuiz = getSharedPreferences("Quiz", Context.MODE_PRIVATE);
+        boolean isFirstRun = sharedPrefQuiz.getBoolean("is_first_run", true);
+        if (isFirstRun) {
+            // if it is the first run, import the quiz data from CSV file to database
+            quizDbHelper = QuizDbHelper.getInstance(this);
+            questions = new ArrayList<>();
+            readQuizData();
+            for (Question question : questions) {
+                quizDbHelper.addQuestion(question);
+            }
+
+            // set the boolean to false for "is_first_run" in Quiz's shared preferences
+            editor = sharedPrefQuiz.edit();
+            editor.putBoolean("is_first_run", false);
+            editor.commit();
+        }
+
         loadTypes();
         loadTopics();
         loadDifficultyLevels();
-
-        quizDbHelper = QuizDbHelper.getInstance(this);
-        questions = new ArrayList<>();
-        readQuizData();
-        quizDbHelper.resetTable(); // erase table along with previous loaded questions before adding new ones
-        for (Question question : questions) {
-            quizDbHelper.addQuestion(question);
-        }
 
         btnStartQuiz.setOnClickListener((View v) -> {
             String type = spinnerType.getSelectedItem().toString();
