@@ -1,32 +1,117 @@
 ﻿Type,Difficulty,Topic,Question,Answer,Option1,Option2,Option3,Option4
-TF,Easy,Systems Design,Computer literacy is understanding the role of information in generating and using business intelligence.,FALSE,TRUE,FALSE,,
-TF,Moderate,Systems Design,The arithmetic logic unit (ALU) performs only arithmetic operations.,FALSE,TRUE,FALSE,,
-MC,Challenging,Systems Design,Which of the following is not among the 5Vs of big data?,1,Variance,Value,Variety,Veracity
+TF,Easy,C#,Properties are usually defined with private access mode.,TRUE,TRUE,FALSE,,
+TF,Easy,C#,Objects are instances of data members.,FALSE,TRUE,FALSE,,
+TF,Easy,C#,Employee employee1; would be a valid call to the default constructor for the following class?***public class Employee {},FALSE,TRUE,FALSE,,
+TF,Easy,C#,"Given the following class definition, public double SetGpa(double gpaValue) would be a valid heading for a mutator.***public class Student {***private string name;***private double gpa;***}",FALSE,TRUE,FALSE,,
+TF,Moderate,C#,"The ""const"" modifier in C# is used with constructors.",FALSE,TRUE,FALSE,,
+TF,Moderate,C#,The symbol (=) is the operator used to test for equality.,FALSE,TRUE,FALSE,,
+TF,Moderate,C#,"If you intend to place a block of statements within an if statement, you must use parentheses around the block.",FALSE,TRUE,FALSE,,
+TF,Moderate,C#,The string data type can be used as an operand for the == or !=.,TRUE,TRUE,FALSE,,
+TF,Challenging,C#,Protected modifiers is the most restrictive.,FALSE,TRUE,FALSE,,
+TF,Challenging,C#,ToString() is one of the user-defined methods inherited from the object class.,TRUE,TRUE,FALSE,,
+TF,Challenging,C#,"In order to provide a new definition for the ToString() method, override keyword is added to the method heading.",TRUE,TRUE,FALSE,,
+TF,Challenging,C#,Examine the code. C will be assigned 3 whenever the program is executed.***if (A == B);***C = 3;,TRUE,TRUE,FALSE,,
 MC,Easy,C#,The fully qualified call to the method that allows the user to input a single character is:,2,Console.System.Read(),System.Console.Read(),Console.System.Write(),System.Console.Write()
-FITB,Easy,C#,Which escape sequence can be used to indicate that the cursor should advance to the next line?,\n,,,,
 MC,Easy,C#,"One of the primary differences between float, double, and decimal is:",4,Float is used to represent more significant digits.,Double is normally used with large monetary values.,Decimal is not used to display negative values.,Double does not require suffixing a numeric literal with a value such as m or f.
-FITB,Moderate,C#,"What is stored in ans as a result of the arithmetic expression, given the following declarations?***int ans = 10, v1 = 5, v2 = 7, v3 = 18;***ans += v1 + 10 (v2 / 5) + v3 / v2;",27,,,,
+MC,Easy,C#,Properties are associated with the _____ of the class while methods are affiliated with the _____ of the class.,4,"activity, fields","accessors, mutators","objects, instances","data, behavior"
+MC,Easy,C#,"Given the Employee class shown below, which of the following would be the most appropriate heading for its default constructor?***public class Employee {}",2,public void Employee(),public Employee(),static Employee(),private void Employee()
+MC,Moderate,C#,Which of the following identifiers follows the standard naming convention for naming a class?,3,Calculate Final Grade,MilesPerGallon,Student,Reports
+MC,Moderate,C#,Which of the following would be the most appropriate way to invoke the CalculateAvg() method found in the Student class if an object named gradStudent had been instantiated from the class?***public double CalculateAvg(),4,gradStudent = CalculateAvg( );,answer = Student.CalculateAvg( );,CalculateAvg( );,answer = gradStudent.CalculateAvg( );
+MC,Moderate,C#,Which loop structure can only be used with a collection such as an array?,1,foreach,for,while,do. . .while
+MC,Moderate,C#,"If a loop body must be executed at least once, which loop structure would be the best option?",4,foreach,for,while,do. . .while
 MC,Challenging,C#,"Given the following method definition, what would be a valid call? The variable someIntValue is defined as an int.***static int GetData(out int aValue, ref int bValue)",2,"someIntValue = GetData(aValue, bValue);","someIntValue = GetData(out aValue, ref bValue);","someIntValue = GetData(out, ref);","someIntValue = GetData(int out aValue, int ref bValue);"
-MC,Easy,Java,All Java applications must have a method named _____.,2,method(),main(),java(),hello()
-FITB,Easy,Java,"Which Java statement produces w on one line and xyz on the next line?***_____(""w\nxyz"");",System.out.println,,,,
-FITB,Moderate,Java,"A public static method named computeSum() is located in ClassA. To call the method from within ClassB, use the statement _____.",ClassA.computeSum();,,,,
-MC,Challenging,Java,The non-static data components of a class often are referred to as the _____ of that class.,2,access types,instance variables,methods,objects
-MC,Moderate,Java,The concept of allowing a class’s private data to be changed only by a class’s own methods is known as _____.,3,structured logic,object orientation,information hiding,data masking
-FITB,Moderate,Java,"If a class is named Student, the class constructor name is _____.",Student(),,,,
+MC,Challenging,C#,The following is probably an example of a(n):***public double GetYards(),4,constructor,mutator,property,accessor
+MC,Challenging,C#,"If a loop body uses a numeric value that is incremented by three with each iteration through the loop until it reaches 1000, which loop structure would probably be the best option?",2,foreach,for,while,do. . .while
+MC,Challenging,C#,Which of the following represents a pretest loop?,4,while,do. . .while,for,both while & do. . .while
+FITB,Easy,C#,Which escape sequence can be used to indicate that the cursor should advance to the next line?,\n,,,,
+FITB,Easy,C#,_____ operator is used to instantiate the class?,new,,,,
+FITB,Easy,C#,"If you follow the standard C# naming conventions, the property name for the following instance variable would be _____.***private string name;",name,,,,
+FITB,Easy,C#,"If you intend to place a block of statements within a loop body, you must use _____ around the block.",curly braces,,,,
+FITB,Moderate,C#,"What is stored in ans as a result of the arithmetic expression, given the following declarations?***int ans = 10, v1 = 5, v2 = 7, v3 = 18;***ans += v1 + 10 (v2 / 5) + v3 / v2;",27,,,,
+FITB,Moderate,C#,"Normally, member data uses a(n) _____ access modifier.",private,,,,
+FITB,Moderate,C#,"Normally, methods use a(n) _____ access modifier for object-oriented solutions.",public,,,,
+FITB,Moderate,C#,The _____ operator represents the logical AND.,&&,,,,
+FITB,Challenging,C#,The value contained within the square brackets that is used to indicate the length of the array must be a(n) _____.,integer,,,,
+FITB,Challenging,C#,"Using the following declaration:***char[] n = {'a', 'b', 'c', 'd', 'e'};***What does n[10/5+2] refer to?",e,,,,
+FITB,Challenging,C#,"Using the following declaration:***int[] anArray = {34, 55, 67, 89, 99};***What would be the result of each of the following output statements?***WriteLine(anArray[anArray.Length - 2]);",89,,,,
+FITB,Challenging,C#,"With the following declaration:***int[] points = {300, 100, 200, 400, 600};***The statement Write(points[2] + points[3]); will display _____.",600,,,,
 TF,Easy,Computer Networking,Protocol means the architecture of a network.,FALSE,TRUE,FALSE,,
 TF,Easy,Computer Networking,Topology means a set of rules established for users to gain control of the network to exchange information.,FALSE,TRUE,FALSE,,
-FITB,Moderate,Computer Networking,HTTP functions are on the _____ Layer of the OSI model.,Application,,,,
-MC,Moderate,Computer Networking,Which information is not included in an Ethernet frame?,1,Frame size,Source MAC address,Padding,Frame check sequence
-FITB,Challenging,Computer Networking,"On Windows 10, what command can help you find the Ethernet (MAC) address?",ipconfig /all,,,,
-FITB,Moderate,Computer Networking,What is the data rate for Fast Ethernet? _____Mbps,100,,,,
-MC,Easy,Computer Networking,A data problem is reported to the network administrator. The problem is found to be with the UTP network connection. What steps could the network administrator have taken to isolate the problem?,2,Visually inspect all UTP terminations,Use the PING command to verify network connectivity,Use pairs 4–5 and 7–8 to repair the connection,Contact the installer of the UTP cable to obtain a certification report
+TF,Easy,Computer Networking,Layer 2: Data Link Layer is responsible for adding a header that includes routing information.,FALSE,TRUE,FALSE,,
+TF,Easy,Computer Networking,Layer 2: Data Link Layer is considered the media access control layer.,TRUE,TRUE,FALSE,,
+TF,Moderate,Computer Networking,Layer 3: Network Layer combines messages or segments into packets.,TRUE,TRUE,FALSE,,
+TF,Moderate,Computer Networking,Layer 3: Network Layer is responsible for the mechanical connection to the network.,FALSE,TRUE,FALSE,,
+TF,Moderate,Computer Networking,Layer 1: Physical Layer is responsible for the mechanical connection to the network.,TRUE,TRUE,FALSE,,
+TF,Moderate,Computer Networking,Layer 1: Physical Layer is responsible for data compression and encryption.,FALSE,TRUE,FALSE,,
 TF,Challenging,Computer Networking,Only two wire pairs are used to obtain a proper power-sum measurement.,FALSE,TRUE,FALSE,,
-MC,Challenging,Computer Networking,Which of the following is not the advantage of optical communication links?,3,Extremely wide bandwidth,Elimination of crosstalk,Elimination of attenuation,Security
-MC,Moderate,Computer Networking,Which type of fiber is preferred for use in modern computer networks?,3,Multi-mode,Polarized mode,Single-mode,All of these answers are correct
+TF,Challenging,Computer Networking,TCP functions at Layer 6: Presentation Layer.,FALSE,TRUE,FALSE,,
+TF,Challenging,Computer Networking,IP and IPX are examples of protocols that operate at Layer 3: Network Layer.,TRUE,TRUE,FALSE,,
+TF,Challenging,Computer Networking,A network interface card operates at Layer 1: Physical Layer.,TRUE,TRUE,FALSE,,
+MC,Easy,Computer Networking,A data problem is reported to the network administrator. The problem is found to be with the UTP network connection. What steps could the network administrator have taken to isolate the problem?,2,Visually inspect all UTP terminations,Use the PING command to verify network connectivity,Use pairs 4–5 and 7–8 to repair the connection,Contact the installer of the UTP cable to obtain a certification report
 MC,Easy,Computer Networking,What is the material surrounding the core of an optical waveguide called?,4,Aperture,Mode field,Step-index,Cladding
+MC,Easy,Computer Networking,An Ethernet packet size greater than 1500 bytes is called _____.,2,a bad frame,a jumbo frame,an MTU,All of the above
+MC,Easy,Computer Networking,What is RJ-45?,3,A 45-pin connector for CAT6,An IEEE standard for data speed,An 8-pin modular connector for twisted-pair Ethernet,A protocol used to verify a communications link
+MC,Moderate,Computer Networking,Which information is not included in an Ethernet frame?,1,Frame size,Source MAC address,Padding,Frame check sequence
+MC,Moderate,Computer Networking,Which type of fiber is preferred for use in modern computer networks?,3,Multi-mode,Polarized mode,Single-mode,All of these answers are correct
+MC,Moderate,Computer Networking,"A disadvantage of Token Ring is that if an error changes the token pattern, it can cause the token to stop circulating. This issue can be eliminated by adding which of the following?",4,Router,Multiport Repeater,Token Passer,Token Ring Hub
+MC,Moderate,Computer Networking,Which of the following is not a step in building an office LAN?,1,Obtaining proper government permits,Configuring the network settings,Connecting the devices together,Creating network documentation
+MC,Challenging,Computer Networking,Which of the following is not the advantage of optical communication links?,3,Extremely wide bandwidth,Elimination of crosstalk,Elimination of attenuation,Security
+MC,Challenging,Computer Networking,What networking protocol does Ethernet use?,3,Ethernet uses a Token Ring passing scheme. The computer devices must possess the ring to be able to pass a token.,Ethernet uses carrier-access multiple sensing with collision detection.,Ethernet uses carrier-sense multiple access with collision detection.,Ethernet uses collision-sense carrier access with multiple pairing.
+MC,Challenging,Computer Networking,An IP address for a computer is assigned by which of the following?,2,Internet Assigned Numbers Authority,The local network administrator,The user of the computer,Internet Address Numbers Authority
+MC,Challenging,Computer Networking,The pad field in an Ethernet packet _____.,1,is used to bring the total number of bytes up to 46 if the data file is less than 46 bytes,is used to bring the total number of bytes up to 64 if the data file is less than 64 bytes,is not required with CSMA/CD,provides grouping of the information for transmission
+FITB,Easy,Computer Networking,Expand the acronym NIC.,Network Interface Card,,,,
+FITB,Easy,Computer Networking,Expand the acronym MAC.,Media Access Control,,,,
+FITB,Easy,Computer Networking,Expand the acronym LAN.,Local Area Network,,,,
+FITB,Easy,Computer Networking,Expand the acronym WAN.,Wide Area Network,,,,
+FITB,Moderate,Computer Networking,HTTP functions are on the _____ Layer of the OSI model.,Application,,,,
+FITB,Moderate,Computer Networking,What is the data rate for Fast Ethernet? _____Mbps,100,,,,
+FITB,Moderate,Computer Networking,_____ is the architecture of a network.,Topology,,,,
+FITB,Moderate,Computer Networking,A(n) _____ is a set of rules established for users to gain control of the network to exchange information.,protocol,,,,
+FITB,Challenging,Computer Networking,"On Windows 10, what command can help you find the Ethernet (MAC) address?",ipconfig /all,,,,
+FITB,Challenging,Computer Networking,_____ refers to a way of providing access to a network by giving each network device a fixed time interval to access the network.,Deterministic,,,,
+FITB,Challenging,Computer Networking,A(n) _____ broadcasts the data it receives to all devices connected to its ports.,hub,,,,
+FITB,Challenging,Computer Networking,A(n) _____ forwards the data it receives directly to its destination address when the associated port is known.,switch,,,,
+TF,Easy,Java,Envisioning program components as objects that are similar to concrete objects in the real world is the hallmark of procedural programming.,FALSE,TRUE,FALSE,,
+TF,Easy,Java,An instance of a class is a method.,FALSE,TRUE,FALSE,,
+TF,Easy,Java,Arguments to methods always appear within curly braces.,FALSE,TRUE,FALSE,,
+TF,Easy,Java,All Java applications must have a method named main().,TRUE,TRUE,FALSE,,
+TF,Moderate,Java,Nonexecuting program statements that provide documentation are called notes.,FALSE,TRUE,FALSE,,
+TF,Moderate,Java,"When data cannot be changed after a class is compiled, the data is variable.",FALSE,TRUE,FALSE,,
+TF,Moderate,Java,An assigned value is not required in a variable declaration.,TRUE,TRUE,FALSE,,
+TF,Moderate,Java,The assignment operator in Java is ==.,FALSE,TRUE,FALSE,,
+TF,Challenging,Java,Java is architecturally neutral.,TRUE,TRUE,FALSE,,
+TF,Challenging,Java,Java supports javadoc type of comment.,TRUE,TRUE,FALSE,,
+TF,Challenging,Java,The remainder operator is represented by a forward slash.,FALSE,TRUE,FALSE,,
+TF,Challenging,Java,You use a format to explicitly override an implicit type.,FALSE,TRUE,FALSE,,
+MC,Easy,Java,All Java applications must have a method named _____.,2,method(),main(),java(),hello()
+MC,Easy,Java,All Java programming statements must end with a(n) _____.,4,period,comma,closing parenthesis,semicolon
+MC,Easy,Java,A boolean variable can hold _____.,4,any character,any whole number,any decimal number,the value true or false
+MC,Moderate,Java,The concept of allowing a class’s private data to be changed only by a class’s own methods is known as _____.,3,structured logic,object orientation,information hiding,data masking
+MC,Moderate,Java,A(n) _____ translates high-level language statements into machine code.,3,programmer,syntax detector,compiler,decipherer
+MC,Moderate,Java,Which assignment is correct in Java?,3,int value = (float) 4.5;,float value = 4 (double);,double value = 2.12;,char value = 5c;
+MC,Moderate,Java,"In Java, methods must include all of the following except _____.",1,a call to another method,a declaration,curly braces,a body
+MC,Challenging,Java,The non-static data components of a class often are referred to as the _____ of that class.,2,access types,instance variables,methods,objects
+MC,Challenging,Java,Which assignment is correct in Java?,3,char aChar = 5.5;,char aChar = “W”;,char aChar = '*';,All of the above
+MC,Challenging,Java,An object’s data items are also known as _____.,1,fields,functions,themes,instances
+MC,Challenging,Java,"If a method is written to receive a double parameter, and you pass an integer to the method, then the method will _____.",1,work correctly. The integer will be promoted to a double,work correctly. The parameter type will automatically become an integer,"execute, but any output will be incorrect",not work. An error message will be issued
+FITB,Easy,Java,"Which Java statement produces w on one line and xyz on the next line?***_____(""w\nxyz"");",System.out.println,,,,
+FITB,Easy,Java,The rules of a programming language constitute its _____.,syntax,,,,
+FITB,Easy,Java,An escape sequence always begins with a(n) _____.,backslash,,,,
+FITB,Easy,Java,The equal to relational operator is _____.,==,,,,
+FITB,Easy,Java,"In Java, what is the value of 3 + 7 * 4 + 2?",33,,,,
+FITB,Moderate,Java,"A public static method named computeSum() is located in ClassA. To call the method from within ClassB, use the statement _____.",ClassA.computeSum();,,,,
+FITB,Moderate,Java,"If a class is named Student, the class constructor name is _____.",Student(),,,,
+FITB,Moderate,Java,All method declarations contain _____.,parentheses,,,,
+FITB,Moderate,Java,What is a correct call to a method declared as public static void aMethod(char code)?***_____,aMethod('Q');,,,,
+FITB,Challenging,Java,The portion of a program within which you can reference a variable is the variable’s _____.,scope,,,,
+FITB,Challenging,Java,The code between a pair of curly braces in a method is a(n) _____.,block,,,,
+FITB,Challenging,Java,Methods that you reference with individual objects are _____.,public,,,,
+FITB,Challenging,Java,A decision is based on a(n) _____ value.,boolean,,,,
+TF,Easy,Systems Design,Computer literacy is understanding the role of information in generating and using business intelligence.,FALSE,TRUE,FALSE,,
 TF,Easy,Systems Design,"When repetitive transaction-processing operations are automated, human involvement is increasingly required.",FALSE,TRUE,FALSE,,
 TF,Easy,Systems Design,"Every character, number, or symbol on the keyboard is represented as a hexadecimal number in computer memory.",FALSE,TRUE,FALSE,,
 TF,Easy,Systems Design,Data communication systems decrease inventory costs.,TRUE,TRUE,FALSE,,
+TF,Moderate,Systems Design,The arithmetic logic unit (ALU) performs only arithmetic operations.,FALSE,TRUE,FALSE,,
 TF,Moderate,Systems Design,A database is a critical component of information systems because any type of analysis that is done is based on data available in the database.,TRUE,TRUE,FALSE,,
 TF,Moderate,Systems Design,"In contrast to pharming, phishing involves hijacking an official Web site address by hacking a Domain Name System server.",FALSE,TRUE,FALSE,,
 TF,Moderate,Systems Design,The Web changed the Internet by introducing a graphical interface to the largely text-based Internet.,TRUE,TRUE,FALSE,,
@@ -42,6 +127,7 @@ MC,Moderate,Systems Design,Which statement is true of transaction-processing sys
 MC,Moderate,Systems Design,Companies exclusively using business-to-consumer (B2C) applications:,1,sell directly to consumers,rely on physical storefronts for customer interactions,approach customers through third-party agents,focus on using personalized physical stores to serve consumers
 MC,Moderate,Systems Design,"During the _____ phase of the systems development life cycle (SDLC), a team assesses how a system is working and takes steps to keep the system up and running.",3,planning,implementation,maintenance,design
 MC,Moderate,Systems Design,"Which is a generic top-level domain (TLD) name used for backbone, regional, and commercial networks?",3,.org,.int,.net,.mil
+MC,Challenging,Systems Design,Which of the following is not among the 5Vs of big data?,1,Variance,Value,Variety,Veracity
 MC,Challenging,Systems Design,"Unlike data in databases, data in data warehouses is:",4,function oriented,raw transaction data,collected from a single source,used for analytical purposes
 MC,Challenging,Systems Design,"The word computer consists of 64 bits, which is equivalent to _____ bytes.",2,6,8,16,32
 MC,Challenging,Systems Design,"David makes two copies of an antivirus software package he just bought and sells one of the copies to Eric. In this scenario, David’s actions are considered _____.",3,"ethical, but illegal","unethical, but legal",illegal and unethical,legal and ethical
@@ -57,89 +143,3 @@ FITB,Challenging,Systems Design,"When disaster strikes, an organization should c
 FITB,Challenging,Systems Design,"XYZtore Inc., an online retail store, sells all of its products through its Web site, xyztore.com, and through an application on cell phones. XYZtore Inc. is an example of a(n) _____.",pure-play company,,,,
 FITB,Challenging,Systems Design,"Paul, a data analyst, is working on a project from home and needs to download some data from his office network. _____ servers will best serve his purpose.",Remote access,,,,
 FITB,Challenging,Systems Design,"Sam is a gamer, and every time he plays at a gaming center, he pays five dollars using a card that he recharges electronically every week. It is evident that Sam uses _____ as the mode of payment.",e-cash,,,,
-TF,Easy,C#,Properties are usually defined with private access mode.,TRUE,TRUE,FALSE,,
-TF,Easy,C#,Objects are instances of data members.,FALSE,TRUE,FALSE,,
-TF,Easy,C#,Employee employee1; would be a valid call to the default constructor for the following class?***public class Employee {},FALSE,TRUE,FALSE,,
-TF,Easy,C#,"Given the following class definition, public double SetGpa(double gpaValue) would be a valid heading for a mutator.***public class Student {***private string name;***private double gpa;***}",FALSE,TRUE,FALSE,,
-TF,Moderate,C#,"The ""const"" modifier in C# is used with constructors.",FALSE,TRUE,FALSE,,
-TF,Moderate,C#,The symbol (=) is the operator used to test for equality.,FALSE,TRUE,FALSE,,
-TF,Moderate,C#,"If you intend to place a block of statements within an if statement, you must use parentheses around the block.",FALSE,TRUE,FALSE,,
-TF,Moderate,C#,The string data type can be used as an operand for the == or !=.,TRUE,TRUE,FALSE,,
-TF,Challenging,C#,Protected modifiers is the most restrictive.,FALSE,TRUE,FALSE,,
-TF,Challenging,C#,ToString() is one of the user-defined methods inherited from the object class.,TRUE,TRUE,FALSE,,
-TF,Challenging,C#,"In order to provide a new definition for the ToString() method, override keyword is added to the method heading.",TRUE,TRUE,FALSE,,
-TF,Challenging,C#,Examine the code. C will be assigned 3 whenever the program is executed.***if (A == B);***C = 3;,TRUE,TRUE,FALSE,,
-MC,Easy,C#,Properties are associated with the _____ of the class while methods are affiliated with the _____ of the class.,4,"activity, fields","accessors, mutators","objects, instances","data, behavior"
-MC,Easy,C#,"Given the Employee class shown below, which of the following would be the most appropriate heading for its default constructor?***public class Employee {}",2,public void Employee(),public Employee(),static Employee(),private void Employee()
-MC,Moderate,C#,Which of the following identifiers follows the standard naming convention for naming a class?,3,Calculate Final Grade,MilesPerGallon,Student,Reports
-MC,Moderate,C#,Which of the following would be the most appropriate way to invoke the CalculateAvg() method found in the Student class if an object named gradStudent had been instantiated from the class?***public double CalculateAvg(),4,gradStudent = CalculateAvg( );,answer = Student.CalculateAvg( );,CalculateAvg( );,answer = gradStudent.CalculateAvg( );
-MC,Moderate,C#,Which loop structure can only be used with a collection such as an array?,1,foreach,for,while,do. . .while
-MC,Moderate,C#,"If a loop body must be executed at least once, which loop structure would be the best option?",4,foreach,for,while,do. . .while
-MC,Challenging,C#,The following is probably an example of a(n):***public double GetYards(),4,constructor,mutator,property,accessor
-MC,Challenging,C#,"If a loop body uses a numeric value that is incremented by three with each iteration through the loop until it reaches 1000, which loop structure would probably be the best option?",2,foreach,for,while,do. . .while
-MC,Challenging,C#,Which of the following represents a pretest loop?,4,while,do. . .while,for,both while & do. . .while
-FITB,Easy,C#,_____ operator is used to instantiate the class?,new,,,,
-FITB,Easy,C#,"If you follow the standard C# naming conventions, the property name for the following instance variable would be _____.***private string name;",name,,,,
-FITB,Easy,C#,"If you intend to place a block of statements within a loop body, you must use _____ around the block.",curly braces,,,,
-FITB,Moderate,C#,"Normally, member data uses a(n) _____ access modifier.",private,,,,
-FITB,Moderate,C#,"Normally, methods use a(n) _____ access modifier for object-oriented solutions.",public,,,,
-FITB,Moderate,C#,The _____ operator represents the logical AND.,&&,,,,
-FITB,Challenging,C#,The value contained within the square brackets that is used to indicate the length of the array must be a(n) _____.,integer,,,,
-FITB,Challenging,C#,"Using the following declaration:***char[] n = {'a', 'b', 'c', 'd', 'e'};***What does n[10/5+2] refer to?",e,,,,
-FITB,Challenging,C#,"Using the following declaration:***int[] anArray = {34, 55, 67, 89, 99};***What would be the result of each of the following output statements?***WriteLine(anArray[anArray.Length - 2]);",89,,,,
-FITB,Challenging,C#,"With the following declaration:***int[] points = {300, 100, 200, 400, 600};***The statement Write(points[2] + points[3]); will display _____.",600,,,,
-TF,Easy,Java,Envisioning program components as objects that are similar to concrete objects in the real world is the hallmark of procedural programming.,FALSE,TRUE,FALSE,,
-TF,Easy,Java,An instance of a class is a method.,FALSE,TRUE,FALSE,,
-TF,Easy,Java,Arguments to methods always appear within curly braces.,FALSE,TRUE,FALSE,,
-TF,Easy,Java,All Java applications must have a method named main().,TRUE,TRUE,FALSE,,
-TF,Moderate,Java,Nonexecuting program statements that provide documentation are called notes.,FALSE,TRUE,FALSE,,
-TF,Moderate,Java,"When data cannot be changed after a class is compiled, the data is variable.",FALSE,TRUE,FALSE,,
-TF,Moderate,Java,An assigned value is not required in a variable declaration.,TRUE,TRUE,FALSE,,
-TF,Moderate,Java,The assignment operator in Java is ==.,FALSE,TRUE,FALSE,,
-TF,Challenging,Java,Java is architecturally neutral.,TRUE,TRUE,FALSE,,
-TF,Challenging,Java,Java supports javadoc type of comment.,TRUE,TRUE,FALSE,,
-TF,Challenging,Java,The remainder operator is represented by a forward slash.,FALSE,TRUE,FALSE,,
-TF,Challenging,Java,You use a format to explicitly override an implicit type.,FALSE,TRUE,FALSE,,
-MC,Easy,Java,All Java programming statements must end with a(n) _____.,4,period,comma,closing parenthesis,semicolon
-MC,Easy,Java,A boolean variable can hold _____.,4,any character,any whole number,any decimal number,the value true or false
-MC,Moderate,Java,A(n) _____ translates high-level language statements into machine code.,3,programmer,syntax detector,compiler,decipherer
-MC,Moderate,Java,Which assignment is correct in Java?,3,int value = (float) 4.5;,float value = 4 (double);,double value = 2.12;,char value = 5c;
-MC,Moderate,Java,"In Java, methods must include all of the following except _____.",1,a call to another method,a declaration,curly braces,a body
-MC,Challenging,Java,Which assignment is correct in Java?,3,char aChar = 5.5;,char aChar = “W”;,char aChar = '*';,All of the above
-MC,Challenging,Java,An object’s data items are also known as _____.,1,fields,functions,themes,instances
-MC,Challenging,Java,"If a method is written to receive a double parameter, and you pass an integer to the method, then the method will _____.",1,work correctly. The integer will be promoted to a double,work correctly. The parameter type will automatically become an integer,"execute, but any output will be incorrect",not work. An error message will be issued
-FITB,Easy,Java,The rules of a programming language constitute its _____.,syntax,,,,
-FITB,Easy,Java,An escape sequence always begins with a(n) _____.,backslash,,,,
-FITB,Easy,Java,The equal to relational operator is _____.,==,,,,
-FITB,Easy,Java,"In Java, what is the value of 3 + 7 * 4 + 2?",33,,,,
-FITB,Moderate,Java,All method declarations contain _____.,parentheses,,,,
-FITB,Moderate,Java,What is a correct call to a method declared as public static void aMethod(char code)?***_____,aMethod('Q');,,,,
-FITB,Challenging,Java,The portion of a program within which you can reference a variable is the variable’s _____.,scope,,,,
-FITB,Challenging,Java,The code between a pair of curly braces in a method is a(n) _____.,block,,,,
-FITB,Challenging,Java,Methods that you reference with individual objects are _____.,public,,,,
-FITB,Challenging,Java,A decision is based on a(n) _____ value.,boolean,,,,
-TF,Easy,Computer Networking,Layer 2: Data Link Layer is responsible for adding a header that includes routing information.,FALSE,TRUE,FALSE,,
-TF,Easy,Computer Networking,Layer 2: Data Link Layer is considered the media access control layer.,TRUE,TRUE,FALSE,,
-TF,Moderate,Computer Networking,Layer 3: Network Layer combines messages or segments into packets.,TRUE,TRUE,FALSE,,
-TF,Moderate,Computer Networking,Layer 3: Network Layer is responsible for the mechanical connection to the network.,FALSE,TRUE,FALSE,,
-TF,Moderate,Computer Networking,Layer 1: Physical Layer is responsible for the mechanical connection to the network.,TRUE,TRUE,FALSE,,
-TF,Moderate,Computer Networking,Layer 1: Physical Layer is responsible for data compression and encryption.,FALSE,TRUE,FALSE,,
-TF,Challenging,Computer Networking,TCP functions at Layer 6: Presentation Layer.,FALSE,TRUE,FALSE,,
-TF,Challenging,Computer Networking,IP and IPX are examples of protocols that operate at Layer 3: Network Layer.,TRUE,TRUE,FALSE,,
-TF,Challenging,Computer Networking,A network interface card operates at Layer 1: Physical Layer.,TRUE,TRUE,FALSE,,
-MC,Easy,Computer Networking,An Ethernet packet size greater than 1500 bytes is called _____.,2,a bad frame,a jumbo frame,an MTU,All of the above
-MC,Easy,Computer Networking,What is RJ-45?,3,A 45-pin connector for CAT6,An IEEE standard for data speed,An 8-pin modular connector for twisted-pair Ethernet,A protocol used to verify a communications link
-MC,Moderate,Computer Networking,"A disadvantage of Token Ring is that if an error changes the token pattern, it can cause the token to stop circulating. This issue can be eliminated by adding which of the following?",4,Router,Multiport Repeater,Token Passer,Token Ring Hub
-MC,Moderate,Computer Networking,Which of the following is not a step in building an office LAN?,1,Obtaining proper government permits,Configuring the network settings,Connecting the devices together,Creating network documentation
-MC,Challenging,Computer Networking,What networking protocol does Ethernet use?,3,Ethernet uses a Token Ring passing scheme. The computer devices must possess the ring to be able to pass a token.,Ethernet uses carrier-access multiple sensing with collision detection.,Ethernet uses carrier-sense multiple access with collision detection.,Ethernet uses collision-sense carrier access with multiple pairing.
-MC,Challenging,Computer Networking,An IP address for a computer is assigned by which of the following?,2,Internet Assigned Numbers Authority,The local network administrator,The user of the computer,Internet Address Numbers Authority
-MC,Challenging,Computer Networking,The pad field in an Ethernet packet _____.,1,is used to bring the total number of bytes up to 46 if the data file is less than 46 bytes,is used to bring the total number of bytes up to 64 if the data file is less than 64 bytes,is not required with CSMA/CD,provides grouping of the information for transmission
-FITB,Easy,Computer Networking,Expand the acronym NIC.,Network Interface Card,,,,
-FITB,Easy,Computer Networking,Expand the acronym MAC.,Media Access Control,,,,
-FITB,Easy,Computer Networking,Expand the acronym LAN.,Local Area Network,,,,
-FITB,Easy,Computer Networking,Expand the acronym WAN.,Wide Area Network,,,,
-FITB,Moderate,Computer Networking,_____ is the architecture of a network.,Topology,,,,
-FITB,Moderate,Computer Networking,A(n) _____ is a set of rules established for users to gain control of the network to exchange information.,protocol,,,,
-FITB,Challenging,Computer Networking,_____ refers to a way of providing access to a network by giving each network device a fixed time interval to access the network.,Deterministic,,,,
-FITB,Challenging,Computer Networking,A(n) _____ broadcasts the data it receives to all devices connected to its ports.,hub,,,,
-FITB,Challenging,Computer Networking,A(n) _____ forwards the data it receives directly to its destination address when the associated port is known.,switch,,,,
