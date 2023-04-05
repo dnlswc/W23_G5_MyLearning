@@ -1,7 +1,5 @@
 package com.example.mylearning.notepad;
 
-import static android.text.TextUtils.substring;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
