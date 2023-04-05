@@ -247,7 +247,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void hideTfOptions() {
-        rdGrpTfOptions.setVisibility(View.GONE);
+        rdGrpTfOptions.setVisibility(View.INVISIBLE);
     }
 
     public void showMcOptions() {
@@ -255,7 +255,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void hideMcOptions() {
-        rdGrpMcOptions.setVisibility(View.GONE);
+        rdGrpMcOptions.setVisibility(View.INVISIBLE);
     }
 
     public void showFitbTxtField() {
@@ -263,7 +263,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void hideFitbTxtField() {
-        editTxtFitbAnswer.setVisibility(View.GONE);
+        editTxtFitbAnswer.setVisibility(View.INVISIBLE);
     }
 
     private int setQuestionLimit() {

@@ -1,8 +1,8 @@
 ﻿Type,Difficulty,Topic,Question,Answer,Option1,Option2,Option3,Option4
 TF,Easy,C#,Properties are usually defined with private access mode.,TRUE,TRUE,FALSE,,
 TF,Easy,C#,Objects are instances of data members.,FALSE,TRUE,FALSE,,
-TF,Easy,C#,Employee employee1; would be a valid call to the default constructor for the following class?***public class Employee {},FALSE,TRUE,FALSE,,
-TF,Easy,C#,"Given the following class definition, public double SetGpa(double gpaValue) would be a valid heading for a mutator.***public class Student {***private string name;***private double gpa;***}",FALSE,TRUE,FALSE,,
+TF,Easy,C#,Employee employee1; would be a valid call to the default constructor for the following class?***public class Employee { },FALSE,TRUE,FALSE,,
+TF,Easy,C#,"Given the following class definition, public double SetGpa(double gpaValue) would be a valid heading for a mutator.***public class Student {***   private string name;***   private double gpa;***}",FALSE,TRUE,FALSE,,
 TF,Moderate,C#,"The ""const"" modifier in C# is used with constructors.",FALSE,TRUE,FALSE,,
 TF,Moderate,C#,The symbol (=) is the operator used to test for equality.,FALSE,TRUE,FALSE,,
 TF,Moderate,C#,"If you intend to place a block of statements within an if statement, you must use parentheses around the block.",FALSE,TRUE,FALSE,,
@@ -14,7 +14,7 @@ TF,Challenging,C#,Examine the code. C will be assigned 3 whenever the program is
 MC,Easy,C#,The fully qualified call to the method that allows the user to input a single character is:,2,Console.System.Read(),System.Console.Read(),Console.System.Write(),System.Console.Write()
 MC,Easy,C#,"One of the primary differences between float, double, and decimal is:",4,Float is used to represent more significant digits.,Double is normally used with large monetary values.,Decimal is not used to display negative values.,Double does not require suffixing a numeric literal with a value such as m or f.
 MC,Easy,C#,Properties are associated with the _____ of the class while methods are affiliated with the _____ of the class.,4,"activity, fields","accessors, mutators","objects, instances","data, behavior"
-MC,Easy,C#,"Given the Employee class shown below, which of the following would be the most appropriate heading for its default constructor?***public class Employee {}",2,public void Employee(),public Employee(),static Employee(),private void Employee()
+MC,Easy,C#,"Given the Employee class shown below, which of the following would be the most appropriate heading for its default constructor?***public class Employee { }",2,public void Employee(),public Employee(),static Employee(),private void Employee()
 MC,Moderate,C#,Which of the following identifiers follows the standard naming convention for naming a class?,3,Calculate Final Grade,MilesPerGallon,Student,Reports
 MC,Moderate,C#,Which of the following would be the most appropriate way to invoke the CalculateAvg() method found in the Student class if an object named gradStudent had been instantiated from the class?***public double CalculateAvg(),4,gradStudent = CalculateAvg( );,answer = Student.CalculateAvg( );,CalculateAvg( );,answer = gradStudent.CalculateAvg( );
 MC,Moderate,C#,Which loop structure can only be used with a collection such as an array?,1,foreach,for,while,do. . .while

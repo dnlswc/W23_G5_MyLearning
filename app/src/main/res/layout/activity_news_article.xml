@@ -7,13 +7,14 @@
     tools:context=".news.NewsArticleActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_above="@id/bottom_navigator"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ScrollView
             android:id="@+id/scrollViewArticleContainer"
             android:layout_width="match_parent"
-            android:layout_height="571dp"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

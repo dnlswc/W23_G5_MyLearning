@@ -6,105 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".quiz.QuizCatalogueActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scrollViewQuizStarter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigator">
 
-        <TextView
-            android:id="@+id/txtViewQuizCatalogueTitle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtQuizCatalogue"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.03" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imgViewQuiz"
-            android:layout_width="wrap_content"
-            android:layout_height="225dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewQuizCatalogueTitle"
-            app:srcCompat="@drawable/quiz" />
+            <ImageView
+                android:id="@+id/imgViewQuiz"
+                android:layout_width="wrap_content"
+                android:layout_height="230dp"
+                android:layout_marginTop="40dp"
+                app:srcCompat="@drawable/quiz" />
 
-        <TextView
-            android:id="@+id/txtViewSelectType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txtCategory"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgViewQuiz" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spinnerType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toEndOf="@+id/txtViewSelectType"
-            app:layout_constraintTop_toBottomOf="@+id/imgViewQuiz" />
+                <TextView
+                    android:id="@+id/txtViewSelectType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/txtCategory"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txtViewSelectTopic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/txtTopic"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerType" />
+                <Spinner
+                    android:id="@+id/spinnerType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="50dp" />
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerTopic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toEndOf="@+id/txtViewSelectTopic"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerType" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txtViewSelectDifficulty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/txtDifficulty"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerTopic" />
+                <TextView
+                    android:id="@+id/txtViewSelectTopic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/txtTopic"
+                    android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/spinnerDifficulty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toEndOf="@+id/txtViewSelectDifficulty"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerTopic" />
+                <Spinner
+                    android:id="@+id/spinnerTopic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="20dp" />
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btnStartQuiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txtStartQuiz"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerDifficulty" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtViewSelectDifficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/txtDifficulty"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerDifficulty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="20dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnStartQuiz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="@string/txtStartQuiz" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
