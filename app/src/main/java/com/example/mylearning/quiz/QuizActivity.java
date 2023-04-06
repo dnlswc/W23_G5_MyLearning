@@ -29,7 +29,10 @@ import java.util.Collections;
 import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity {
-    private static final long TIMER_IN_MS = 30000;
+    // Answer time for each True-False or Multiple-Choice question is 30 secs
+    private static final long TF_MC_TIMER_IN_MS = 30000;
+    // Answer time for each Fill-in-the-Blank question is 60 secs
+    private static final long FITB_TIMER_IN_MS = 60000;
 
     // score(s) for correct answers in different difficulties
     private static final int EASY_SCORE = 1;
@@ -40,6 +43,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final int MAX_NUM_OF_QUESTIONS = 10;
 
     private static final String KEY_SCORE = "keyScore";
+    private static final String KEY_TOTAL_SCORE = "keyTotalScore";
     private static final String KEY_QUESTION_COUNTER = "keyQuestionCounter";
     private static final String KEY_TIME_LEFT = "keyTimeLeft";
     private static final String KEY_ANSWERED = "keyAnswered";
@@ -76,6 +80,7 @@ public class QuizActivity extends AppCompatActivity {
     private String correctAnswer;
 
     private int score;
+    private int totalScore;
     private boolean answered;
     private int mcqAnswer;
     private String tfqFitbqAnswer;
@@ -145,6 +150,7 @@ public class QuizActivity extends AppCompatActivity {
                 finish();
             }
             score = savedInstanceState.getInt(KEY_SCORE);
+            totalScore =  savedInstanceState.getInt(KEY_TOTAL_SCORE);
             questionCounter = savedInstanceState.getInt(KEY_QUESTION_COUNTER);
             timeLeftInMs = savedInstanceState.getLong(KEY_TIME_LEFT);
             answered = savedInstanceState.getBoolean(KEY_ANSWERED);
@@ -321,7 +327,12 @@ public class QuizActivity extends AppCompatActivity {
             answered = false;
             btnConfirmNext.setText("Confirm");
 
-            timeLeftInMs = TIMER_IN_MS;
+            if (currentQuestion.getType().equalsIgnoreCase("FITB")) {
+                timeLeftInMs = FITB_TIMER_IN_MS;
+            } else {
+                timeLeftInMs = TF_MC_TIMER_IN_MS;
+            }
+
             startTimer();
         } else {
             finishQuiz();
@@ -331,6 +342,8 @@ public class QuizActivity extends AppCompatActivity {
     private void checkAnswer() {
         answered = true;
         timer.cancel();
+        calculateTotalScore();
+        txtViewScore.setText("Score: " + score + "/" + totalScore);
 
         if (currentQuestion.getType().equalsIgnoreCase("MC")) {
             RadioButton rdBtnSelected = findViewById(rdGrpMcOptions.getCheckedRadioButtonId());
@@ -378,7 +391,17 @@ public class QuizActivity extends AppCompatActivity {
             score += CHALLENGING_SCORE;
         }
 
-        txtViewScore.setText("Score: " + score);
+        txtViewScore.setText("Score: " + score + "/" + totalScore);
+    }
+
+    private void calculateTotalScore() {
+        if (currentQuestion.getDifficulty().equalsIgnoreCase("Easy")) {
+            totalScore += EASY_SCORE;
+        } else if (currentQuestion.getDifficulty().equalsIgnoreCase("Moderate")) {
+            totalScore += MODERATE_SCORE;
+        } else {
+            totalScore += CHALLENGING_SCORE;
+        }
     }
 
     private void showCorrectMcqAnswer(int mcqAnswer) {
@@ -518,6 +541,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_SCORE, score);
+        outState.putInt(KEY_TOTAL_SCORE, totalScore);
         outState.putInt(KEY_QUESTION_COUNTER, questionCounter);
         outState.putLong(KEY_TIME_LEFT, timeLeftInMs);
         outState.putBoolean(KEY_ANSWERED, answered);
