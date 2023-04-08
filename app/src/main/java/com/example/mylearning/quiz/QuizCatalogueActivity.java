@@ -68,17 +68,7 @@ public class QuizCatalogueActivity extends AppCompatActivity {
         boolean isFirstRun = sharedPrefQuiz.getBoolean("is_first_run", true);
         if (isFirstRun) {
             // if it is the first run, import the quiz data from CSV file to database
-            quizDbHelper = QuizDbHelper.getInstance(this);
-            questions = new ArrayList<>();
-            readQuizData();
-            for (Question question : questions) {
-                quizDbHelper.addQuestion(question);
-            }
-
-            // set the boolean to false for "is_first_run" in Quiz's shared preferences
-            editor = sharedPrefQuiz.edit();
-            editor.putBoolean("is_first_run", false);
-            editor.commit();
+            importCsvDataIntoDb();
         }
 
         loadTypes();
@@ -137,53 +127,6 @@ public class QuizCatalogueActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTypes() {
-        String[] types = new String[Question.getAllTypes().length + 1];
-        for (int i = 0; i <= Question.getAllTypes().length; i++) {
-            if (i == 0) {
-                types[i] = "All";
-            } else {
-                types[i] = Question.getAllTypes()[i - 1];
-            }
-        }
-
-        ArrayAdapter<String> adapterType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
-        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerType.setAdapter(adapterType);
-    }
-
-    // load distinct topics from the database
-    private void loadTopics() {
-        QuizDbHelper quizDbHelper = new QuizDbHelper(this);
-        String[] topics = new String[quizDbHelper.getTopics().size() + 1];
-        for (int i = 0; i <= quizDbHelper.getTopics().size(); i++) {
-            if (i == 0) {
-                topics[i] = "All";
-            } else {
-                topics[i] = quizDbHelper.getTopics().get(i - 1);
-            }
-        }
-
-        ArrayAdapter<String> adapterTopic = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, topics);
-        adapterTopic.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTopic.setAdapter(adapterTopic);
-    }
-
-    private void loadDifficultyLevels() {
-        String[] difficultyLevels = new String[Question.getAllDifficultyLevels().length + 1];
-        for (int i = 0; i <= Question.getAllDifficultyLevels().length; i++) {
-            if (i == 0) {
-                difficultyLevels[i] = "All";
-            } else {
-                difficultyLevels[i] = Question.getAllDifficultyLevels()[i - 1];
-            }
-        }
-
-        ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
-        adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDifficulty.setAdapter(adapterDifficulty);
-    }
-
     private void readQuizData() {
         InputStream inputStream = getResources().openRawResource(R.raw.quiz_data);
         BufferedReader reader = new BufferedReader(
@@ -192,7 +135,9 @@ public class QuizCatalogueActivity extends AppCompatActivity {
 
         String line = "";
         try {
-            reader.readLine();
+            if ((line = reader.readLine()) != null) {
+                // process header
+            }
 
             while ((line = reader.readLine()) != null) {
                 // this regex split the line on commas only if the commas are not within a field enclosed in double quotes
@@ -239,5 +184,70 @@ public class QuizCatalogueActivity extends AppCompatActivity {
             Log.d(TAG, "Error in reading data file on line " + line);
             ex.printStackTrace();
         }
+    }
+
+    private void importCsvDataIntoDb() {
+        quizDbHelper = QuizDbHelper.getInstance(this);
+        questions = new ArrayList<>();
+        readQuizData();
+        for (Question question : questions) {
+            quizDbHelper.addQuestion(question);
+        }
+
+        // set the boolean to false for "is_first_run" in Quiz's shared preferences
+        setIsFirstRunToFalse();
+    }
+
+    private void setIsFirstRunToFalse() {
+        editor = sharedPrefQuiz.edit();
+        editor.putBoolean("is_first_run", false);
+        editor.commit();
+    }
+
+    private void loadTypes() {
+        String[] types = new String[Question.getAllTypes().length + 1];
+        for (int i = 0; i <= Question.getAllTypes().length; i++) {
+            if (i == 0) {
+                types[i] = "All";
+            } else {
+                types[i] = Question.getAllTypes()[i - 1];
+            }
+        }
+
+        ArrayAdapter<String> adapterType = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerType.setAdapter(adapterType);
+    }
+
+    // load distinct topics from the database
+    private void loadTopics() {
+        QuizDbHelper quizDbHelper = new QuizDbHelper(this);
+        String[] topics = new String[quizDbHelper.getTopics().size() + 1];
+        for (int i = 0; i <= quizDbHelper.getTopics().size(); i++) {
+            if (i == 0) {
+                topics[i] = "All";
+            } else {
+                topics[i] = quizDbHelper.getTopics().get(i - 1);
+            }
+        }
+
+        ArrayAdapter<String> adapterTopic = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, topics);
+        adapterTopic.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTopic.setAdapter(adapterTopic);
+    }
+
+    private void loadDifficultyLevels() {
+        String[] difficultyLevels = new String[Question.getAllDifficultyLevels().length + 1];
+        for (int i = 0; i <= Question.getAllDifficultyLevels().length; i++) {
+            if (i == 0) {
+                difficultyLevels[i] = "All";
+            } else {
+                difficultyLevels[i] = Question.getAllDifficultyLevels()[i - 1];
+            }
+        }
+
+        ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
+        adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDifficulty.setAdapter(adapterDifficulty);
     }
 }

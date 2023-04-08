@@ -16,8 +16,7 @@ import retrofit2.http.Query;
 public class RequestManager {
     Context context;
     String[] apiKeys;
-    Retrofit retrofit = new Retrofit
-            .Builder()
+    Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://newsapi.org/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -31,10 +30,10 @@ public class RequestManager {
         final MutableBoolean responseIsSuccessful = new MutableBoolean(false);
         int i = 0;
 
-        CallNewsApi callNewsApi = retrofit.create(CallNewsApi.class);
+        NewsApiService service = retrofit.create(NewsApiService.class);
 
         do {
-            Call<NewsApiResponse> call = callNewsApi.callArticles("us", "technology", query, apiKeys[i]);
+            Call<NewsApiResponse> call = service.getArticles("us", "technology", query, apiKeys[i]);
 
             try {
                 call.enqueue(new Callback<NewsApiResponse>() {
@@ -64,10 +63,10 @@ public class RequestManager {
         final MutableBoolean responseIsSuccessful = new MutableBoolean(false);
         int i = 0;
 
-        CallNewsApi callNewsApi = retrofit.create(CallNewsApi.class);
+        NewsApiService service = retrofit.create(NewsApiService.class);
 
         do {
-            Call<NewsApiResponse> call = callNewsApi.callArticlesBySource(source, apiKeys[i]);
+            Call<NewsApiResponse> call = service.getArticlesBySource(source, apiKeys[i]);
 
             try {
                 call.enqueue(new Callback<NewsApiResponse>() {
@@ -92,9 +91,9 @@ public class RequestManager {
         } while (!responseIsSuccessful.value && i < apiKeys.length);
     }
 
-    public interface CallNewsApi {
+    public interface NewsApiService {
         @GET("top-headlines")
-        Call<NewsApiResponse> callArticles(
+        Call<NewsApiResponse> getArticles(
                 @Query("country") String country,
                 @Query("category") String category,
                 @Query("q") String query,
@@ -102,7 +101,7 @@ public class RequestManager {
         );
 
         @GET("top-headlines")
-        Call<NewsApiResponse> callArticlesBySource(
+        Call<NewsApiResponse> getArticlesBySource(
                 @Query("sources") String source,
                 @Query("apiKey") String apiKey
         );
