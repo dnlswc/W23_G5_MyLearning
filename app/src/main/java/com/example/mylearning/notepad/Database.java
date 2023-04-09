@@ -92,15 +92,17 @@ public class Database extends SQLiteOpenHelper {
 
         String sortingOption = sortingChoice.get(NotePageActivity.sortingIndex);
 
-        String tempAuthorEmail = NotePageActivity.author_email;
-        if (tempAuthorEmail.equals("Empty") == true) {
-            tempAuthorEmail = "Guest3175@gmail.com";
-        }
 
+        String tempAuthorEmail = NotePageActivity.author_email;
 
         String query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL + " = '" + tempAuthorEmail
                 + "' " + sortingOption;
 
+
+        if (tempAuthorEmail.equals("Empty") == true || tempAuthorEmail.equals("Guest3175@gmail.com") == true) {
+            query = "SELECT * FROM " + TABLE + " WHERE " + AUTHOR_EMAIL + " = 'Guest3175@gmail.com' "
+                    + " OR " + AUTHOR_EMAIL + " = 'Empty' " + sortingOption;
+        }
 
         Log.d("SQLQUERY: ", query);
 

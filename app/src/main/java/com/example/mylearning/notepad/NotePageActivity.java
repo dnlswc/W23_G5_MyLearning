@@ -53,7 +53,6 @@ public class NotePageActivity extends AppCompatActivity {
     Button buttonConfirm;
     Button buttonCancel;
     RadioGroup radioGroupSortOption;
-    List<Note> demonNotes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +224,7 @@ public class NotePageActivity extends AppCompatActivity {
     private void filter(String newText) {
         List<Note> filteredList = new ArrayList<>();
         for (Note item : notes) {
+            // For the time searching, it will compare three elements, including hour:minute:second
             if (item.getTitle().toLowerCase().contains(newText.toLowerCase()) ||
                     item.getContent().toLowerCase().contains(newText.toLowerCase()) ||
                     item.getDate().toLowerCase().contains(newText.toLowerCase()) ||
