@@ -55,8 +55,18 @@ public class NewsArticleActivity extends AppCompatActivity {
 
         Linkify.addLinks(txtViewArticleUrl, Linkify.WEB_URLS);
 
-        // external library "Picasso" is used here to load image from a URL
-        Picasso.get().load(article.getUrlToImage()).into(imgViewArticleImage);
+        if (article.getUrlToImage() != null) {
+            // external library "Picasso" is used here to load image from a URL
+            try {
+                Picasso.get()
+                        .load(article.getUrlToImage())
+                        .resize(1920, 1200)
+                        .onlyScaleDown()
+                        .into(imgViewArticleImage);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
 
         bottomNavigationView.setOnItemSelectedListener((@NonNull MenuItem item) ->{
 

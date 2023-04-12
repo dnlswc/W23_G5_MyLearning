@@ -52,7 +52,15 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
 
         if (articleList.get(position).getUrlToImage() != null) {
             // external library "Picasso" is used here to load image from a URL
-            Picasso.get().load(articleList.get(position).getUrlToImage()).into(holder.imgViewNewsImage);
+            try {
+                Picasso.get()
+                        .load(articleList.get(position).getUrlToImage())
+                        .resize(1920, 1200)
+                        .onlyScaleDown()
+                        .into(holder.imgViewNewsImage);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
 
         holder.cardViewNewsContainer.setOnClickListener((View v) -> {
